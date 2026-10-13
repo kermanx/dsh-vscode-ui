@@ -1,48 +1,119 @@
 # DSH VS Code UI
 
-把本机 DSH Web 界面适配为 VS Code Classic（Modern UI 关闭）风格。支持浅色、深色和跟随系统主题，沿用 DSH 的字体偏好。
+为 DeepSeek Harness（DSH）的 Web 界面提供 VS Code Classic（关闭 Modern UI 时的经典界面）风格：用活动栏切换功能，用树形侧栏管理工作区和会话，让对话、文件和终端保持在熟悉的工作台布局里。
 
-- 左侧 Activity Bar 为 48px，使用 24px Codicons、2px 活动指示线和键盘漫游焦点。搜索位于会话侧栏顶部；新建会话位于会话侧栏标题栏。
-- 会话侧栏以 22px Tree View 行展示工作区和会话，分别显示选中、键盘焦点、失焦与悬停状态。方向键只移动焦点，Enter 选中工作区或打开会话；支持 Home/End、Page Up/Down、输入首字母定位、Space 展开文件夹，以及键盘上下文菜单。
-- 树采用单选，选中项与当前打开的会话独立：点击工作区名称会选中工作区，展开箭头只改变展开状态；Shift/Ctrl/Meta 点击会话只选择、不打开；Escape 或点击树内空白处清除选择，中央会话继续保留。DSH 重绘、侧栏隐藏或工作区折叠不会把本地选择恢复成旧会话。
-- 从树点击或按 Enter 打开会话时保留树焦点，阻止会话输入框的自动聚焦打断树导航；主动点击输入框、按 Tab 或使用快捷键时正常交出焦点。
-- 插件、看板、自动化和第三方面板进入各自的侧栏视图。点击活动图标切换内容，再点当前图标收起；重开恢复该视图和调整后的宽度。已访问面板保留挂载，中央会话不会随活动图标切换而卸载。
-- 设置、菜单、输入框、按钮、编辑器标签、对话工具调用等采用对应 Classic 组件的尺寸、颜色与状态。
-- 会话与详情视图切换采用 PanelTitle 的紧凑文字标签；右侧打开的文件采用 EditorTabs；设置作用域和分段选项分别使用 SettingsEditor、Radio 的样式。会话与轨迹详情支持左右键移动标签焦点、Enter/Space 激活。
-- 保留 DSH 原生会话、工作区、插件管理、设置、右侧文件/终端面板和底部扩展功能。
+> 本项目是独立维护的第三方社区插件，不属于 DeepSeek Harness 或 Visual Studio Code 官方项目。
+>
+> - 插件的支持与兼容性维护由本项目负责，问题请在本仓库反馈。
+> - 插件依赖 DSH 的 Web 布局和扩展接口；升级 DSH 后，可能需要同步更新本插件。
 
-## 开发和全局安装
+## 主要功能
+
+- 经典工作台：48px 活动栏、Codicons 图标和紧凑的树形侧栏，统一设置、菜单、按钮、输入框、文件标签和工具调用的外观。
+- 会话树：按工作区浏览会话，区分选中、焦点和悬停状态；搜索入口位于侧栏顶部，新建会话位于标题栏。
+- 独立侧栏视图：插件、看板、自动化和第三方面板通过活动栏切换。收起再展开时恢复当前视图和调整后的宽度。
+- 保留工作状态：切换侧栏功能时，中央会话和草稿保持不变，已访问的侧栏面板也保留状态。
+- 键盘导航：会话树、活动栏和视图标签支持键盘操作；从树中打开会话后，焦点继续留在树内，方便接着浏览。
+- 主题与字体：支持浅色、深色和跟随系统，沿用 DSH 中保存的字体与字号偏好。
+- 原生功能：继续使用 DSH 的会话、工作区、插件管理、设置、右侧文件与终端面板，以及底部扩展功能。
+
+## 环境要求
+
+- DSH：目前针对 `0.2.1-alpha.2` 的 Web 布局与服务接口验证；其他版本需要重新确认兼容性。
+- 界面：使用 `dsh web` 或其他加载 Web 界面的 profile。纯终端运行不会显示这套界面。
+- 构建工具：需要 Node.js 和 npm，在本地安装依赖并构建插件。
+- 插件安装：`dsh plugin` 通过 pnpm 管理 profile 中的依赖，请确保 DSH 能找到可用的 pnpm。
+
+## 安装
+
+### 从本地源码安装
+
+将仓库下载到本地后，在仓库根目录执行：
 
 ```sh
-npm install
+npm ci
 npm run build
-dsh plugin --profile web add /absolute/path/to/dsh-vscode-ui
+dsh plugin --profile web add "$PWD"
 ```
 
-本仓库已通过本地链接安装到当前用户的 `~/.dsh/profiles/web`。常规 `dsh web` 启动会应用该插件。变更 bundle patch 或 package manifest 后重启 DSH；仅重新构建客户端后刷新浏览器。因为插件拥有根布局，开发时 DSH 的热卸载可能短暂移除根节点，此时需要手动刷新页面。
+构建不需要额外的 DSH 源码 checkout。安装完成后，启动或重启对应的 profile：
 
 ```sh
-npm test
+dsh web
 ```
 
-测试涵盖中央会话草稿与面板状态保留、树的焦点/选中分离与卸载恢复、Activity Bar 切换和焦点交接、视图标签导航、主题 token 完整性、侧栏宽度恢复，以及 DSH 导航取消协议。
+插件只对安装它的 profile 生效；使用其他 profile 时，将命令中的 `web` 替换为对应名称。可通过以下命令查看合成后的配置，确认 `vscode-ui` 已启用：
 
-卸载后重启 DSH 可恢复原布局：
+```sh
+dsh --profile web --dump-config
+```
+
+### 更新本地安装
+
+更新源码后重新运行 `npm ci` 和 `npm run build`。使用本地目录链接安装时，仅修改客户端代码或样式，构建后刷新浏览器即可；修改 `package.json` 或 `cordis.patch.yml` 后需要重启 DSH。
+
+## 使用方式
+
+### 活动栏与侧栏
+
+- 点击左侧活动图标，切换会话、插件、看板或自动化等视图；再次点击当前图标可收起侧栏。
+- 拖动侧栏边界调整宽度，收起后重新展开会恢复原宽度。
+- 在会话视图顶部搜索会话，或点击标题栏的新建按钮创建会话。
+- 切换侧栏视图时，中央会话继续保留，可以一边查看其他功能，一边继续当前对话。
+
+### 会话树
+
+- 点击会话打开它；点击工作区名称选中该工作区，点击展开箭头仅切换展开状态。
+- 方向键移动焦点或展开、折叠工作区；按 `Enter` 选中工作区或打开会话，按 `Space` 切换工作区的展开状态。
+- `Home` / `End` 跳到首尾，`Page Up` / `Page Down` 按可见区域移动，输入首字母可定位条目。
+- 按住 `Shift`、`Ctrl` 或 `Meta` 点击会话时，只改变选中项，不打开会话；树仍为单选。
+- 按 `Escape` 或点击树内空白处清除选择，已经打开的中央会话继续保留。
+
+从树中打开会话后，键盘焦点仍留在树内。需要输入消息时，可以点击输入框、按 `Tab` 或使用 DSH 的快捷键切换焦点。
+
+### 视图标签
+
+会话与轨迹详情使用紧凑的文字标签，支持左右方向键移动焦点、`Enter` / `Space` 激活。右侧打开的文件使用编辑器标签样式，文件和终端操作继续沿用 DSH 的原生功能。
+
+## 配置
+
+安装后自动应用界面，无需额外配置。主题、字体和字号在 DSH 原有设置中调整，插件会跟随浅色、深色或系统主题选择。
+
+目前没有独立的插件配置项。活动栏和会话树采用固定的 Classic 布局，侧栏宽度可直接拖动调整。
+
+## 卸载
 
 ```sh
 dsh plugin --profile web remove dsh-vscode-ui
 ```
 
+卸载后重启该 profile，并刷新浏览器，即可恢复 DSH 原生布局。
+
 ## 适配边界
 
-目前针对 DSH `0.2.1-alpha.2` 的 Web slot/service 协议验证。插件通过 bundle patch 取代 `ui-layout` 和 `ui-sidebar`，其余原生功能继续由 DSH 提供。第三方页面的内部业务 UI（包括 iframe）由原插件负责；此插件提供侧栏容器和可用的滚动区域。看板内容仍需要 dshw daemon 正常运行。
+- 插件通过 bundle patch 替换 `ui-layout` 和 `ui-sidebar`，其余功能继续由 DSH 提供。其他同样替换根布局或侧栏的插件可能与之冲突。
+- 第三方页面的内部界面（包括 iframe）由对应插件负责；本插件提供侧栏容器和滚动区域。
+- 看板仍依赖正常运行的 dshw daemon，安装界面插件不会代替它启动服务。
+- 开发时热重载插件可能短暂移除根布局；遇到空白页面时，重新构建并刷新浏览器。
 
-`src/layout/` 基于 DSH 的 MIT 布局协议实现，保留主题投影、快捷键、异步导航取消、窗口测量和右侧栏交互。升级 DSH 时应重新核对布局及 slot 协议。样式选择器兼容开发版与发布版的 CSS Modules 类名。
+## 开发
+
+```sh
+npm ci
+npm test
+npm run build
+```
+
+`npm test` 会先构建，再运行测试。测试覆盖会话草稿与面板状态保留、会话树选择与焦点交接、活动栏切换、视图标签导航、主题 token、图标、侧栏宽度恢复和 DSH 导航取消协议。
+
+`src/layout/` 基于 DSH 的 MIT 布局实现适配，保留主题同步、快捷键、异步导航取消、窗口测量和右侧栏交互。升级 DSH 时，应重新核对布局与 slot/service 协议。样式选择器同时适配开发版与发布版的 CSS Modules 类名。
 
 ## 参考来源
 
-严格对照 [vscode-ui skill](https://github.com/kermanx/vscode-ui-skill) 的 Classic 实现适配，参考提交：`4378eb0b965339a354d357fcb5ae33d2e10bf20e`。主要参考 ActivityBar、CompositeBar、TreeView、SidebarTitle、WorkbenchLayout、Button、InputBox、Menu、SettingsEditor、EditorTabs 和 Theme。
+界面参考 [vscode-ui skill](https://github.com/kermanx/vscode-ui-skill) 的 Classic 实现，参考提交为 `4378eb0b965339a354d357fcb5ae33d2e10bf20e`，主要涉及 ActivityBar、CompositeBar、TreeView、SidebarTitle、WorkbenchLayout、Button、InputBox、Menu、SettingsEditor、EditorTabs 和 Theme。
 
-颜色来自参考中的 Light 2026 / Dark 2026 主题及其继承 token；图标由构建期 Codicon 数据生成。参考代码、样式和资源已适配进本仓库，运行时不依赖 skill 路径或缓存。各派生源文件记录组件来源与改动；适用的 Microsoft、DeepSeek MIT 声明保留在源文件及 LICENSE 中。
+颜色来自参考中的 Light 2026 / Dark 2026 主题及其继承 token，图标由构建期 Codicon 数据生成。参考代码、样式和资源已适配进本仓库，运行时不依赖 skill 路径或缓存；派生源文件保留了组件来源与改动说明。
 
-建议将 vscode-ui skill 安装到本项目的 `.agents/skills/vscode-ui/`，方便以后继续按相同参考维护。
+## 许可
+
+MIT，见 [LICENSE](LICENSE)。源文件与许可文件中保留了适用的 Microsoft 和 DeepSeek 版权声明。
