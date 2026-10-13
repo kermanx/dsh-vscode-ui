@@ -1,8 +1,8 @@
 /*
  * UI reference skill: vscode-ui
  * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
- * Reference components: ActionBar, Theme
- * Adaptation: Apply ActionBar geometry and semantic states to DSH reply and code actions. Keep DSH prose and highlighting; the flat code surface is a project composition, not a reference Chat implementation.
+ * Reference components: Pane, ActionBar, Theme
+ * Adaptation: Flat output surfaces and compact actions for DSH replies, code, and progress reports. Keep native prose and behavior; Chat composition is project-specific.
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
  */
 /* Reply prose keeps DSH's reading sizes; inline code remains part of the line. */
@@ -29,6 +29,13 @@ body .md-code-block {
   --dsl-code-block-banner-background-color: var(--dsw-alias-markdown-code-block-banner);
 }
 
+/* One quiet frame per output, with the same inset as expanded tool results. */
+body [data-chat-flow-kind='assistant-step'] .md-code-block {
+  box-sizing: border-box;
+  border: 1px solid var(--dsw-alias-border-l3);
+  box-shadow: none;
+}
+
 /* CodeToolbar is also used by the read and diff tool cards. Keep its UI type
    independent of the document/code font and leave the sticky wrapper intact. */
 body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] {
@@ -37,6 +44,7 @@ body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] {
   padding: 3px 8px 3px 12px;
   gap: 8px;
   border-radius: 0;
+  border-bottom: 1px solid var(--dsw-alias-border-l3);
   background: var(--dsw-alias-markdown-code-block-banner);
   color: var(--vscode-descriptionForeground);
   font: 11px/18px var(--dsw-font-family);
@@ -94,6 +102,31 @@ body [data-document-frontmatter] {
   border-width: 1px;
   border-radius: 0;
 }
+
+/* Progress is a normal transcript block, not an elevated floating card. */
+body [data-chat-flow-kind='progress-check'] .dsh-progress-check {
+  grid-template-columns: minmax(0, 1fr) 22px;
+  padding: 8px 12px;
+  border: 1px solid var(--dsw-alias-border-l3);
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--dsw-alias-bg-base);
+}
+
+body .dsh-progress-check dl { gap: 4px 12px; }
+body .dsh-progress-check dt { font-size: 12px; color: var(--vscode-descriptionForeground); }
+body .dsh-progress-check .dsh-progress-check-toggle {
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  min-height: 22px;
+  padding: 3px;
+  border: 0;
+  border-radius: var(--vscode-cornerRadius-medium, 6px);
+  background: transparent;
+}
+body .dsh-progress-check .dsh-progress-check-toggle:hover { background: var(--vscode-toolbar-hoverBackground); }
+body .dsh-progress-check .dsh-progress-check-toggle:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
 
 /* Completed-turn actions are compact chrome, independent of the prose font size. */
 body [data-turn-tail] [data-clock='end'] {

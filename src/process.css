@@ -21,6 +21,9 @@ body [data-step-process-body]:has(:is([data-terminal], [data-slot="tool.call.too
 
 body :is([data-tool], [data-slot='tool.call.toolview']) :is([data-terminal], [data-read], [data-diff], [data-search], [data-web], :--class(ioCard)),
 body :is([data-tool], [data-slot='tool.call.toolview']) :--class(detailsBodyWrap) > :--class(root) {
+  --dsl-search-radius: 0px;
+  --dsl-web-radius: 0px;
+  box-sizing: border-box;
   min-width: 0;
   margin: 4px 0 4px 22px;
   border: 1px solid var(--dsw-alias-border-l3);
@@ -48,6 +51,24 @@ body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] :is(:--class
 
 body :is([data-tool], [data-slot='tool.call.toolview']) :--class(ioCard) {
   background: var(--dsw-alias-bg-base);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(ioSection) {
+  padding: 8px 12px;
+  column-gap: 12px;
+}
+
+/* Detail cards already own the frame; nested code should not add another. */
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(detailsBodyWrap) .md-code-block {
+  border: 0;
+  box-shadow: none;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-search] > :--class(header) {
+  min-height: 28px;
+  padding: 3px 12px;
+  border-bottom: 1px solid var(--dsw-alias-border-l3);
+  border-radius: 0;
 }
 
 body :is([data-tool], [data-slot='tool.call.toolview']) :--class(ioDivider) {
