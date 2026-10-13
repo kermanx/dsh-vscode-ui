@@ -1,0 +1,24 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: WorkbenchLayout, SplitView, Sash
+ * Adaptation: DSH three-column slot layout, 48px activity rail and persistent side views with delayed sash hover feedback.
+ * Copyright (c) Microsoft Corporation. Copyright (c) 2026 DeepSeek. MIT License.
+ */
+.vsc-frame-frame { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; height: 100%; overflow: hidden; background: var(--vscode-editor-background); }
+.vsc-frame-sidebarCol { min-width: 0; min-height: 0; overflow: hidden; background: var(--vscode-sideBar-background); border-right: 1px solid var(--vscode-sideBar-border); }
+/* When only the 48px Activity Bar remains, its own border owns the edge. */
+.vsc-frame-frame[data-sidebar-collapsed] .vsc-frame-sidebarCol { border-right: 0; }
+.vsc-frame-centerCol { min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.vsc-frame-rightbarCol { position: relative; min-width: 0; min-height: 0; overflow: visible; }
+.vsc-frame-bottomRow { grid-column: 1 / -1; min-width: 0; min-height: 0; overflow: auto; background: var(--vscode-editor-background); }
+.vsc-frame-overlayLayer { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+.vsc-frame-overlayLayer > * { pointer-events: auto; }
+.vsc-frame-handle { position: absolute; grid-area: 1 / 1 / 2 / -1; top: 0; bottom: 0; width: 4px; margin-left: -2px; cursor: ew-resize; z-index: 11; touch-action: none; }
+html[data-platform='darwin'] .vsc-frame-handle { cursor: col-resize; }
+.vsc-frame-handle::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: transparent; transition: background-color .1s ease-out; }
+.vsc-frame-handle:hover::before { background: var(--vscode-sash-hoverBorder, var(--vscode-focusBorder)); transition-delay: .3s; }
+.vsc-frame-handle[data-dragging]::before { background: var(--vscode-sash-hoverBorder, var(--vscode-focusBorder)); transition-delay: 0s; }
+@media (prefers-reduced-motion: reduce) { .vsc-frame-handle::before { transition-duration: 0s; } }
+html[data-windows-titlebar] .vsc-frame-frame { box-sizing: border-box; padding-top: var(--dsh-windows-titlebar-height); }
+html[data-windows-titlebar] .vsc-frame-frame::before { content: ''; position: absolute; inset: 0 0 auto; height: var(--dsh-windows-titlebar-height); background: var(--vscode-sideBar-background); -webkit-app-region: drag; }

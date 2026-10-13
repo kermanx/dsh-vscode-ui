@@ -1,0 +1,153 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: TreeView, List, IconLabel, ActionBar, Pane, SidebarTitle
+ * Adaptation: Native DSH hierarchy and two-line search results with Classic row geometry, persistent focus, and independent selection states.
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ */
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)):has(> :--class(sectionHeader)) {
+  --dsh-session-list-edge-inset: 0px;
+  padding-right: 0;
+}
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) {
+  height: 22px; margin: 0; padding: 0 8px 0 12px; gap: 2px;
+  border-radius: 0; border: 0; box-shadow: 0 -1px var(--dsw-alias-border-l3);
+}
+body [data-slot='sidebar'] :--class(sectionLabel) {
+  font-size: 11px; line-height: 22px; font-weight: 700; text-transform: uppercase;
+  color: var(--dsw-alias-label-primary); max-width: 60%;
+}
+body [data-slot='sidebar'] :--class(sectionLabelHidden) { max-width: 0; }
+body [data-slot='sidebar'] :--class(sectionHeader) :--class(headerActions) { gap: 4px; }
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) :is(:--class(iconButton), :--class(searchButton), :--class(clearButton)) {
+  box-sizing: border-box; width: 20px; height: 20px; padding: 2px; border: 0; border-radius: 6px;
+}
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) :--class(search) { height: 22px; border-radius: 4px; }
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) :--class(searchExpanded) {
+  width: 100%; margin-inline: 0; border-width: 1px;
+}
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) :--class(searchExpanded) :is(:--class(searchButton), :--class(clearButton)) {
+  height: 20px;
+}
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) :--class(searchSlot) { max-width: 22px; }
+body [data-slot='sidebar'] :--class(root):not(:--class(rail)) > :--class(sectionHeader) :--class(searchSlotExpanded) { max-width: 100%; }
+body [data-slot='sidebar'] :--class(listArea) { margin: 0; padding: 0; }
+body [data-slot='sidebar'] :--class(treeBody) > [role='tree'] {
+  margin: 0; padding: 0 0 8px; scrollbar-gutter: auto;
+}
+body [data-slot='sidebar'] :--class(treeBody) > :--class(fade) { display: none; }
+
+/* Persistent disclosure and icon lanes. The native 12px depth step projects to 8px.
+   Neutralize native .selected fills here: that class identifies the open session,
+   while aria-selected below identifies the independent tree selection. */
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem'] {
+  box-sizing: border-box; height: 22px; min-height: 22px; border-radius: 0;
+  margin-block: 0; padding-right: 12px; font-size: 13px; line-height: 22px;
+  background: transparent; color: var(--vscode-foreground); outline: none;
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] {
+  gap: 0; padding-left: calc(8px + var(--dsh-workspace-indent, 0px) / 1.5);
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :--class(chevron) {
+  display: inline-flex; box-sizing: content-box; order: 0; width: 16px; height: 22px; padding-right: 6px;
+  color: var(--dsw-alias-label-primary); transform: translateX(3px);
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :--class(folder) {
+  display: inline-flex; order: 1; width: 16px; height: 22px; margin-right: 6px;
+  color: inherit;
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :--class(projectText) { order: 2; }
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :--class(rowActions) { order: 3; }
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='session:'] {
+  padding-left: calc(8px + var(--dsh-workspace-indent, 0px) / 1.5);
+}
+body [data-slot='sidebar'] [data-vsc-tree-group] [data-row-key^='session:'] {
+  padding-left: calc(16px + var(--dsh-workspace-indent, 0px) / 1.5);
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='session:'] > :--class(slot) {
+  width: 16px; height: 22px; margin-left: 22px; margin-right: 6px;
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :--class(title) {
+  margin: 0; font-size: 13px; line-height: 22px; font-weight: 400; color: inherit;
+  overflow: clip; text-overflow: ellipsis; mask-image: none;
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :--class(time) {
+  font-size: .9em; padding-left: 6px; opacity: .7; color: inherit; font-variant-numeric: tabular-nums;
+}
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='overflow:'] {
+  padding-left: calc(60px + var(--dsh-workspace-indent, 0px) / 1.5); text-align: left;
+  color: var(--dsw-alias-label-caption);
+}
+body [data-slot='sidebar'] [data-vsc-tree-group],
+body [data-slot='sidebar'] [data-vsc-tree-group] > * + * { margin-top: 0; }
+body [data-slot='sidebar'] [data-vsc-tree]:--class(flatList) > * + * { margin-top: 0; }
+/* Search retains its workspace/snippet line; each line uses the tree's 22px rhythm. */
+body [data-slot='sidebar'] [data-vsc-tree] :--class(searchResultRow) {
+  height: 44px; padding: 0 12px 0 8px;
+}
+body [data-slot='sidebar'] [data-vsc-tree]:--class(searchTree) > [role='treeitem'] + [role='treeitem'] { margin-top: 0; }
+body [data-slot='sidebar'] [data-vsc-tree] :--class(searchResultHeading) { height: 22px; }
+body [data-slot='sidebar'] [data-vsc-tree] :--class(searchResultTitle) { font-size: 13px; line-height: 22px; margin-left: 6px; }
+body [data-slot='sidebar'] [data-vsc-tree] :--class(searchResultMeta) { margin-left: 22px; height: 22px; }
+body [data-slot='sidebar'] [data-vsc-tree] :is(:--class(searchResultWorkspace), :--class(searchResultSnippet)) {
+  font-size: .9em; line-height: 22px; color: inherit; opacity: .7;
+}
+
+/* One continuous guide belongs to each parent, including every visible descendant. */
+body [data-slot='sidebar'] [data-vsc-tree-group]:not(:--class(workspaceDropBefore))::before {
+  content: ''; position: absolute; z-index: 1; pointer-events: none;
+  left: calc(16px + var(--dsh-workspace-indent, 0px) / 1.5); top: 22px; bottom: 0;
+  width: 1px; background: var(--vsc-tree-inactive-guide); opacity: 1;
+}
+body [data-slot='sidebar'] [data-vsc-tree-group='active']:not(:--class(workspaceDropBefore))::before { background: var(--vsc-tree-guide); opacity: 1; }
+
+/* A remembered focus row is distinct from selection and from DOM focus.
+   Row actions/rename fields deliberately leave the list's active state. */
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:hover:not([aria-selected='true']):not([data-vsc-tree-focused='true']) {
+  background: var(--vscode-list-hoverBackground); color: var(--vscode-list-hoverForeground);
+}
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:--class(menuOpen):not([aria-selected='true']):not([data-vsc-tree-focused='true']) {
+  background: var(--vscode-list-hoverBackground); color: var(--vscode-list-hoverForeground);
+}
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem'][aria-selected='true'] {
+  background: var(--vscode-list-inactiveSelectionBackground); color: var(--vscode-list-inactiveSelectionForeground, var(--vscode-foreground));
+  outline: 1px dotted var(--vscode-contrastActiveBorder, transparent); outline-offset: -1px;
+}
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:hover {
+  outline: 1px dashed var(--vscode-contrastActiveBorder, transparent); outline-offset: -1px;
+}
+body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [data-vsc-tree-focused='true'] {
+  background: var(--vscode-list-focusBackground); color: var(--vscode-list-focusForeground, var(--vscode-foreground));
+  outline: 1px solid var(--vscode-list-focusOutline); outline-offset: -1px;
+}
+body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [role='treeitem'][aria-selected='true'] {
+  background: var(--vscode-list-activeSelectionBackground); color: var(--vscode-list-activeSelectionForeground);
+}
+body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [data-vsc-tree-focused='true'][aria-selected='true'] {
+  outline-color: var(--vscode-list-focusAndSelectionOutline, var(--vscode-contrastActiveBorder, var(--vscode-list-focusOutline)));
+}
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is([aria-selected='true'], [data-vsc-tree-focused='true']) :is(:--class(slot), :--class(iconButton)) { color: inherit; }
+body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [aria-selected='true'] :is(:--class(slot), :--class(iconButton)) {
+  color: var(--vscode-list-activeSelectionIconForeground, inherit);
+}
+body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) { display: none; gap: 0; height: 22px; margin-left: 4px; }
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :--class(menuOpen)) :--class(rowActions) { display: inline-flex; }
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :--class(menuOpen)) > :is(:--class(time), :--class(pinIndicator)) { display: none; }
+body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) :--class(iconButton) {
+  box-sizing: border-box; width: 20px; height: 20px; padding: 2px;
+  border-radius: var(--vscode-cornerRadius-medium, 6px);
+}
+body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) :--class(iconButton) svg { width: 16px; height: 16px; }
+body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) :--class(iconButton):hover { background: var(--vscode-toolbar-hoverBackground); }
+body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) :--class(iconButton):focus-visible {
+  outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px;
+}
+
+/* Keep native insertion markers separate from the ancestor's guide. */
+body [data-slot='sidebar'] [data-vsc-tree] :is(:--class(dropBefore), :--class(workspaceDropBefore))::before,
+body [data-slot='sidebar'] [data-vsc-tree] :is(:--class(dropAfter), :--class(workspaceDropAfter))::after {
+  height: 1px; width: auto; left: 0; right: 0; opacity: 1;
+  background: var(--dsw-focus-ring-color);
+}
+body [data-slot='sidebar'] [data-vsc-tree] :is(:--class(dropBefore), :--class(workspaceDropBefore))::before { top: 0; bottom: auto; }
+body [data-slot='sidebar'] [data-vsc-tree] :is(:--class(dropAfter), :--class(workspaceDropAfter))::after { bottom: 0; top: auto; }

@@ -1,0 +1,364 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: Button, InputBox, Radio, Switch, Menu, Hover, Dialog, SettingsEditor, Toolbar, WorkbenchLayout, PanelTitle
+ * Adaptation: DSH native controls retain their events and accessibility semantics while adopting Classic geometry, state colors and focus treatment.
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ */
+/* Slot and data attributes are the public DSH styling anchors. Primitive
+   selectors below support Vite's _local_hash and DSH's hash_local names. */
+body {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* The existing layout still owns width, collapse, and native caption clearance. */
+body [data-slot='root'] > div {
+  border-radius: 0;
+}
+
+body [data-slot='root'] div:has(> [data-slot='sidebar']),
+html[data-platform] body [data-slot='root'] div:has(> [data-slot='sidebar']) {
+  background: var(--dsw-specific-sidebar-fill);
+  border-right: 1px solid var(--dsw-alias-border-l3);
+}
+
+body [data-slot='sidebar'] > div {
+  background: var(--dsw-specific-sidebar-fill);
+  font-size: 13px;
+}
+
+body [data-slot='root'] div:has(> [data-slot='main']),
+html[data-platform] body [data-slot='root'] div:has(> [data-slot='main']) {
+  background: var(--dsw-alias-bg-base);
+  border-radius: 0;
+  border-left: 0;
+}
+
+/* Only the shared text Button primitive has both button and size classes. */
+body button:--class(button):is(:--class(md), :--class(sm)) {
+  box-sizing: border-box;
+  height: 26px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+body button:--class(button):--class(sm) {
+  height: 22px;
+  padding: 3px 6px;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+body span:has(> input:--class(input)) {
+  box-sizing: border-box;
+  height: 26px;
+  padding: 4px 6px;
+  border: 1px solid var(--vscode-input-border, transparent);
+  border-radius: 4px;
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+}
+
+body span > input:--class(input) {
+  font-size: 13px;
+  line-height: 16px;
+  color: inherit;
+}
+
+body span > input:--class(input)::placeholder { color: var(--vscode-input-placeholderForeground); opacity: 1; }
+
+body span:has(> input:--class(input)):focus-within {
+  border-color: var(--vscode-input-border, transparent);
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+body span:has(> input:--class(input)[aria-invalid='true']) { border-color: var(--vscode-inputValidation-errorBorder); }
+body span:has(> input:--class(input)[aria-invalid='true']):focus-within { outline-color: var(--vscode-inputValidation-errorBorder); }
+
+body input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file']),
+body textarea {
+  border-radius: 4px;
+}
+
+/* Menus and dialogs retain their own positioning, portals, and dismissal. */
+body :is([data-menu-material], [data-menu-backing]) {
+  border-radius: 8px;
+}
+
+body [data-menu-material] {
+  border: 1px solid var(--vscode-menu-border, var(--vscode-editorWidget-border, transparent));
+  color: var(--vscode-menu-foreground);
+  box-shadow: 0 0 12px rgb(0 0 0 / 14%);
+}
+
+body [role='dialog'] {
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--dsw-alias-border-l3), 0 0 20px rgb(0 0 0 / 15%);
+}
+
+body [data-composer-card] {
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px var(--dsw-alias-border-l4);
+}
+
+body [data-composer-card]::after {
+  border-radius: inherit;
+}
+
+@media (forced-colors: active) {
+  body :is([data-composer-card], [data-menu-material], [role='dialog']) {
+    outline: 1px solid CanvasText;
+  }
+}
+
+/* Settings retains its modal navigation and becomes a flat TOC beside forms. */
+body [data-shortcut-modal='settings'] { background: var(--dsw-alias-bg-base); }
+body [data-shortcut-modal='settings'] :--class(nav) {
+  width: 172px; padding: 12px 0; gap: 12px;
+  background: var(--vscode-editor-background);
+  border-right: 1px solid var(--dsw-alias-border-l3);
+}
+body [data-shortcut-modal='settings'] :--class(navTitle) { font-size: 13px; font-weight: 600; }
+body [data-shortcut-modal='settings'] :--class(navList) { gap: 0; }
+body [data-shortcut-modal='settings'] :--class(navCell) {
+  height: 26px; flex-shrink: 0; padding: 0 12px;
+  border-radius: 0; font-size: 13px; line-height: 26px;
+  background: transparent; color: var(--vscode-foreground);
+}
+body [data-shortcut-modal='settings'] :--class(navCell):hover { color: var(--vscode-settings-settingsHeaderHoverForeground, var(--vscode-foreground)); background: transparent; }
+body [data-shortcut-modal='settings'] :--class(navCell)[aria-current] { color: var(--vscode-settings-headerForeground); background: transparent; font-weight: 600; }
+body [data-shortcut-modal='settings'] :--class(navCell):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] :--class(navIcon) { width: 16px; height: 16px; }
+body [data-shortcut-modal='settings'] :--class(header) { height: 38px; padding: 8px; }
+body [data-shortcut-modal='settings'] :--class(close) { width: 22px; height: 22px; border-radius: 6px; color: var(--vscode-icon-foreground); }
+body [data-shortcut-modal='settings'] :--class(close):hover { background: var(--vscode-toolbar-hoverBackground); }
+body [data-shortcut-modal='settings'] :--class(close):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] :--class(options) { padding: 0 20px 20px; }
+body [data-shortcut-modal='settings'] :--class(title) { font-size: 13px; font-weight: 400; color: var(--vscode-settings-headerForeground); }
+body [data-shortcut-modal='settings'] :--class(rowText) { padding-right: 16px; gap: 2px; }
+body [data-shortcut-modal='settings'] :--class(cubeRow) { gap: 0; flex-wrap: nowrap; }
+body [data-shortcut-modal='settings'] :--class(themeCube) {
+  flex: 0 1 auto; flex-direction: row; gap: 6px;
+  padding: 4px 10px; min-height: 26px;
+  border: 1px solid var(--vscode-radio-inactiveBorder, transparent); border-radius: 0;
+  font-size: 12px; line-height: 16px;
+  color: var(--vscode-radio-inactiveForeground, var(--vscode-foreground));
+  background: var(--vscode-radio-inactiveBackground, transparent);
+}
+body [data-shortcut-modal='settings'] :--class(themeCube) + :--class(themeCube) { margin-left: -1px; }
+body [data-shortcut-modal='settings'] :--class(themeCube):first-child { border-radius: 3px 0 0 3px; }
+body [data-shortcut-modal='settings'] :--class(themeCube):last-child { border-radius: 0 3px 3px 0; }
+body [data-shortcut-modal='settings'] :--class(themeCube) svg { width: 16px; height: 16px; }
+body [data-shortcut-modal='settings'] :--class(themeCube):hover:not([aria-pressed='true']) { background: var(--vscode-radio-inactiveHoverBackground); }
+body [data-shortcut-modal='settings'] :--class(themeCube)[aria-pressed='true'] {
+  color: var(--vscode-radio-activeForeground); background: var(--vscode-radio-activeBackground);
+  border-color: var(--vscode-radio-activeBorder, transparent); z-index: 1;
+}
+body [data-shortcut-modal='settings'] :--class(themeCube):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 2px; z-index: 2; }
+body [data-shortcut-modal='settings'] :--class(stepper) {
+  box-sizing: border-box; height: 26px; border-radius: 4px;
+  color: var(--vscode-settings-numberInputForeground, var(--vscode-input-foreground));
+  background: var(--vscode-settings-numberInputBackground, var(--vscode-input-background));
+  border: 1px solid var(--vscode-settings-numberInputBorder, var(--vscode-input-border, transparent));
+}
+body [data-shortcut-modal='settings'] :--class(stepper):focus-within { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] :--class(stepper) :--class(value) { color: inherit; }
+body [data-shortcut-modal='settings'] :--class(stepper) :--class(arrows) { gap: 0; right: 4px; }
+body [data-shortcut-modal='settings'] :--class(stepper) :--class(arrow) { height: 11px; border-radius: 0; }
+body [data-shortcut-modal='settings'] :is(:--class(value), :--class(unit)) { font-size: 13px; }
+body [data-shortcut-modal='settings'] button[aria-haspopup='menu'] {
+  min-height: 26px; height: auto; padding-block: 3px; border-radius: 4px; font-size: 13px;
+}
+body [data-shortcut-modal='settings'] :--class(selector)[aria-haspopup='menu'] {
+  border: 1px solid var(--vscode-settings-dropdownBorder, var(--vscode-dropdown-border, transparent));
+  color: var(--vscode-settings-dropdownForeground, var(--vscode-dropdown-foreground));
+  background: var(--vscode-settings-dropdownBackground, var(--vscode-dropdown-background));
+}
+body [data-shortcut-modal='settings'] :--class(selector)[aria-haspopup='menu']:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] span:has(> input:--class(input)) {
+  --vscode-input-background: var(--vscode-settings-textInputBackground);
+  --vscode-input-foreground: var(--vscode-settings-textInputForeground);
+  border-color: var(--vscode-settings-textInputBorder, var(--vscode-input-border, transparent));
+}
+body [data-shortcut-modal='settings'] span:has(> input:--class(input)[aria-invalid='true']) { border-color: var(--vscode-inputValidation-errorBorder); }
+
+/* Menus, choices, hovers and buttons use their own Classic dimensions. */
+body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']) {
+  box-sizing: border-box; min-height: 24px; padding: 2px 8px; border-radius: 6px;
+  font-family: var(--dsw-font-family); font-size: 13px; line-height: 20px;
+  color: var(--vscode-menu-foreground);
+}
+body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):--class(danger) { color: var(--vscode-errorForeground); }
+body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):is(:hover, :focus-visible):not(:disabled):not([aria-disabled='true']) {
+  color: var(--vscode-list-hoverForeground, var(--vscode-menu-foreground)); background: var(--vscode-list-hoverBackground);
+}
+body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):focus-visible:not(:disabled):not([aria-disabled='true']) {
+  outline: 1px solid var(--vscode-menu-selectionBorder, transparent); outline-offset: -1px;
+}
+body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):is(:disabled, [aria-disabled='true']) {
+  color: var(--vscode-disabledForeground); background: transparent; opacity: 1; cursor: default;
+}
+body [data-menu-material] :--class(itemIcon), body [data-menu-material] :--class(itemIcon) svg { width: 16px; height: 16px; color: inherit; }
+body [data-menu-material] :--class(check) { color: inherit; }
+body [data-menu-material] :--class(shortcutKeys) { color: inherit; opacity: .7; }
+body [data-menu-material] :--class(item):is(:hover, :focus-visible) :--class(shortcutKeys) { opacity: 1; }
+body [data-menu-material] [role='separator'] { height: 1px; margin: 5px 0; background: var(--vscode-menu-separatorBackground); }
+body [data-menu-material] :--class(footer) { border-top: 1px solid var(--vscode-menu-separatorBackground); }
+body [role='tooltip'] {
+  box-sizing: border-box; padding: 4px 8px; border-radius: 5px; background: var(--vscode-editorHoverWidget-background);
+  color: var(--vscode-editorHoverWidget-foreground, var(--vscode-foreground)); border: 1px solid var(--vscode-editorHoverWidget-border);
+  font: 13px/19px var(--dsw-font-family);
+  box-shadow: 0 0 12px rgb(0 0 0 / 14%);
+}
+body button:--class(button):is(:--class(md), :--class(sm)) { border: 1px solid var(--vscode-button-border, transparent); font-family: var(--dsw-font-family); }
+body button:--class(button):--class(primary) { color: var(--vscode-button-foreground); background: var(--vscode-button-background); }
+body button:--class(button):--class(primary):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-button-hoverBackground); }
+body button:--class(button):--class(outline) { border-color: var(--vscode-button-secondaryBorder, var(--vscode-button-border, transparent)); color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryBackground); }
+body button:--class(button):--class(outline):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-button-secondaryHoverBackground); }
+body button:--class(button):is(:--class(ghost), :--class(toolbar)) { color: var(--vscode-foreground); background: transparent; border-color: transparent; }
+body button:--class(button):is(:--class(ghost), :--class(toolbar)):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-toolbar-hoverBackground); }
+body button:--class(button):is(:--class(ghost), :--class(toolbar)):active:not(:disabled) { background: var(--vscode-toolbar-activeBackground); }
+body button:--class(button):disabled { opacity: .4; cursor: default; }
+body button:--class(button):focus-visible { outline: 1px solid var(--dsw-focus-ring-color); outline-offset: 2px; }
+
+/* The composer is a multiline editing field with an attached command row. */
+/* Session title and view navigation each occupy a 35px workbench row. */
+body [data-slot='conversation.header'] > header:has([data-conversation-tabs]) {
+  min-height: 71px;
+  grid-template-rows: 35px 35px;
+  padding-top: 0;
+  border-bottom-width: 1px;
+}
+body [data-slot='conversation.header'] > header:has([data-conversation-tabs]) > :--class(titleRow) {
+  min-height: 35px;
+}
+body [data-composer-card] {
+  border: 1px solid var(--dsw-alias-border-l4); box-shadow: none;
+  padding-top: 6px; gap: 6px;
+}
+body [data-composer-card]:focus-within { border-color: var(--dsw-focus-ring-color); }
+body [data-composer-card]:--class(cardWorkspaceTrigger) { border-color: transparent; }
+body [data-composer-card] :--class(input) { padding-left: 10px; min-height: 44px; }
+body [data-composer-card] :--class(placeholder) { left: 10px; }
+body [data-composer-card] :--class(row) { padding: 4px 6px; gap: 6px; }
+body [data-composer-card] :is(:--class(tools), :--class(modes), :--class(trailing), :--class(standardControls)) { gap: 6px; }
+body [data-composer-card] :--class(add) {
+  box-sizing: border-box; width: 22px; height: 22px; padding: 3px;
+  border-radius: 6px; background: transparent;
+}
+body [data-composer-card] :--class(primary) {
+  box-sizing: border-box; width: 26px; height: 26px; padding: 5px; border-radius: 4px; transform: none;
+  background: var(--dsw-alias-button-primary-fill);
+}
+body [data-composer-card] :--class(primary):hover:not(:disabled) { background: var(--dsw-alias-button-primary-hover); }
+body [data-composer-card] :--class(primary) svg { width: 16px; height: 16px; }
+body [data-composer-card] :--class(row) button:is([aria-haspopup], :--class(trigger)) {
+  box-sizing: border-box; height: 22px; min-height: 22px; padding: 0 6px;
+  border-radius: 4px; font: 13px/18px var(--dsw-font-family);
+}
+body [data-composer-card] :--class(row) :--class(add)[aria-haspopup] { padding: 3px; }
+body [data-composer-card] [data-slot='conversation.input.activity'] button:--class(trigger) {
+  width: 22px; padding: 3px; border: 0;
+}
+body [data-composer-card] :--class(row) button:is([aria-haspopup], :--class(trigger)):not(:--class(add)) svg { flex-shrink: 0; width: 12px; height: 12px; }
+body [data-composer-card] :--class(row) button:focus-visible {
+  outline: 1px solid var(--dsw-focus-ring-color); outline-offset: -1px;
+}
+body [data-phase='hero'] [data-slot='conversation.session.header.corner'] button {
+  width: 22px; height: 22px; padding: 3px; border: 0; border-radius: 6px;
+}
+html:not([data-platform='darwin']):not([data-windows-titlebar]) body [data-phase='hero'] [data-slot='conversation.header'] > header {
+  box-sizing: border-box; height: 35px; min-height: 35px; padding-block: 0;
+}
+body [data-phase='hero'] :--class(headline) {
+  justify-content: flex-start; font-size: 20px; line-height: 28px; font-weight: 400;
+}
+body [data-phase='hero'] :--class(titleGroup) { justify-content: flex-start; }
+body [data-phase='hero'] :--class(fishHitbox) svg { width: 24px; height: 24px; }
+body [data-phase='hero'] :--class(previewBadge) {
+  align-self: center; margin-top: 0; border: 0; border-radius: 2px;
+  font: 11px/16px var(--dsw-font-family); padding: 0 4px;
+  background: var(--vsc-list-inactive-selection); color: var(--dsw-alias-label-secondary);
+}
+body [data-phase='hero'] :--class(composerHero) { gap: 6px; }
+body [data-phase='hero'] :--class(root):has(> :--class(stack) > :--class(headline)) {
+  padding-inline: var(--dsh-composer-side-clearance);
+}
+body [data-phase='hero'] :--class(stack):has(> :--class(headline)) > :--class(body):empty { display: none; }
+body [data-phase='hero'] :--class(heroWorkspaceRow) { padding-inline: var(--dsh-composer-side-clearance); }
+body [data-phase='hero'] :--class(heroWorkspaceRow) button {
+  box-sizing: border-box; height: 22px; min-height: 22px; padding: 0 6px;
+  border-radius: 4px; font: 13px/18px var(--dsw-font-family);
+}
+
+/* User messages retain DSH's bubble layout with square corners. */
+body :is([data-chat-flow-kind='user'], [data-chat-flow-kind='steering']) :--class(bubble) {
+  border-radius: 0;
+}
+body [data-chat-flow-kind] :--class(fileCard) { border-radius: 4px; min-height: 44px; padding: 6px 8px; }
+body [data-chat-flow-kind] :--class(callRow) { border-radius: 0; }
+body :--class(toBottom) { width: 26px; height: 26px; border-radius: 6px; box-shadow: none; border: 1px solid var(--dsw-alias-border-l4); }
+
+/* Installed plugins read as extension rows, with artwork separate from chrome. */
+body [data-plugin-panel] :--class(pageTitle) { font-size: 20px; font-weight: 400; }
+body [data-plugin-panel] :--class(pageHead) { padding-bottom: 12px; }
+body [data-plugin-panel] :--class(cards) { gap: 0; }
+body [data-plugin-panel] :--class(card) { border-radius: 0; margin: 0; }
+body [data-plugin-panel] :--class(cardOpen)::after { border-radius: 0; }
+body [data-plugin-panel] :--class(cardHead) { gap: 10px; padding: 8px; }
+body [data-plugin-panel] :--class(cardIcon) { width: 42px; height: 42px; border: 0; border-radius: 0; }
+body [data-plugin-panel] :is(:--class(cardTitle), :--class(cardOpen)) { font-size: 13px; font-weight: 600; }
+body [data-plugin-panel] :is(:--class(iconButton), :--class(infoButton)) { width: 22px; height: 22px; border-radius: 6px; }
+body [data-plugin-panel] :is(:--class(addPrimary), :--class(addMore)) { height: 26px; font-size: 12px; }
+body [data-plugin-panel] :--class(addPrimary) { border-radius: 4px 0 0 4px; }
+body [data-plugin-panel] :--class(addMore) { border-radius: 0 4px 4px 0; }
+
+@media (max-width: 640px) {
+  body [data-shortcut-modal='settings'] { max-width: calc(100vw - 16px); }
+  body [data-shortcut-modal='settings'] :--class(nav) { width: 130px; }
+  body [data-shortcut-modal='settings'] :--class(navCell) { padding-inline: 8px; gap: 6px; }
+  body [data-shortcut-modal='settings'] :--class(options) { padding-inline: 12px; }
+  body [data-shortcut-modal='settings'] :--class(themeCube) { padding-inline: 6px; }
+}
+
+/* Preserve Switch semantics and its real thumb; the reference uses a 28 × 16 track. */
+body button:--class(switch)[role='switch'] {
+  position: relative; box-sizing: border-box; container-type: size; flex: none;
+  width: 28px; height: 16px; border-radius: 999px; padding: 0;
+  border: 1px solid transparent; background: color-mix(in srgb, var(--vscode-descriptionForeground) 36%, transparent);
+  cursor: pointer; transition: background-color 120ms ease, border-color 120ms ease;
+}
+body button:--class(switch)[role='switch'][aria-checked='true'] { background: var(--vscode-button-background); border-color: var(--vscode-button-background); }
+body button:--class(switch)[role='switch'] > :--class(thumb) {
+  position: absolute; display: block; box-sizing: border-box; top: 0; bottom: 0; left: 0;
+  width: 100cqh; height: auto; border: 1px solid transparent; border-radius: 999px;
+  background-color: var(--vscode-button-foreground); background-clip: padding-box;
+  transform: none; transition: left 120ms ease;
+}
+body button:--class(switch)[role='switch'][aria-checked='true'] > :--class(thumb) { left: calc(100% - 100cqh); transform: none; }
+body button:--class(switch)[role='switch']:disabled { opacity: .5; cursor: default; }
+body button:--class(switch)[role='switch']:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  body button:--class(switch)[role='switch'], body button:--class(switch)[role='switch'] > :--class(thumb) { transition: none; }
+}
+@media (forced-colors: active) {
+  body button:--class(switch)[role='switch'] { border-color: ButtonText; }
+}
+body [data-shortcut-modal='settings'] [data-slot='settings.general.item'] > :is(:--class(row), :--class(group)) {
+  padding-block: 12px;
+}
+body [data-shortcut-modal='settings'] :--class(setting) :--class(button) {
+  height: 26px; padding: 4px 8px; border-radius: 4px;
+  font: 12px/16px var(--dsw-font-family);
+}
+body [data-shortcut-modal='settings'] :--class(settingTitle) { font-size: 13px; }
+body [data-shortcut-modal='settings'] :--class(settingText) { padding-right: 16px; gap: 2px; }
+body [data-shortcut-modal='settings'] :--class(setting) { padding-block: 12px; }
+
+body :--class(tag)[data-tone] { border-radius: 2px; padding: 0 4px; font-weight: 400; }
+body [data-plugin-panel] { align-items: stretch; gap: 16px; padding-inline: 24px; }
+body [data-plugin-panel] > * { max-width: none; }
+body [data-plugin-panel] :--class(groupTitle) { font-size: 13px; font-weight: 600; }

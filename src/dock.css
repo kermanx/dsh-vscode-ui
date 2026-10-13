@@ -1,0 +1,206 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: EditorTabs, PanelTitle, CompositeBar, ActionBar, Radio, SettingsEditor
+ * Adaptation: DSH open items use EditorTabs, content views use PanelTitle, settings scopes use SettingsEditor, and compact choices use segmented Radio.
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ */
+/* The dock owns open items. Its active-pane state distinguishes the focused
+   editor group from other groups without confusing selection with DOM focus. */
+body [data-dockkit-strip] {
+  --vsc-dock-tab-background: var(--vscode-tab-inactiveBackground);
+  --vsc-dock-tab-foreground: var(--vscode-tab-inactiveForeground);
+  --vsc-dock-tab-active-background: var(--vscode-tab-activeBackground);
+  --vsc-dock-tab-active-foreground: var(--vscode-tab-activeForeground);
+  --vsc-dock-tab-active-border: var(--vscode-tab-activeBorder);
+  --vsc-dock-tab-active-border-top: var(--vscode-tab-activeBorderTop);
+  --vsc-dock-tab-hover-background: var(--vscode-tab-hoverBackground);
+  --vsc-dock-tab-hover-foreground: var(--vscode-tab-hoverForeground);
+  --vsc-dock-action-opacity: 1;
+  box-sizing: border-box; height: 35px; min-height: 35px;
+  padding: 0 8px 0 max(0px, calc(var(--dsh-dockkit-strip-inline-start, 10px) - 10px));
+  gap: 0; border-radius: 0;
+  background: var(--vscode-editorGroupHeader-tabsBackground);
+  box-shadow: inset 0 -1px var(--vscode-editorGroupHeader-tabsBorder);
+}
+body [data-dockkit-pane]:not([data-dockkit-pane-active='true']) [data-dockkit-strip] {
+  --vsc-dock-tab-background: var(--vscode-tab-unfocusedInactiveBackground);
+  --vsc-dock-tab-foreground: var(--vscode-tab-unfocusedInactiveForeground);
+  --vsc-dock-tab-active-background: var(--vscode-tab-unfocusedActiveBackground);
+  --vsc-dock-tab-active-foreground: var(--vscode-tab-unfocusedActiveForeground);
+  --vsc-dock-tab-active-border: var(--vscode-tab-unfocusedActiveBorder);
+  --vsc-dock-tab-active-border-top: var(--vscode-tab-unfocusedActiveBorderTop);
+  --vsc-dock-tab-hover-background: var(--vscode-tab-unfocusedHoverBackground);
+  --vsc-dock-tab-hover-foreground: var(--vscode-tab-unfocusedActiveForeground);
+  --vsc-dock-action-opacity: .5;
+}
+body [data-dockkit-strip-tabs] { height: 35px; align-items: stretch; }
+body [data-dockkit-strip-tabs][data-dockkit-strip-scroll] { mask-image: none; }
+body [data-dockkit-tab] {
+  box-sizing: border-box; flex: 0 0 auto; width: max-content; min-width: 120px; max-width: 170px;
+  height: 35px; padding: 0 10px; border-radius: 0;
+  border-right: 1px solid var(--vscode-tab-border);
+  font: 13px/18px var(--dsw-font-family);
+  color: var(--vsc-dock-tab-foreground); background: var(--vsc-dock-tab-background);
+  box-shadow: none;
+}
+body [data-dockkit-tab]:has([data-dockkit-tab-close]) { padding-right: 28px; }
+body [data-dockkit-tab][aria-selected='true'] {
+  color: var(--vsc-dock-tab-active-foreground); background: var(--vsc-dock-tab-active-background);
+  box-shadow: inset 0 1px var(--vsc-dock-tab-active-border-top), inset 0 -1px var(--vsc-dock-tab-active-border);
+}
+body [data-dockkit-tab]:hover {
+  color: var(--vsc-dock-tab-hover-foreground); background: var(--vsc-dock-tab-hover-background);
+}
+body [data-dockkit-tab]:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder); outline-offset: -2px;
+  box-shadow: none;
+}
+/* DockKit deliberately makes a lone, unclosable item a quiet pane label. */
+body [data-dockkit-tab][data-dockkit-tab-quiet],
+body [data-dockkit-tab][data-dockkit-tab-quiet]:hover {
+  min-width: 0; color: var(--vscode-foreground); background: transparent;
+  border-right: 0; box-shadow: none;
+}
+body [data-dockkit-strip] [data-dockkit-tab][role='tab'] [data-dockkit-tab-title] {
+  min-width: 0; gap: 6px; line-height: 18px; mask-image: none;
+}
+body [data-dockkit-strip] [data-dockkit-tab][role='tab'] [data-dockkit-tab-title][data-dockkit-tab-clipped] {
+  mask-image: linear-gradient(to right, black calc(100% - 5px), transparent);
+}
+body [data-dockkit-tab-title] svg { flex: none; width: 16px; height: 16px; }
+body [data-dockkit-tab-close] {
+  box-sizing: border-box; width: 20px; height: 20px; padding: 2px;
+  top: 50%; right: 4px; transform: translateY(-50%); border: 0; border-radius: 6px;
+  color: inherit; background: transparent;
+}
+body [data-dockkit-tab]:is([aria-selected='true'], :hover, :focus-within) [data-dockkit-tab-close] { opacity: var(--vsc-dock-action-opacity); }
+body [data-dockkit-tab-close]:hover { background: var(--vscode-toolbar-hoverBackground); }
+body [data-dockkit-tab-close] svg { width: 16px; height: 16px; }
+
+/* The existing insertion marker keeps its location without creating tab gaps. */
+body [data-dockkit-strip-tabs] > :--class(slot) {
+  position: relative; width: 0; height: 35px;
+}
+body [data-dockkit-strip-tabs] > :--class(slot)::before { display: none; }
+body [data-dockkit-strip-tabs] > [data-dockkit-caret]::before {
+  display: block; position: absolute; left: -1px; width: 2px; height: 20px;
+}
+
+/* Fixed-size actions stay outside the tab scroller. */
+body [data-dockkit-strip-chrome] { height: 35px; margin-left: 0; gap: 4px; }
+body [data-dockkit-strip] :is([data-dockkit-add-tab], [data-dockkit-split-button]),
+body [data-dockkit-strip-chrome] > button {
+  box-sizing: border-box; width: 22px; height: 22px; padding: 3px;
+  border: 0; border-radius: 6px; color: var(--vscode-icon-foreground);
+  background: transparent;
+}
+body [data-dockkit-strip] :is([data-dockkit-add-tab], [data-dockkit-split-button]):hover:not(:disabled),
+body [data-dockkit-strip-chrome] > button:hover:not(:disabled) {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+body [data-dockkit-add-tab] { margin-left: 4px; }
+body [data-dockkit-strip] > span:has([data-dockkit-split-button]) {
+  display: flex; flex: none; align-items: center; margin-left: 4px; margin-right: 4px;
+}
+body [data-dockkit-strip] :is([data-dockkit-add-tab], [data-dockkit-split-button]) svg,
+body [data-dockkit-strip-chrome] > button svg { width: 16px; height: 16px; }
+body [data-dockkit-strip] button:focus-visible {
+  outline: 1px solid var(--dsw-focus-ring-color); outline-offset: -1px;
+}
+body [data-dockkit-host='dock'] { border-radius: 0; box-shadow: none; }
+
+body [data-dockkit-strip-chrome] [data-sidebar-right-toggle] svg { transform: none; }
+body [data-dockkit-tab-title] :--class(folder) { color: inherit; }
+
+/* Session views and inspector detail pages use PanelTitle's compact text
+   tabs. Stable item attributes keep this separate from segmented choices. */
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) {
+  display: flex; align-items: stretch; box-sizing: border-box; height: 35px;
+  min-width: 0; gap: 0; margin: 0; padding: 0 8px; border: 0;
+  overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+  background: transparent;
+}
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab])))::-webkit-scrollbar { display: none; }
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab'] {
+  position: relative; box-sizing: border-box; flex: 0 0 auto; min-width: 0; height: 35px;
+  padding: 0 10px; border: 0; border-radius: 0;
+  font: 11px/27px var(--dsw-font-family); text-transform: uppercase;
+  white-space: nowrap; color: var(--vscode-panelTitle-inactiveForeground);
+  background: transparent; box-shadow: none;
+}
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab']::after {
+  content: ''; display: block; position: absolute;
+  left: 10px; right: 10px; bottom: 5px; height: 1px; border-radius: 0;
+  background: transparent; pointer-events: none;
+}
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab'][aria-selected='true'] {
+  color: var(--vscode-panelTitle-activeForeground); background: transparent; box-shadow: none;
+}
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab'][aria-selected='true']::after { background: var(--vscode-panelTitle-activeBorder); }
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab']:is(:hover, :focus-visible) { color: var(--vscode-panelTitle-activeForeground); }
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab']:focus-visible { outline: none; }
+body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab']:focus-visible::after { height: 2px; background: var(--vscode-focusBorder); }
+
+/* The 8px strip inset + 10px item inset aligns with the session heading. */
+body [data-conversation-tabs] { margin: 0 -28px 0 -20px; }
+body [role='tablist']:has(> [id^='trajectory-detail-']) { border-bottom: 1px solid var(--vscode-panel-border); }
+body :--class(detailTabsBar):has(> [role='tablist'] > [data-detail-tab]) {
+  box-sizing: border-box; height: 35px; min-height: 35px; padding: 0 8px; gap: 8px;
+  border-bottom: 1px solid var(--vscode-panel-border);
+}
+body [role='tablist']:has(> [data-detail-tab]) { align-self: stretch; padding: 0; }
+body :--class(detailTabsBar):has(> [role='tablist'] > [data-detail-tab]) :--class(detailActions) { margin-right: 0; }
+body :--class(detailTabsBar):has(> [role='tablist'] > [data-detail-tab]) :--class(detailIconButton) {
+  box-sizing: border-box; width: 22px; height: 22px; padding: 3px; border-radius: 6px;
+}
+body :--class(detailTabsBar):has(> [role='tablist'] > [data-detail-tab]) :--class(detailIconButton) svg { width: 16px; height: 16px; }
+
+/* Plugin settings changes configuration scope, using SettingsEditor's
+   sentence-case 13px tabs with the bottom rule across the whole label box. */
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) {
+  display: flex; align-items: stretch; min-width: 0; height: 35px;
+  gap: 0; margin-top: 0; padding: 0; border-bottom: 1px solid var(--vscode-settings-headerBorder);
+}
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) > [role='tab'] {
+  box-sizing: border-box; position: relative; height: 35px; padding: 7px 8px 6px;
+  border: 0; border-radius: 0; font: 13px/20px var(--dsw-font-family); text-transform: none;
+  color: var(--vscode-foreground); background: transparent; opacity: .9; box-shadow: none;
+}
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; border-radius: 0; background: transparent;
+}
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:is(:hover, [aria-selected='true']) {
+  opacity: 1; color: var(--vscode-settings-headerForeground, var(--vscode-foreground));
+}
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) > [role='tab'][aria-selected='true']::after {
+  background: var(--vscode-settings-headerForeground, var(--vscode-foreground));
+}
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:focus-visible { outline: none; opacity: 1; }
+body [data-shortcut-modal='settings'] :--class(tabs)[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:focus-visible::after { background: var(--vscode-focusBorder); }
+
+/* Both native segmented primitives retain their equal-width layout and
+   keyboard selection. Paint the active segment in place so an old sliding
+   indicator cannot retain the host's 4px inset or elevated pill geometry. */
+body :is(:--class(control), :--class(tabs):has(> :--class(indicator)))[role='tablist'] {
+  box-sizing: border-box; align-items: center; gap: 2px; padding: 2px;
+  border: 1px solid var(--vscode-contrastBorder, var(--vscode-radio-inactiveBorder, transparent));
+  border-radius: 6px; background: transparent;
+}
+body :is(:--class(control), :--class(tabs):has(> :--class(indicator)))[role='tablist'] > :--class(indicator) { display: none; }
+body :is(:--class(control), :--class(tabs):has(> :--class(indicator)))[role='tablist'] > [role='tab'] {
+  box-sizing: border-box; display: inline-flex; justify-content: center; align-items: center;
+  min-width: 0; height: 24px; padding: 0 6px; margin: 0;
+  border: 1px solid transparent; border-radius: 4px;
+  font: 11px/16px var(--dsw-font-family); color: var(--vscode-foreground);
+  background: transparent; box-shadow: none; text-decoration: none; transition: none;
+}
+body :is(:--class(control), :--class(tabs):has(> :--class(indicator)))[role='tablist'] > [role='tab']:not([aria-selected='true']):hover:not(:disabled) { background: var(--vscode-toolbar-hoverBackground); }
+body :is(:--class(control), :--class(tabs):has(> :--class(indicator)))[role='tablist'] > [role='tab'][aria-selected='true'] {
+  background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
+  color: var(--vscode-foreground); border-color: var(--vscode-contrastActiveBorder, transparent); font-weight: 600;
+}
+body :is(:--class(control), :--class(tabs):has(> :--class(indicator)))[role='tablist'] > [role='tab']:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; text-decoration: none;
+}

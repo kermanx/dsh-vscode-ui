@@ -1,0 +1,97 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: ActivityBar/activityaction.css, SidebarTitle, CompositeBar, WorkbenchLayout
+ * Adaptation: 48px activity rail, 35px view title and compact action toolbar around DSH's persistent session views.
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ */
+body .vsc-sidebar {
+  --dsh-sidebar-inline-padding: 0px;
+  /* The grid column owns width; its divider is outside this content box.
+     Reusing the outer pixel width here clips the tree's right focus edge. */
+  box-sizing: border-box; width: 100%; height: 100%; min-height: 0; display: flex;
+  overflow: hidden; padding: 0; color: var(--vscode-sideBar-foreground);
+  font: 13px/1.4 var(--dsw-font-family);
+}
+.vsc-activitybar {
+  position: relative; box-sizing: border-box; flex: 0 0 48px; width: 48px; min-height: 0;
+  display: flex; flex-direction: column;
+  background: var(--vscode-activityBar-background);
+}
+.vsc-activitybar::after { content: ''; position: absolute; inset: 0 0 0 auto; border-right: 1px solid var(--vscode-activityBar-border, var(--vscode-contrastBorder, transparent)); pointer-events: none; }
+body .vsc-activities { display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; flex: 1; min-height: 48px; }
+.vsc-activities::-webkit-scrollbar { display: none; }
+.vsc-global-actions { flex: none; display: flex; flex-direction: column; }
+body .vsc-activity {
+  position: relative; box-sizing: border-box; display: flex; flex: none;
+  align-items: center; justify-content: center; width: 48px; height: 48px;
+  min-height: 48px; padding: 0; margin: 0; border: 0; border-radius: 0;
+  background: transparent; color: var(--vscode-activityBar-inactiveForeground);
+  cursor: pointer; outline: none;
+}
+body .vsc-activity:hover, body .vsc-activity[aria-current], body .vsc-activity:focus-visible { color: var(--vscode-activityBar-foreground); }
+body .vsc-activity[aria-current] { background: var(--vscode-activityBar-activeBackground, transparent); }
+body .vsc-activity[aria-current]::before, body .vsc-activity:focus-visible::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0;
+  border-left: 2px solid var(--vscode-activityBar-activeBorder);
+}
+body .vsc-activity:focus-visible::before { border-color: var(--vscode-contrastActiveBorder, var(--vscode-focusBorder)); }
+body .vsc-activity[aria-current]:focus-visible::before { border-color: var(--vscode-activityBar-activeFocusBorder, var(--vscode-contrastActiveBorder, var(--vscode-focusBorder))); }
+.vsc-icon { display: inline-block; flex-shrink: 0; background: currentColor; }
+.vsc-explorer { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--vscode-sideBar-background); }
+.vsc-explorer[hidden] { display: none; }
+.vsc-workspace-view, .vsc-workspace-view > [data-slot='sidebar.workspaces'] { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.vsc-sidebar-title { box-sizing: border-box; flex: none; height: 35px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px 0 20px; gap: 8px; overflow: hidden; background: var(--vscode-sideBarTitle-background, var(--vscode-sideBar-background)); border-bottom: 1px solid var(--vscode-sideBarTitle-border, transparent); }
+.vsc-sidebar-title > h2 { min-width: 0; margin: 0; font-size: 11px; font-weight: 400; line-height: 35px; color: var(--vscode-sideBarTitle-foreground); text-transform: uppercase; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: default; }
+.vsc-title-actions { flex: none; display: flex; align-items: center; gap: 4px; padding-right: 4px; }
+body .vsc-action { box-sizing: border-box; flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; padding: 3px; border: 0; border-radius: var(--vscode-cornerRadius-medium, 6px); background: transparent; color: var(--vscode-icon-foreground); cursor: pointer; }
+body .vsc-action:hover { background: var(--vscode-toolbar-hoverBackground); outline: 1px dashed var(--vscode-toolbar-hoverOutline, transparent); outline-offset: -1px; }
+body .vsc-action:active { background: var(--vscode-toolbar-activeBackground); }
+body .vsc-action:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+/* Existing settings/footer controls retain their dialogs, events and focus return. */
+body .vsc-global-actions [data-slot='settings.trigger'] > button,
+body .vsc-global-actions :--class(triggerRow),
+body .vsc-global-actions :--class(trigger):not([data-shortcut-modal] *) {
+  box-sizing: border-box; width: 48px; height: 48px; margin: 0; padding: 0;
+  display: flex; align-items: center; justify-content: center; border-radius: 0;
+}
+body .vsc-global-actions [data-slot='settings.trigger'] svg { width: 24px; height: 24px; }
+body .vsc-global-actions [data-slot='settings.trigger'] :--class(label) { display: none; }
+body .vsc-global-actions :--class(rail) { margin-left: 0; transform: none; }
+body .vsc-global-actions :--class(trigger):not([data-shortcut-modal] *) { position: relative; background: transparent; color: var(--vscode-activityBar-inactiveForeground); }
+body .vsc-global-actions :--class(trigger):not([data-shortcut-modal] *):is(:hover, :focus-visible, [aria-expanded='true']) { background: transparent; color: var(--vscode-activityBar-foreground); }
+body .vsc-global-actions :--class(trigger):not([data-shortcut-modal] *):focus-visible { outline: none; }
+body .vsc-global-actions :--class(trigger):not([data-shortcut-modal] *):focus-visible::before { content: ''; position: absolute; inset: 0 auto 0 0; border-left: 2px solid var(--vscode-contrastActiveBorder, var(--vscode-focusBorder)); }
+.vsc-leading { display: flex; height: 35px; align-items: center; gap: 4px; }
+body [data-slot='sidebar'] :--class(sectionHeader) { background: var(--vscode-sideBarSectionHeader-background); }
+body [data-slot='sidebar'] :--class(sectionLabel) { padding-left: 8px; }
+body [data-slot='sidebar'] [data-vsc-tree] { scrollbar-width: thin; scrollbar-color: var(--vscode-scrollbarSlider-background) transparent; }
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :--class(title) { white-space: nowrap; text-overflow: ellipsis; }
+/* Desktop titlebar traffic lights keep their native drag clearance. */
+html[data-platform='darwin'] .vsc-sidebar { padding-top: 36px; }
+@media (prefers-reduced-motion: reduce) { .vsc-sidebar * { scroll-behavior: auto; } }
+@media (forced-colors: active) {
+  body .vsc-activity[aria-current]::before { border-color: Highlight; }
+  body [data-vsc-tree] [aria-selected='true'] { outline: 1px solid Highlight; }
+}
+
+.vsc-workspace-view[hidden], .vsc-side-panel[hidden] { display: none; }
+.vsc-side-panel { flex: 1; min-height: 0; min-width: 0; overflow: auto; }
+.vsc-side-panel > [data-slot='main'] { height: 100%; min-height: 0; min-width: 0; }
+.vsc-side-panel { --dsh-frame-top-clearance: 0px; }
+body .vsc-side-panel [data-plugin-panel] { padding: 0 8px 12px; gap: 12px; background: var(--vscode-sideBar-background); }
+body .vsc-side-panel :is(:--class(pageHead), :--class(pageHeading)) { flex-direction: column; align-items: stretch; gap: 8px; margin: 0 0 12px; padding: 0; }
+body .vsc-side-panel :is(:--class(pageTitle), :--class(pageHeading) h1) { display: none; }
+body .vsc-side-panel :--class(pageIntro) { font-size: 12px; }
+body .vsc-side-panel :--class(toolbar) { justify-content: flex-start; gap: 8px; }
+body .vsc-side-panel :--class(cardHead) { flex-wrap: wrap; gap: 8px; padding: 8px 0; }
+body .vsc-side-panel :--class(cardIcon) { width: 32px; height: 32px; }
+body .vsc-side-panel :is(:--class(cardDescription), :--class(cardMeta), :--class(cardPackage)) { overflow-wrap: anywhere; }
+body .vsc-side-panel :--class(pageContent) { padding: 0 8px 12px; }
+body .vsc-side-panel :--class(page) { font-size: 13px; background: var(--vscode-sideBar-background); }
+body .vsc-side-panel :--class(creationActions) { gap: 8px; }
+body .vsc-side-panel :--class(filterTabs) { gap: 2px; }
+body .vsc-side-panel :--class(filterTab) { height: 22px; padding: 0 6px; border-radius: 0; font-size: 12px; }
+body .vsc-side-panel :--class(searchField) { height: 26px; margin-bottom: 8px; padding: 0 6px; border-radius: 4px; }
+body .vsc-side-panel :--class(newButton) { height: 26px; border-radius: 4px; font-size: 12px; }
+body .vsc-side-panel :--class(detailPane) { max-width: 100%; min-width: 0; }

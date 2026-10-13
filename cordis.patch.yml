@@ -1,0 +1,8 @@
+# Own the frame and sidebar; retain the native feature and settings providers.
+- id: ui-layout
+  disabled: true
+- id: ui-sidebar
+  disabled: true
+- insert:
+    - id: vscode-ui
+      name: dsh-vscode-ui

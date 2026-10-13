@@ -1,0 +1,161 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: Pane, ActionBar, Theme
+ * Adaptation: Apply Classic action feedback and frame treatment to DSH tool disclosures. Keep DSH expansion, result rendering and terminal output; complete Chat and terminal implementations are outside the reference.
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ */
+/* DSH owns disclosure density, font preferences, and expansion policy. */
+body :is([data-step-process], [data-tool], [data-slot='tool.call.toolview']) :is(button, [role='button'], summary):focus-visible {
+  outline: 1px solid var(--dsw-focus-ring-color);
+  outline-offset: -1px;
+}
+
+/* Avoid a second vertical viewport around an opened tool's own viewport. */
+body [data-step-process-body]:has(:is([data-terminal], [data-slot="tool.call.toolview"] [aria-expanded="true"])) {
+  max-height: none;
+  overflow: visible;
+  scrollbar-gutter: auto;
+  mask-image: none;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([data-terminal], [data-read], [data-diff], [data-search], [data-web], :--class(ioCard)),
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(detailsBodyWrap) > :--class(root) {
+  min-width: 0;
+  margin: 4px 0 4px 22px;
+  border: 1px solid var(--dsw-alias-border-l3);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Every expanded tool body starts under its title; terminal and IO cards
+   should not be the only variants with this inset. */
+body :is([data-tool], [data-slot='tool.call.toolview']) :is(:--class(codeBody), :--class(imageBody), :--class(searchRecovery)) {
+  margin-left: 22px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-read] > :--class(body) {
+  padding: 10px 12px 12px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] > :--class(body) {
+  padding-block: 10px 12px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] :is(:--class(line), :--class(expand)) {
+  padding-inline: 12px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(ioCard) {
+  background: var(--dsw-alias-bg-base);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(ioDivider) {
+  height: 1px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(inspectButton) {
+  box-sizing: border-box;
+  height: 22px;
+  margin-left: 22px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: var(--vscode-cornerRadius-medium, 6px);
+  font: 11px/22px var(--dsw-font-family);
+}
+
+/* Detail cards place Inspect at the top-right, outside the disclosure target. */
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(detailsBodyWrap) > :--class(inspectButton) {
+  top: 6px;
+  right: 6px;
+  margin: 0;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(inspectButton) svg {
+  width: 16px;
+  height: 16px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(inspectButton):hover {
+  background: var(--vscode-toolbar-hoverBackground);
+  color: var(--vscode-foreground);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) :--class(inspectButton):active {
+  background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']):focus-within :--class(inspectButton) {
+  opacity: 1;
+}
+
+/* Static terminal: 20px decoration gutter, square frame, preserved output columns. */
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] {
+  --dsl-terminal-radius: 0px;
+  --dsl-terminal-gutter: 20px;
+  --dsl-terminal-command-whitespace: pre-wrap;
+  background: var(--vsc-terminal-background);
+  color: var(--vsc-terminal-foreground);
+  letter-spacing: 0;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] > :--class(header) {
+  padding-block: 6px;
+  padding-right: 8px;
+  gap: 8px;
+  border-radius: 0;
+  background: var(--dsw-specific-sidebar-fill);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal][data-body] > :--class(header) {
+  border-bottom: 1px solid var(--dsw-alias-border-l3);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(command) {
+  flex: 1;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(cwd) {
+  max-width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--dsw-alias-label-caption);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(runState) {
+  top: calc(var(--dsl-terminal-line-height) / 2);
+  left: calc(-1 * var(--dsl-terminal-gutter) + 2px);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(copyButton) {
+  padding-inline: 4px;
+  border-radius: var(--vscode-cornerRadius-medium, 6px);
+  background: var(--dsw-specific-sidebar-fill);
+  font: 11px/var(--dsl-terminal-line-height) var(--dsw-font-family);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(copyButton):hover {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(copyButton):active {
+  background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(status) {
+  border-radius: 2px;
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(output) {
+  box-sizing: border-box;
+  line-height: var(--dsl-terminal-line-height);
+}
+
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :--class(line) {
+  white-space: pre;
+  overflow-wrap: normal;
+}

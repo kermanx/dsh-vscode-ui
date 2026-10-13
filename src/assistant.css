@@ -1,0 +1,141 @@
+/*
+ * UI reference skill: vscode-ui
+ * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
+ * Reference components: ActionBar, Theme
+ * Adaptation: Apply ActionBar geometry and semantic states to DSH reply and code actions. Keep DSH prose and highlighting; the flat code surface is a project composition, not a reference Chat implementation.
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ */
+/* Reply prose keeps DSH's reading sizes; inline code remains part of the line. */
+body [data-chat-flow-kind='assistant-step'] :--class(markdown) :not(pre) > code {
+  display: inline;
+  border: 0;
+  border-radius: 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  overflow-wrap: anywhere;
+}
+
+body [data-chat-flow-kind='assistant-step'] :--class(markdown) :is(a, :--class(fileMention)):focus-visible {
+  outline: 1px solid var(--dsw-focus-ring-color);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* The same primitive renders chat fences and Markdown document previews. The
+   renderer still owns highlighting, sticky banners, wrapping, and copying. */
+body .md-code-block {
+  --dsl-code-block-border-radius: 0px;
+  --dsl-code-block-background: var(--dsw-alias-markdown-code-block);
+  --dsl-code-block-banner-background-color: var(--dsw-alias-markdown-code-block-banner);
+}
+
+/* CodeToolbar is also used by the read and diff tool cards. Keep its UI type
+   independent of the document/code font and leave the sticky wrapper intact. */
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] {
+  box-sizing: border-box;
+  min-height: 28px;
+  padding: 3px 8px 3px 12px;
+  gap: 8px;
+  border-radius: 0;
+  background: var(--dsw-alias-markdown-code-block-banner);
+  color: var(--vscode-descriptionForeground);
+  font: 11px/18px var(--dsw-font-family);
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] :--class(actions) {
+  gap: 4px;
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  height: 22px;
+  padding: 3px;
+  border: 0;
+  border-radius: var(--vscode-cornerRadius-medium, 6px);
+  color: var(--vscode-icon-foreground);
+  background: transparent;
+  font: 11px/16px var(--dsw-font-family);
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button:--class(action) {
+  width: 22px;
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button svg {
+  width: 16px;
+  height: 16px;
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button:hover:not(:disabled) {
+  background: var(--vscode-toolbar-hoverBackground);
+  outline: 1px dashed var(--vscode-toolbar-hoverOutline, transparent);
+  outline-offset: -1px;
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button:active:not(:disabled) {
+  background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
+}
+
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+  box-shadow: none;
+}
+
+body .md-code-block [data-code-block-content] pre {
+  padding: 12px;
+}
+
+body [data-document-frontmatter] {
+  border-width: 1px;
+  border-radius: 0;
+}
+
+/* Completed-turn actions are compact chrome, independent of the prose font size. */
+body [data-turn-tail] [data-clock='end'] {
+  height: 22px;
+  gap: 4px;
+  margin-left: -3px;
+}
+
+body [data-turn-tail] [data-clock='end'] button:--class(action) {
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: var(--vscode-cornerRadius-medium, 6px);
+  color: var(--vscode-icon-foreground);
+}
+
+body [data-turn-tail] [data-clock='end'] button:--class(action) svg {
+  width: 16px;
+  height: 16px;
+}
+
+body [data-turn-tail] [data-clock='end'] button:focus-visible {
+  outline: 1px solid var(--dsw-focus-ring-color);
+  outline-offset: -1px;
+}
+
+body [data-turn-tail] [data-clock='end'] button:--class(action):hover:not([data-unavailable]) {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+
+body [data-turn-tail] [data-clock='end'] button:--class(action):active:not([data-unavailable]) {
+  background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
+}
+
+body [data-turn-tail] :--class(endInfo) {
+  gap: 4px;
+  margin-left: 8px;
+  color: var(--dsw-alias-label-caption);
+}
+
+body [data-turn-tail] :--class(timeEnd) {
+  font: 11px/22px var(--dsw-font-family);
+  font-variant-numeric: tabular-nums;
+}
