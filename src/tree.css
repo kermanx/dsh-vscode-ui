@@ -132,7 +132,7 @@ body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [aria-se
 }
 body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) { display: none; gap: 0; height: 22px; margin-left: 4px; }
 body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :--class(menuOpen)) :--class(rowActions) { display: inline-flex; }
-body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :--class(menuOpen)) > :is(:--class(time), :--class(pinIndicator)) { display: none; }
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :--class(menuOpen)) > :is(:--class(time), :--class(pinIndicator), :--class(rowResting)) { display: none; }
 body [data-slot='sidebar'] [data-vsc-tree] :--class(rowActions) :--class(iconButton) {
   box-sizing: border-box; width: 20px; height: 20px; padding: 2px;
   border-radius: var(--vscode-cornerRadius-medium, 6px);

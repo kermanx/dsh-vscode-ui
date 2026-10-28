@@ -1,9 +1,7 @@
 import { build } from 'esbuild'
 import { mkdir, copyFile, readFile } from 'node:fs/promises'
 import { iconStyles } from './icons.mjs'
-
-const expandClasses = text => text.replace(/:--class\(([a-zA-Z][\w-]*)\)/g,
-  (_, name) => `:is([class^="_${name}_"], [class*=" _${name}_"], [class$="_${name}"], [class*="_${name} "])`)
+import { expandClasses } from '../src/selectors.js'
 
 await mkdir(new URL('../dist/', import.meta.url), { recursive: true })
 await copyFile(new URL('../src/index.js', import.meta.url), new URL('../dist/index.js', import.meta.url))

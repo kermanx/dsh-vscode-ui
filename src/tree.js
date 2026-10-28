@@ -5,10 +5,11 @@
  * Adaptation: Independent selection and navigation focus, retained across DSH composer autofocus when the tree opens a session.
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
  */
+import { nativeClass } from './selectors.js'
+
 const rowSelector = '[role="treeitem"], [data-row-key^="overflow:"]'
 const groupSelector = '[style*="--dsh-workspace-indent"]'
-const titleSelector = '[class$="_title"], [class*="_title "], [class^="_title_"], [class*=" _title_"], [class*="searchResultTitle"]'
-const nativeClass = name => `:is([class$="_${name}"], [class*="_${name} "], [class^="_${name}_"], [class*=" _${name}_"])`
+const titleSelector = `${nativeClass('title')}, ${nativeClass('searchResultTitle')}`
 // Native Menu wraps its trigger in .root; Tooltip leaves ordinary row actions
 // unwrapped. Never turn a context-menu key into an unarchive/new-session click.
 const menuTriggerSelector = `button[aria-haspopup="menu"], button[aria-haspopup="true"], ${nativeClass('rowActions')} > ${nativeClass('root')} > button`
@@ -186,7 +187,7 @@ export function enhanceSidebarTree(document) {
       next.set(tree, state)
       remembered.set(tree, state)
     }
-    for (const button of document.querySelectorAll('[data-slot="sidebar"] button[class$="_newSession"], [data-slot="sidebar"] button[class*="_newSession "]')) {
+    for (const button of document.querySelectorAll(`[data-slot="sidebar"] button${nativeClass('newSession')}`)) {
       alive.add(button)
       if (button.hasAttribute('aria-label')) attr(button, 'title', button.getAttribute('aria-label'))
     }

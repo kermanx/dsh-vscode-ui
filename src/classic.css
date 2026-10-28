@@ -6,7 +6,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
  */
 /* Slot and data attributes are the public DSH styling anchors. Primitive
-   selectors below support Vite's _local_hash and DSH's hash_local names. */
+   selectors below support _local_hash, hash_local, and prefix_module_local_hash names. */
 body {
   font-size: 13px;
   line-height: 1.4;

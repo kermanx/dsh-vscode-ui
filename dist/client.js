@@ -1341,7 +1341,7 @@ var classic_default = `/*
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
  */
 /* Slot and data attributes are the public DSH styling anchors. Primitive
-   selectors below support Vite's _local_hash and DSH's hash_local names. */
+   selectors below support _local_hash, hash_local, and prefix_module_local_hash names. */
 body {
   font-size: 13px;
   line-height: 1.4;
@@ -1371,7 +1371,7 @@ html[data-platform] body [data-slot='root'] div:has(> [data-slot='main']) {
 }
 
 /* Only the shared text Button primitive has both button and size classes. */
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is(:is([class^="_md_"], [class*=" _md_"], [class$="_md"], [class*="_md "]), :is([class^="_sm_"], [class*=" _sm_"], [class$="_sm"], [class*="_sm "])) {
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is(:is([class*="_md_"], [class$="_md"], [class*="_md "]), :is([class*="_sm_"], [class$="_sm"], [class*="_sm "])) {
   box-sizing: border-box;
   height: 26px;
   padding: 4px 8px;
@@ -1380,14 +1380,14 @@ body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [c
   line-height: 16px;
 }
 
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is([class^="_sm_"], [class*=" _sm_"], [class$="_sm"], [class*="_sm "]) {
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is([class*="_sm_"], [class$="_sm"], [class*="_sm "]) {
   height: 22px;
   padding: 3px 6px;
   font-size: 11px;
   line-height: 14px;
 }
 
-body span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])) {
+body span:has(> input:is([class*="_input_"], [class$="_input"], [class*="_input "])) {
   box-sizing: border-box;
   height: 26px;
   padding: 4px 6px;
@@ -1397,21 +1397,21 @@ body span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_inpu
   color: var(--vscode-input-foreground);
 }
 
-body span > input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "]) {
+body span > input:is([class*="_input_"], [class$="_input"], [class*="_input "]) {
   font-size: 13px;
   line-height: 16px;
   color: inherit;
 }
 
-body span > input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])::placeholder { color: var(--vscode-input-placeholderForeground); opacity: 1; }
+body span > input:is([class*="_input_"], [class$="_input"], [class*="_input "])::placeholder { color: var(--vscode-input-placeholderForeground); opacity: 1; }
 
-body span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])):focus-within {
+body span:has(> input:is([class*="_input_"], [class$="_input"], [class*="_input "])):focus-within {
   border-color: var(--vscode-input-border, transparent);
   outline: 1px solid var(--vscode-focusBorder);
   outline-offset: -1px;
 }
-body span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])[aria-invalid='true']) { border-color: var(--vscode-inputValidation-errorBorder); }
-body span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])[aria-invalid='true']):focus-within { outline-color: var(--vscode-inputValidation-errorBorder); }
+body span:has(> input:is([class*="_input_"], [class$="_input"], [class*="_input "])[aria-invalid='true']) { border-color: var(--vscode-inputValidation-errorBorder); }
+body span:has(> input:is([class*="_input_"], [class$="_input"], [class*="_input "])[aria-invalid='true']):focus-within { outline-color: var(--vscode-inputValidation-errorBorder); }
 
 body input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file']),
 body textarea {
@@ -1451,31 +1451,31 @@ body [data-composer-card]::after {
 
 /* Settings retains its modal navigation and becomes a flat TOC beside forms. */
 body [data-shortcut-modal='settings'] { background: var(--dsw-alias-bg-base); }
-body [data-shortcut-modal='settings'] :is([class^="_nav_"], [class*=" _nav_"], [class$="_nav"], [class*="_nav "]) {
+body [data-shortcut-modal='settings'] :is([class*="_nav_"], [class$="_nav"], [class*="_nav "]) {
   width: 172px; padding: 12px 0; gap: 12px;
   background: var(--vscode-editor-background);
   border-right: 1px solid var(--dsw-alias-border-l3);
 }
-body [data-shortcut-modal='settings'] :is([class^="_navTitle_"], [class*=" _navTitle_"], [class$="_navTitle"], [class*="_navTitle "]) { font-size: 13px; font-weight: 600; }
-body [data-shortcut-modal='settings'] :is([class^="_navList_"], [class*=" _navList_"], [class$="_navList"], [class*="_navList "]) { gap: 0; }
-body [data-shortcut-modal='settings'] :is([class^="_navCell_"], [class*=" _navCell_"], [class$="_navCell"], [class*="_navCell "]) {
+body [data-shortcut-modal='settings'] :is([class*="_navTitle_"], [class$="_navTitle"], [class*="_navTitle "]) { font-size: 13px; font-weight: 600; }
+body [data-shortcut-modal='settings'] :is([class*="_navList_"], [class$="_navList"], [class*="_navList "]) { gap: 0; }
+body [data-shortcut-modal='settings'] :is([class*="_navCell_"], [class$="_navCell"], [class*="_navCell "]) {
   height: 26px; flex-shrink: 0; padding: 0 12px;
   border-radius: 0; font-size: 13px; line-height: 26px;
   background: transparent; color: var(--vscode-foreground);
 }
-body [data-shortcut-modal='settings'] :is([class^="_navCell_"], [class*=" _navCell_"], [class$="_navCell"], [class*="_navCell "]):hover { color: var(--vscode-settings-settingsHeaderHoverForeground, var(--vscode-foreground)); background: transparent; }
-body [data-shortcut-modal='settings'] :is([class^="_navCell_"], [class*=" _navCell_"], [class$="_navCell"], [class*="_navCell "])[aria-current] { color: var(--vscode-settings-headerForeground); background: transparent; font-weight: 600; }
-body [data-shortcut-modal='settings'] :is([class^="_navCell_"], [class*=" _navCell_"], [class$="_navCell"], [class*="_navCell "]):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
-body [data-shortcut-modal='settings'] :is([class^="_navIcon_"], [class*=" _navIcon_"], [class$="_navIcon"], [class*="_navIcon "]) { width: 16px; height: 16px; }
-body [data-shortcut-modal='settings'] :is([class^="_header_"], [class*=" _header_"], [class$="_header"], [class*="_header "]) { height: 38px; padding: 8px; }
-body [data-shortcut-modal='settings'] :is([class^="_close_"], [class*=" _close_"], [class$="_close"], [class*="_close "]) { width: 22px; height: 22px; border-radius: 6px; color: var(--vscode-icon-foreground); }
-body [data-shortcut-modal='settings'] :is([class^="_close_"], [class*=" _close_"], [class$="_close"], [class*="_close "]):hover { background: var(--vscode-toolbar-hoverBackground); }
-body [data-shortcut-modal='settings'] :is([class^="_close_"], [class*=" _close_"], [class$="_close"], [class*="_close "]):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
-body [data-shortcut-modal='settings'] :is([class^="_options_"], [class*=" _options_"], [class$="_options"], [class*="_options "]) { padding: 0 20px 20px; }
-body [data-shortcut-modal='settings'] :is([class^="_title_"], [class*=" _title_"], [class$="_title"], [class*="_title "]) { font-size: 13px; font-weight: 400; color: var(--vscode-settings-headerForeground); }
-body [data-shortcut-modal='settings'] :is([class^="_rowText_"], [class*=" _rowText_"], [class$="_rowText"], [class*="_rowText "]) { padding-right: 16px; gap: 2px; }
-body [data-shortcut-modal='settings'] :is([class^="_cubeRow_"], [class*=" _cubeRow_"], [class$="_cubeRow"], [class*="_cubeRow "]) { gap: 0; flex-wrap: nowrap; }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) {
+body [data-shortcut-modal='settings'] :is([class*="_navCell_"], [class$="_navCell"], [class*="_navCell "]):hover { color: var(--vscode-settings-settingsHeaderHoverForeground, var(--vscode-foreground)); background: transparent; }
+body [data-shortcut-modal='settings'] :is([class*="_navCell_"], [class$="_navCell"], [class*="_navCell "])[aria-current] { color: var(--vscode-settings-headerForeground); background: transparent; font-weight: 600; }
+body [data-shortcut-modal='settings'] :is([class*="_navCell_"], [class$="_navCell"], [class*="_navCell "]):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] :is([class*="_navIcon_"], [class$="_navIcon"], [class*="_navIcon "]) { width: 16px; height: 16px; }
+body [data-shortcut-modal='settings'] :is([class*="_header_"], [class$="_header"], [class*="_header "]) { height: 38px; padding: 8px; }
+body [data-shortcut-modal='settings'] :is([class*="_close_"], [class$="_close"], [class*="_close "]) { width: 22px; height: 22px; border-radius: 6px; color: var(--vscode-icon-foreground); }
+body [data-shortcut-modal='settings'] :is([class*="_close_"], [class$="_close"], [class*="_close "]):hover { background: var(--vscode-toolbar-hoverBackground); }
+body [data-shortcut-modal='settings'] :is([class*="_close_"], [class$="_close"], [class*="_close "]):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] :is([class*="_options_"], [class$="_options"], [class*="_options "]) { padding: 0 20px 20px; }
+body [data-shortcut-modal='settings'] :is([class*="_title_"], [class$="_title"], [class*="_title "]) { font-size: 13px; font-weight: 400; color: var(--vscode-settings-headerForeground); }
+body [data-shortcut-modal='settings'] :is([class*="_rowText_"], [class$="_rowText"], [class*="_rowText "]) { padding-right: 16px; gap: 2px; }
+body [data-shortcut-modal='settings'] :is([class*="_cubeRow_"], [class$="_cubeRow"], [class*="_cubeRow "]) { gap: 0; flex-wrap: nowrap; }
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) {
   flex: 0 1 auto; flex-direction: row; gap: 6px;
   padding: 4px 10px; min-height: 26px;
   border: 1px solid var(--vscode-radio-inactiveBorder, transparent); border-radius: 0;
@@ -1483,42 +1483,42 @@ body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _the
   color: var(--vscode-radio-inactiveForeground, var(--vscode-foreground));
   background: var(--vscode-radio-inactiveBackground, transparent);
 }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) + :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) { margin-left: -1px; }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):first-child { border-radius: 3px 0 0 3px; }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):last-child { border-radius: 0 3px 3px 0; }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) svg { width: 16px; height: 16px; }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):hover:not([aria-pressed='true']) { background: var(--vscode-radio-inactiveHoverBackground); }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "])[aria-pressed='true'] {
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) + :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) { margin-left: -1px; }
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):first-child { border-radius: 3px 0 0 3px; }
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):last-child { border-radius: 0 3px 3px 0; }
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) svg { width: 16px; height: 16px; }
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):hover:not([aria-pressed='true']) { background: var(--vscode-radio-inactiveHoverBackground); }
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "])[aria-pressed='true'] {
   color: var(--vscode-radio-activeForeground); background: var(--vscode-radio-activeBackground);
   border-color: var(--vscode-radio-activeBorder, transparent); z-index: 1;
 }
-body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 2px; z-index: 2; }
-body [data-shortcut-modal='settings'] :is([class^="_stepper_"], [class*=" _stepper_"], [class$="_stepper"], [class*="_stepper "]) {
+body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]):focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 2px; z-index: 2; }
+body [data-shortcut-modal='settings'] :is([class*="_stepper_"], [class$="_stepper"], [class*="_stepper "]) {
   box-sizing: border-box; height: 26px; border-radius: 4px;
   color: var(--vscode-settings-numberInputForeground, var(--vscode-input-foreground));
   background: var(--vscode-settings-numberInputBackground, var(--vscode-input-background));
   border: 1px solid var(--vscode-settings-numberInputBorder, var(--vscode-input-border, transparent));
 }
-body [data-shortcut-modal='settings'] :is([class^="_stepper_"], [class*=" _stepper_"], [class$="_stepper"], [class*="_stepper "]):focus-within { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
-body [data-shortcut-modal='settings'] :is([class^="_stepper_"], [class*=" _stepper_"], [class$="_stepper"], [class*="_stepper "]) :is([class^="_value_"], [class*=" _value_"], [class$="_value"], [class*="_value "]) { color: inherit; }
-body [data-shortcut-modal='settings'] :is([class^="_stepper_"], [class*=" _stepper_"], [class$="_stepper"], [class*="_stepper "]) :is([class^="_arrows_"], [class*=" _arrows_"], [class$="_arrows"], [class*="_arrows "]) { gap: 0; right: 4px; }
-body [data-shortcut-modal='settings'] :is([class^="_stepper_"], [class*=" _stepper_"], [class$="_stepper"], [class*="_stepper "]) :is([class^="_arrow_"], [class*=" _arrow_"], [class$="_arrow"], [class*="_arrow "]) { height: 11px; border-radius: 0; }
-body [data-shortcut-modal='settings'] :is(:is([class^="_value_"], [class*=" _value_"], [class$="_value"], [class*="_value "]), :is([class^="_unit_"], [class*=" _unit_"], [class$="_unit"], [class*="_unit "])) { font-size: 13px; }
+body [data-shortcut-modal='settings'] :is([class*="_stepper_"], [class$="_stepper"], [class*="_stepper "]):focus-within { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] :is([class*="_stepper_"], [class$="_stepper"], [class*="_stepper "]) :is([class*="_value_"], [class$="_value"], [class*="_value "]) { color: inherit; }
+body [data-shortcut-modal='settings'] :is([class*="_stepper_"], [class$="_stepper"], [class*="_stepper "]) :is([class*="_arrows_"], [class$="_arrows"], [class*="_arrows "]) { gap: 0; right: 4px; }
+body [data-shortcut-modal='settings'] :is([class*="_stepper_"], [class$="_stepper"], [class*="_stepper "]) :is([class*="_arrow_"], [class$="_arrow"], [class*="_arrow "]) { height: 11px; border-radius: 0; }
+body [data-shortcut-modal='settings'] :is(:is([class*="_value_"], [class$="_value"], [class*="_value "]), :is([class*="_unit_"], [class$="_unit"], [class*="_unit "])) { font-size: 13px; }
 body [data-shortcut-modal='settings'] button[aria-haspopup='menu'] {
   min-height: 26px; height: auto; padding-block: 3px; border-radius: 4px; font-size: 13px;
 }
-body [data-shortcut-modal='settings'] :is([class^="_selector_"], [class*=" _selector_"], [class$="_selector"], [class*="_selector "])[aria-haspopup='menu'] {
+body [data-shortcut-modal='settings'] :is([class*="_selector_"], [class$="_selector"], [class*="_selector "])[aria-haspopup='menu'] {
   border: 1px solid var(--vscode-settings-dropdownBorder, var(--vscode-dropdown-border, transparent));
   color: var(--vscode-settings-dropdownForeground, var(--vscode-dropdown-foreground));
   background: var(--vscode-settings-dropdownBackground, var(--vscode-dropdown-background));
 }
-body [data-shortcut-modal='settings'] :is([class^="_selector_"], [class*=" _selector_"], [class$="_selector"], [class*="_selector "])[aria-haspopup='menu']:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
-body [data-shortcut-modal='settings'] span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])) {
+body [data-shortcut-modal='settings'] :is([class*="_selector_"], [class$="_selector"], [class*="_selector "])[aria-haspopup='menu']:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+body [data-shortcut-modal='settings'] span:has(> input:is([class*="_input_"], [class$="_input"], [class*="_input "])) {
   --vscode-input-background: var(--vscode-settings-textInputBackground);
   --vscode-input-foreground: var(--vscode-settings-textInputForeground);
   border-color: var(--vscode-settings-textInputBorder, var(--vscode-input-border, transparent));
 }
-body [data-shortcut-modal='settings'] span:has(> input:is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "])[aria-invalid='true']) { border-color: var(--vscode-inputValidation-errorBorder); }
+body [data-shortcut-modal='settings'] span:has(> input:is([class*="_input_"], [class$="_input"], [class*="_input "])[aria-invalid='true']) { border-color: var(--vscode-inputValidation-errorBorder); }
 
 /* Menus, choices, hovers and buttons use their own Classic dimensions. */
 body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']) {
@@ -1526,7 +1526,7 @@ body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='
   font-family: var(--dsw-font-family); font-size: 13px; line-height: 20px;
   color: var(--vscode-menu-foreground);
 }
-body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):is([class^="_danger_"], [class*=" _danger_"], [class$="_danger"], [class*="_danger "]) { color: var(--vscode-errorForeground); }
+body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):is([class*="_danger_"], [class$="_danger"], [class*="_danger "]) { color: var(--vscode-errorForeground); }
 body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):is(:hover, :focus-visible):not(:disabled):not([aria-disabled='true']) {
   color: var(--vscode-list-hoverForeground, var(--vscode-menu-foreground)); background: var(--vscode-list-hoverBackground);
 }
@@ -1536,28 +1536,28 @@ body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='
 body [data-menu-material] :is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox']):is(:disabled, [aria-disabled='true']) {
   color: var(--vscode-disabledForeground); background: transparent; opacity: 1; cursor: default;
 }
-body [data-menu-material] :is([class^="_itemIcon_"], [class*=" _itemIcon_"], [class$="_itemIcon"], [class*="_itemIcon "]), body [data-menu-material] :is([class^="_itemIcon_"], [class*=" _itemIcon_"], [class$="_itemIcon"], [class*="_itemIcon "]) svg { width: 16px; height: 16px; color: inherit; }
-body [data-menu-material] :is([class^="_check_"], [class*=" _check_"], [class$="_check"], [class*="_check "]) { color: inherit; }
-body [data-menu-material] :is([class^="_shortcutKeys_"], [class*=" _shortcutKeys_"], [class$="_shortcutKeys"], [class*="_shortcutKeys "]) { color: inherit; opacity: .7; }
-body [data-menu-material] :is([class^="_item_"], [class*=" _item_"], [class$="_item"], [class*="_item "]):is(:hover, :focus-visible) :is([class^="_shortcutKeys_"], [class*=" _shortcutKeys_"], [class$="_shortcutKeys"], [class*="_shortcutKeys "]) { opacity: 1; }
+body [data-menu-material] :is([class*="_itemIcon_"], [class$="_itemIcon"], [class*="_itemIcon "]), body [data-menu-material] :is([class*="_itemIcon_"], [class$="_itemIcon"], [class*="_itemIcon "]) svg { width: 16px; height: 16px; color: inherit; }
+body [data-menu-material] :is([class*="_check_"], [class$="_check"], [class*="_check "]) { color: inherit; }
+body [data-menu-material] :is([class*="_shortcutKeys_"], [class$="_shortcutKeys"], [class*="_shortcutKeys "]) { color: inherit; opacity: .7; }
+body [data-menu-material] :is([class*="_item_"], [class$="_item"], [class*="_item "]):is(:hover, :focus-visible) :is([class*="_shortcutKeys_"], [class$="_shortcutKeys"], [class*="_shortcutKeys "]) { opacity: 1; }
 body [data-menu-material] [role='separator'] { height: 1px; margin: 5px 0; background: var(--vscode-menu-separatorBackground); }
-body [data-menu-material] :is([class^="_footer_"], [class*=" _footer_"], [class$="_footer"], [class*="_footer "]) { border-top: 1px solid var(--vscode-menu-separatorBackground); }
+body [data-menu-material] :is([class*="_footer_"], [class$="_footer"], [class*="_footer "]) { border-top: 1px solid var(--vscode-menu-separatorBackground); }
 body [role='tooltip'] {
   box-sizing: border-box; padding: 4px 8px; border-radius: 5px; background: var(--vscode-editorHoverWidget-background);
   color: var(--vscode-editorHoverWidget-foreground, var(--vscode-foreground)); border: 1px solid var(--vscode-editorHoverWidget-border);
   font: 13px/19px var(--dsw-font-family);
   box-shadow: 0 0 12px rgb(0 0 0 / 14%);
 }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is(:is([class^="_md_"], [class*=" _md_"], [class$="_md"], [class*="_md "]), :is([class^="_sm_"], [class*=" _sm_"], [class$="_sm"], [class*="_sm "])) { border: 1px solid var(--vscode-button-border, transparent); font-family: var(--dsw-font-family); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is([class^="_primary_"], [class*=" _primary_"], [class$="_primary"], [class*="_primary "]) { color: var(--vscode-button-foreground); background: var(--vscode-button-background); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is([class^="_primary_"], [class*=" _primary_"], [class$="_primary"], [class*="_primary "]):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-button-hoverBackground); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is([class^="_outline_"], [class*=" _outline_"], [class$="_outline"], [class*="_outline "]) { border-color: var(--vscode-button-secondaryBorder, var(--vscode-button-border, transparent)); color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryBackground); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is([class^="_outline_"], [class*=" _outline_"], [class$="_outline"], [class*="_outline "]):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-button-secondaryHoverBackground); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is(:is([class^="_ghost_"], [class*=" _ghost_"], [class$="_ghost"], [class*="_ghost "]), :is([class^="_toolbar_"], [class*=" _toolbar_"], [class$="_toolbar"], [class*="_toolbar "])) { color: var(--vscode-foreground); background: transparent; border-color: transparent; }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is(:is([class^="_ghost_"], [class*=" _ghost_"], [class$="_ghost"], [class*="_ghost "]), :is([class^="_toolbar_"], [class*=" _toolbar_"], [class$="_toolbar"], [class*="_toolbar "])):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-toolbar-hoverBackground); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):is(:is([class^="_ghost_"], [class*=" _ghost_"], [class$="_ghost"], [class*="_ghost "]), :is([class^="_toolbar_"], [class*=" _toolbar_"], [class$="_toolbar"], [class*="_toolbar "])):active:not(:disabled) { background: var(--vscode-toolbar-activeBackground); }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):disabled { opacity: .4; cursor: default; }
-body button:is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]):focus-visible { outline: 1px solid var(--dsw-focus-ring-color); outline-offset: 2px; }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is(:is([class*="_md_"], [class$="_md"], [class*="_md "]), :is([class*="_sm_"], [class$="_sm"], [class*="_sm "])) { border: 1px solid var(--vscode-button-border, transparent); font-family: var(--dsw-font-family); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is([class*="_primary_"], [class$="_primary"], [class*="_primary "]) { color: var(--vscode-button-foreground); background: var(--vscode-button-background); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is([class*="_primary_"], [class$="_primary"], [class*="_primary "]):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-button-hoverBackground); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is([class*="_outline_"], [class$="_outline"], [class*="_outline "]) { border-color: var(--vscode-button-secondaryBorder, var(--vscode-button-border, transparent)); color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryBackground); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is([class*="_outline_"], [class$="_outline"], [class*="_outline "]):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-button-secondaryHoverBackground); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is(:is([class*="_ghost_"], [class$="_ghost"], [class*="_ghost "]), :is([class*="_toolbar_"], [class$="_toolbar"], [class*="_toolbar "])) { color: var(--vscode-foreground); background: transparent; border-color: transparent; }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is(:is([class*="_ghost_"], [class$="_ghost"], [class*="_ghost "]), :is([class*="_toolbar_"], [class$="_toolbar"], [class*="_toolbar "])):is(:hover, :focus-visible):not(:disabled) { background: var(--vscode-toolbar-hoverBackground); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):is(:is([class*="_ghost_"], [class$="_ghost"], [class*="_ghost "]), :is([class*="_toolbar_"], [class$="_toolbar"], [class*="_toolbar "])):active:not(:disabled) { background: var(--vscode-toolbar-activeBackground); }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):disabled { opacity: .4; cursor: default; }
+body button:is([class*="_button_"], [class$="_button"], [class*="_button "]):focus-visible { outline: 1px solid var(--dsw-focus-ring-color); outline-offset: 2px; }
 
 /* The composer is a multiline editing field with an attached command row. */
 /* Session title and view navigation each occupy a 35px workbench row. */
@@ -1567,7 +1567,7 @@ body [data-slot='conversation.header'] > header:has([data-conversation-tabs]) {
   padding-top: 0;
   border-bottom-width: 1px;
 }
-body [data-slot='conversation.header'] > header:has([data-conversation-tabs]) > :is([class^="_titleRow_"], [class*=" _titleRow_"], [class$="_titleRow"], [class*="_titleRow "]) {
+body [data-slot='conversation.header'] > header:has([data-conversation-tabs]) > :is([class*="_titleRow_"], [class$="_titleRow"], [class*="_titleRow "]) {
   min-height: 35px;
 }
 body [data-composer-card] {
@@ -1575,31 +1575,31 @@ body [data-composer-card] {
   padding-top: 6px; gap: 6px;
 }
 body [data-composer-card]:focus-within { border-color: var(--dsw-focus-ring-color); }
-body [data-composer-card]:is([class^="_cardWorkspaceTrigger_"], [class*=" _cardWorkspaceTrigger_"], [class$="_cardWorkspaceTrigger"], [class*="_cardWorkspaceTrigger "]) { border-color: transparent; }
-body [data-composer-card] :is([class^="_input_"], [class*=" _input_"], [class$="_input"], [class*="_input "]) { padding-left: 10px; min-height: 44px; }
-body [data-composer-card] :is([class^="_placeholder_"], [class*=" _placeholder_"], [class$="_placeholder"], [class*="_placeholder "]) { left: 10px; }
-body [data-composer-card] :is([class^="_row_"], [class*=" _row_"], [class$="_row"], [class*="_row "]) { padding: 4px 6px; gap: 6px; }
-body [data-composer-card] :is(:is([class^="_tools_"], [class*=" _tools_"], [class$="_tools"], [class*="_tools "]), :is([class^="_modes_"], [class*=" _modes_"], [class$="_modes"], [class*="_modes "]), :is([class^="_trailing_"], [class*=" _trailing_"], [class$="_trailing"], [class*="_trailing "]), :is([class^="_standardControls_"], [class*=" _standardControls_"], [class$="_standardControls"], [class*="_standardControls "])) { gap: 6px; }
-body [data-composer-card] :is([class^="_add_"], [class*=" _add_"], [class$="_add"], [class*="_add "]) {
+body [data-composer-card]:is([class*="_cardWorkspaceTrigger_"], [class$="_cardWorkspaceTrigger"], [class*="_cardWorkspaceTrigger "]) { border-color: transparent; }
+body [data-composer-card] :is([class*="_input_"], [class$="_input"], [class*="_input "]) { padding-left: 10px; min-height: 44px; }
+body [data-composer-card] :is([class*="_placeholder_"], [class$="_placeholder"], [class*="_placeholder "]) { left: 10px; }
+body [data-composer-card] :is([class*="_row_"], [class$="_row"], [class*="_row "]) { padding: 4px 6px; gap: 6px; }
+body [data-composer-card] :is(:is([class*="_tools_"], [class$="_tools"], [class*="_tools "]), :is([class*="_modes_"], [class$="_modes"], [class*="_modes "]), :is([class*="_trailing_"], [class$="_trailing"], [class*="_trailing "]), :is([class*="_standardControls_"], [class$="_standardControls"], [class*="_standardControls "])) { gap: 6px; }
+body [data-composer-card] :is([class*="_add_"], [class$="_add"], [class*="_add "]) {
   box-sizing: border-box; width: 22px; height: 22px; padding: 3px;
   border-radius: 6px; background: transparent;
 }
-body [data-composer-card] :is([class^="_primary_"], [class*=" _primary_"], [class$="_primary"], [class*="_primary "]) {
+body [data-composer-card] :is([class*="_primary_"], [class$="_primary"], [class*="_primary "]) {
   box-sizing: border-box; width: 26px; height: 26px; padding: 5px; border-radius: 4px; transform: none;
   background: var(--dsw-alias-button-primary-fill);
 }
-body [data-composer-card] :is([class^="_primary_"], [class*=" _primary_"], [class$="_primary"], [class*="_primary "]):hover:not(:disabled) { background: var(--dsw-alias-button-primary-hover); }
-body [data-composer-card] :is([class^="_primary_"], [class*=" _primary_"], [class$="_primary"], [class*="_primary "]) svg { width: 16px; height: 16px; }
-body [data-composer-card] :is([class^="_row_"], [class*=" _row_"], [class$="_row"], [class*="_row "]) button:is([aria-haspopup], :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "])) {
+body [data-composer-card] :is([class*="_primary_"], [class$="_primary"], [class*="_primary "]):hover:not(:disabled) { background: var(--dsw-alias-button-primary-hover); }
+body [data-composer-card] :is([class*="_primary_"], [class$="_primary"], [class*="_primary "]) svg { width: 16px; height: 16px; }
+body [data-composer-card] :is([class*="_row_"], [class$="_row"], [class*="_row "]) button:is([aria-haspopup], :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "])) {
   box-sizing: border-box; height: 22px; min-height: 22px; padding: 0 6px;
   border-radius: 4px; font: 13px/18px var(--dsw-font-family);
 }
-body [data-composer-card] :is([class^="_row_"], [class*=" _row_"], [class$="_row"], [class*="_row "]) :is([class^="_add_"], [class*=" _add_"], [class$="_add"], [class*="_add "])[aria-haspopup] { padding: 3px; }
-body [data-composer-card] [data-slot='conversation.input.activity'] button:is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "]) {
+body [data-composer-card] :is([class*="_row_"], [class$="_row"], [class*="_row "]) :is([class*="_add_"], [class$="_add"], [class*="_add "])[aria-haspopup] { padding: 3px; }
+body [data-composer-card] [data-slot='conversation.input.activity'] button:is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "]) {
   width: 22px; padding: 3px; border: 0;
 }
-body [data-composer-card] :is([class^="_row_"], [class*=" _row_"], [class$="_row"], [class*="_row "]) button:is([aria-haspopup], :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "])):not(:is([class^="_add_"], [class*=" _add_"], [class$="_add"], [class*="_add "])) svg { flex-shrink: 0; width: 12px; height: 12px; }
-body [data-composer-card] :is([class^="_row_"], [class*=" _row_"], [class$="_row"], [class*="_row "]) button:focus-visible {
+body [data-composer-card] :is([class*="_row_"], [class$="_row"], [class*="_row "]) button:is([aria-haspopup], :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "])):not(:is([class*="_add_"], [class$="_add"], [class*="_add "])) svg { flex-shrink: 0; width: 12px; height: 12px; }
+body [data-composer-card] :is([class*="_row_"], [class$="_row"], [class*="_row "]) button:focus-visible {
   outline: 1px solid var(--dsw-focus-ring-color); outline-offset: -1px;
 }
 body [data-phase='hero'] [data-slot='conversation.session.header.corner'] button {
@@ -1608,95 +1608,95 @@ body [data-phase='hero'] [data-slot='conversation.session.header.corner'] button
 html:not([data-platform='darwin']):not([data-windows-titlebar]) body [data-phase='hero'] [data-slot='conversation.header'] > header {
   box-sizing: border-box; height: 35px; min-height: 35px; padding-block: 0;
 }
-body [data-phase='hero'] :is([class^="_headline_"], [class*=" _headline_"], [class$="_headline"], [class*="_headline "]) {
+body [data-phase='hero'] :is([class*="_headline_"], [class$="_headline"], [class*="_headline "]) {
   justify-content: flex-start; font-size: 20px; line-height: 28px; font-weight: 400;
 }
-body [data-phase='hero'] :is([class^="_titleGroup_"], [class*=" _titleGroup_"], [class$="_titleGroup"], [class*="_titleGroup "]) { justify-content: flex-start; }
-body [data-phase='hero'] :is([class^="_fishHitbox_"], [class*=" _fishHitbox_"], [class$="_fishHitbox"], [class*="_fishHitbox "]) svg { width: 24px; height: 24px; }
-body [data-phase='hero'] :is([class^="_previewBadge_"], [class*=" _previewBadge_"], [class$="_previewBadge"], [class*="_previewBadge "]) {
+body [data-phase='hero'] :is([class*="_titleGroup_"], [class$="_titleGroup"], [class*="_titleGroup "]) { justify-content: flex-start; }
+body [data-phase='hero'] :is([class*="_fishHitbox_"], [class$="_fishHitbox"], [class*="_fishHitbox "]) svg { width: 24px; height: 24px; }
+body [data-phase='hero'] :is([class*="_previewBadge_"], [class$="_previewBadge"], [class*="_previewBadge "]) {
   align-self: center; margin-top: 0; border: 0; border-radius: 2px;
   font: 11px/16px var(--dsw-font-family); padding: 0 4px;
   background: var(--vsc-list-inactive-selection); color: var(--dsw-alias-label-secondary);
 }
-body [data-phase='hero'] :is([class^="_composerHero_"], [class*=" _composerHero_"], [class$="_composerHero"], [class*="_composerHero "]) { gap: 6px; }
-body [data-phase='hero'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):has(> :is([class^="_stack_"], [class*=" _stack_"], [class$="_stack"], [class*="_stack "]) > :is([class^="_headline_"], [class*=" _headline_"], [class$="_headline"], [class*="_headline "])) {
+body [data-phase='hero'] :is([class*="_composerHero_"], [class$="_composerHero"], [class*="_composerHero "]) { gap: 6px; }
+body [data-phase='hero'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):has(> :is([class*="_stack_"], [class$="_stack"], [class*="_stack "]) > :is([class*="_headline_"], [class$="_headline"], [class*="_headline "])) {
   padding-inline: var(--dsh-composer-side-clearance);
 }
-body [data-phase='hero'] :is([class^="_stack_"], [class*=" _stack_"], [class$="_stack"], [class*="_stack "]):has(> :is([class^="_headline_"], [class*=" _headline_"], [class$="_headline"], [class*="_headline "])) > :is([class^="_body_"], [class*=" _body_"], [class$="_body"], [class*="_body "]):empty { display: none; }
-body [data-phase='hero'] :is([class^="_heroWorkspaceRow_"], [class*=" _heroWorkspaceRow_"], [class$="_heroWorkspaceRow"], [class*="_heroWorkspaceRow "]) { padding-inline: var(--dsh-composer-side-clearance); }
-body [data-phase='hero'] :is([class^="_heroWorkspaceRow_"], [class*=" _heroWorkspaceRow_"], [class$="_heroWorkspaceRow"], [class*="_heroWorkspaceRow "]) button {
+body [data-phase='hero'] :is([class*="_stack_"], [class$="_stack"], [class*="_stack "]):has(> :is([class*="_headline_"], [class$="_headline"], [class*="_headline "])) > :is([class*="_body_"], [class$="_body"], [class*="_body "]):empty { display: none; }
+body [data-phase='hero'] :is([class*="_heroWorkspaceRow_"], [class$="_heroWorkspaceRow"], [class*="_heroWorkspaceRow "]) { padding-inline: var(--dsh-composer-side-clearance); }
+body [data-phase='hero'] :is([class*="_heroWorkspaceRow_"], [class$="_heroWorkspaceRow"], [class*="_heroWorkspaceRow "]) button {
   box-sizing: border-box; height: 22px; min-height: 22px; padding: 0 6px;
   border-radius: 4px; font: 13px/18px var(--dsw-font-family);
 }
 
 /* User messages retain DSH's bubble layout with square corners. */
-body :is([data-chat-flow-kind='user'], [data-chat-flow-kind='steering']) :is([class^="_bubble_"], [class*=" _bubble_"], [class$="_bubble"], [class*="_bubble "]) {
+body :is([data-chat-flow-kind='user'], [data-chat-flow-kind='steering']) :is([class*="_bubble_"], [class$="_bubble"], [class*="_bubble "]) {
   border-radius: 0;
 }
-body [data-chat-flow-kind] :is([class^="_fileCard_"], [class*=" _fileCard_"], [class$="_fileCard"], [class*="_fileCard "]) { border-radius: 4px; min-height: 44px; padding: 6px 8px; }
-body [data-chat-flow-kind] :is([class^="_callRow_"], [class*=" _callRow_"], [class$="_callRow"], [class*="_callRow "]) { border-radius: 0; }
-body :is([class^="_toBottom_"], [class*=" _toBottom_"], [class$="_toBottom"], [class*="_toBottom "]) { width: 26px; height: 26px; border-radius: 6px; box-shadow: none; border: 1px solid var(--dsw-alias-border-l4); }
+body [data-chat-flow-kind] :is([class*="_fileCard_"], [class$="_fileCard"], [class*="_fileCard "]) { border-radius: 4px; min-height: 44px; padding: 6px 8px; }
+body [data-chat-flow-kind] :is([class*="_callRow_"], [class$="_callRow"], [class*="_callRow "]) { border-radius: 0; }
+body :is([class*="_toBottom_"], [class$="_toBottom"], [class*="_toBottom "]) { width: 26px; height: 26px; border-radius: 6px; box-shadow: none; border: 1px solid var(--dsw-alias-border-l4); }
 
 /* Installed plugins read as extension rows, with artwork separate from chrome. */
-body [data-plugin-panel] :is([class^="_pageTitle_"], [class*=" _pageTitle_"], [class$="_pageTitle"], [class*="_pageTitle "]) { font-size: 20px; font-weight: 400; }
-body [data-plugin-panel] :is([class^="_pageHead_"], [class*=" _pageHead_"], [class$="_pageHead"], [class*="_pageHead "]) { padding-bottom: 12px; }
-body [data-plugin-panel] :is([class^="_cards_"], [class*=" _cards_"], [class$="_cards"], [class*="_cards "]) { gap: 0; }
-body [data-plugin-panel] :is([class^="_card_"], [class*=" _card_"], [class$="_card"], [class*="_card "]) { border-radius: 0; margin: 0; }
-body [data-plugin-panel] :is([class^="_cardOpen_"], [class*=" _cardOpen_"], [class$="_cardOpen"], [class*="_cardOpen "])::after { border-radius: 0; }
-body [data-plugin-panel] :is([class^="_cardHead_"], [class*=" _cardHead_"], [class$="_cardHead"], [class*="_cardHead "]) { gap: 10px; padding: 8px; }
-body [data-plugin-panel] :is([class^="_cardIcon_"], [class*=" _cardIcon_"], [class$="_cardIcon"], [class*="_cardIcon "]) { width: 42px; height: 42px; border: 0; border-radius: 0; }
-body [data-plugin-panel] :is(:is([class^="_cardTitle_"], [class*=" _cardTitle_"], [class$="_cardTitle"], [class*="_cardTitle "]), :is([class^="_cardOpen_"], [class*=" _cardOpen_"], [class$="_cardOpen"], [class*="_cardOpen "])) { font-size: 13px; font-weight: 600; }
-body [data-plugin-panel] :is(:is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]), :is([class^="_infoButton_"], [class*=" _infoButton_"], [class$="_infoButton"], [class*="_infoButton "])) { width: 22px; height: 22px; border-radius: 6px; }
-body [data-plugin-panel] :is(:is([class^="_addPrimary_"], [class*=" _addPrimary_"], [class$="_addPrimary"], [class*="_addPrimary "]), :is([class^="_addMore_"], [class*=" _addMore_"], [class$="_addMore"], [class*="_addMore "])) { height: 26px; font-size: 12px; }
-body [data-plugin-panel] :is([class^="_addPrimary_"], [class*=" _addPrimary_"], [class$="_addPrimary"], [class*="_addPrimary "]) { border-radius: 4px 0 0 4px; }
-body [data-plugin-panel] :is([class^="_addMore_"], [class*=" _addMore_"], [class$="_addMore"], [class*="_addMore "]) { border-radius: 0 4px 4px 0; }
+body [data-plugin-panel] :is([class*="_pageTitle_"], [class$="_pageTitle"], [class*="_pageTitle "]) { font-size: 20px; font-weight: 400; }
+body [data-plugin-panel] :is([class*="_pageHead_"], [class$="_pageHead"], [class*="_pageHead "]) { padding-bottom: 12px; }
+body [data-plugin-panel] :is([class*="_cards_"], [class$="_cards"], [class*="_cards "]) { gap: 0; }
+body [data-plugin-panel] :is([class*="_card_"], [class$="_card"], [class*="_card "]) { border-radius: 0; margin: 0; }
+body [data-plugin-panel] :is([class*="_cardOpen_"], [class$="_cardOpen"], [class*="_cardOpen "])::after { border-radius: 0; }
+body [data-plugin-panel] :is([class*="_cardHead_"], [class$="_cardHead"], [class*="_cardHead "]) { gap: 10px; padding: 8px; }
+body [data-plugin-panel] :is([class*="_cardIcon_"], [class$="_cardIcon"], [class*="_cardIcon "]) { width: 42px; height: 42px; border: 0; border-radius: 0; }
+body [data-plugin-panel] :is(:is([class*="_cardTitle_"], [class$="_cardTitle"], [class*="_cardTitle "]), :is([class*="_cardOpen_"], [class$="_cardOpen"], [class*="_cardOpen "])) { font-size: 13px; font-weight: 600; }
+body [data-plugin-panel] :is(:is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]), :is([class*="_infoButton_"], [class$="_infoButton"], [class*="_infoButton "])) { width: 22px; height: 22px; border-radius: 6px; }
+body [data-plugin-panel] :is(:is([class*="_addPrimary_"], [class$="_addPrimary"], [class*="_addPrimary "]), :is([class*="_addMore_"], [class$="_addMore"], [class*="_addMore "])) { height: 26px; font-size: 12px; }
+body [data-plugin-panel] :is([class*="_addPrimary_"], [class$="_addPrimary"], [class*="_addPrimary "]) { border-radius: 4px 0 0 4px; }
+body [data-plugin-panel] :is([class*="_addMore_"], [class$="_addMore"], [class*="_addMore "]) { border-radius: 0 4px 4px 0; }
 
 @media (max-width: 640px) {
   body [data-shortcut-modal='settings'] { max-width: calc(100vw - 16px); }
-  body [data-shortcut-modal='settings'] :is([class^="_nav_"], [class*=" _nav_"], [class$="_nav"], [class*="_nav "]) { width: 130px; }
-  body [data-shortcut-modal='settings'] :is([class^="_navCell_"], [class*=" _navCell_"], [class$="_navCell"], [class*="_navCell "]) { padding-inline: 8px; gap: 6px; }
-  body [data-shortcut-modal='settings'] :is([class^="_options_"], [class*=" _options_"], [class$="_options"], [class*="_options "]) { padding-inline: 12px; }
-  body [data-shortcut-modal='settings'] :is([class^="_themeCube_"], [class*=" _themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) { padding-inline: 6px; }
+  body [data-shortcut-modal='settings'] :is([class*="_nav_"], [class$="_nav"], [class*="_nav "]) { width: 130px; }
+  body [data-shortcut-modal='settings'] :is([class*="_navCell_"], [class$="_navCell"], [class*="_navCell "]) { padding-inline: 8px; gap: 6px; }
+  body [data-shortcut-modal='settings'] :is([class*="_options_"], [class$="_options"], [class*="_options "]) { padding-inline: 12px; }
+  body [data-shortcut-modal='settings'] :is([class*="_themeCube_"], [class$="_themeCube"], [class*="_themeCube "]) { padding-inline: 6px; }
 }
 
 /* Preserve Switch semantics and its real thumb; the reference uses a 28 \xD7 16 track. */
-body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] {
+body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] {
   position: relative; box-sizing: border-box; container-type: size; flex: none;
   width: 28px; height: 16px; border-radius: 999px; padding: 0;
   border: 1px solid transparent; background: color-mix(in srgb, var(--vscode-descriptionForeground) 36%, transparent);
   cursor: pointer; transition: background-color 120ms ease, border-color 120ms ease;
 }
-body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'][aria-checked='true'] { background: var(--vscode-button-background); border-color: var(--vscode-button-background); }
-body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] > :is([class^="_thumb_"], [class*=" _thumb_"], [class$="_thumb"], [class*="_thumb "]) {
+body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'][aria-checked='true'] { background: var(--vscode-button-background); border-color: var(--vscode-button-background); }
+body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] > :is([class*="_thumb_"], [class$="_thumb"], [class*="_thumb "]) {
   position: absolute; display: block; box-sizing: border-box; top: 0; bottom: 0; left: 0;
   width: 100cqh; height: auto; border: 1px solid transparent; border-radius: 999px;
   background-color: var(--vscode-button-foreground); background-clip: padding-box;
   transform: none; transition: left 120ms ease;
 }
-body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'][aria-checked='true'] > :is([class^="_thumb_"], [class*=" _thumb_"], [class$="_thumb"], [class*="_thumb "]) { left: calc(100% - 100cqh); transform: none; }
-body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch']:disabled { opacity: .5; cursor: default; }
-body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch']:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 2px; }
+body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'][aria-checked='true'] > :is([class*="_thumb_"], [class$="_thumb"], [class*="_thumb "]) { left: calc(100% - 100cqh); transform: none; }
+body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch']:disabled { opacity: .5; cursor: default; }
+body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch']:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
-  body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'], body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] > :is([class^="_thumb_"], [class*=" _thumb_"], [class$="_thumb"], [class*="_thumb "]) { transition: none; }
+  body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'], body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] > :is([class*="_thumb_"], [class$="_thumb"], [class*="_thumb "]) { transition: none; }
 }
 @media (forced-colors: active) {
-  body button:is([class^="_switch_"], [class*=" _switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] { border-color: ButtonText; }
+  body button:is([class*="_switch_"], [class$="_switch"], [class*="_switch "])[role='switch'] { border-color: ButtonText; }
 }
-body [data-shortcut-modal='settings'] [data-slot='settings.general.item'] > :is(:is([class^="_row_"], [class*=" _row_"], [class$="_row"], [class*="_row "]), :is([class^="_group_"], [class*=" _group_"], [class$="_group"], [class*="_group "])) {
+body [data-shortcut-modal='settings'] [data-slot='settings.general.item'] > :is(:is([class*="_row_"], [class$="_row"], [class*="_row "]), :is([class*="_group_"], [class$="_group"], [class*="_group "])) {
   padding-block: 12px;
 }
-body [data-shortcut-modal='settings'] :is([class^="_setting_"], [class*=" _setting_"], [class$="_setting"], [class*="_setting "]) :is([class^="_button_"], [class*=" _button_"], [class$="_button"], [class*="_button "]) {
+body [data-shortcut-modal='settings'] :is([class*="_setting_"], [class$="_setting"], [class*="_setting "]) :is([class*="_button_"], [class$="_button"], [class*="_button "]) {
   height: 26px; padding: 4px 8px; border-radius: 4px;
   font: 12px/16px var(--dsw-font-family);
 }
-body [data-shortcut-modal='settings'] :is([class^="_settingTitle_"], [class*=" _settingTitle_"], [class$="_settingTitle"], [class*="_settingTitle "]) { font-size: 13px; }
-body [data-shortcut-modal='settings'] :is([class^="_settingText_"], [class*=" _settingText_"], [class$="_settingText"], [class*="_settingText "]) { padding-right: 16px; gap: 2px; }
-body [data-shortcut-modal='settings'] :is([class^="_setting_"], [class*=" _setting_"], [class$="_setting"], [class*="_setting "]) { padding-block: 12px; }
+body [data-shortcut-modal='settings'] :is([class*="_settingTitle_"], [class$="_settingTitle"], [class*="_settingTitle "]) { font-size: 13px; }
+body [data-shortcut-modal='settings'] :is([class*="_settingText_"], [class$="_settingText"], [class*="_settingText "]) { padding-right: 16px; gap: 2px; }
+body [data-shortcut-modal='settings'] :is([class*="_setting_"], [class$="_setting"], [class*="_setting "]) { padding-block: 12px; }
 
-body :is([class^="_tag_"], [class*=" _tag_"], [class$="_tag"], [class*="_tag "])[data-tone] { border-radius: 2px; padding: 0 4px; font-weight: 400; }
+body :is([class*="_tag_"], [class$="_tag"], [class*="_tag "])[data-tone] { border-radius: 2px; padding: 0 4px; font-weight: 400; }
 body [data-plugin-panel] { align-items: stretch; gap: 16px; padding-inline: 24px; }
 body [data-plugin-panel] > * { max-width: none; }
-body [data-plugin-panel] :is([class^="_groupTitle_"], [class*=" _groupTitle_"], [class$="_groupTitle"], [class*="_groupTitle "]) { font-size: 13px; font-weight: 600; }
+body [data-plugin-panel] :is([class*="_groupTitle_"], [class$="_groupTitle"], [class*="_groupTitle "]) { font-size: 13px; font-weight: 600; }
 `;
 
 // src/fonts.js
@@ -1760,30 +1760,30 @@ body [data-step-process] [data-process-activity][aria-expanded='false'] [data-st
 body [data-step-process] [data-process-activity][aria-expanded='false'] [data-step-process-chevron] svg > * { visibility: hidden; }
 body [data-step-process] [data-process-activity][aria-expanded='true'] [data-step-process-chevron] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-step-process] [data-process-activity][aria-expanded='true'] [data-step-process-chevron] svg > * { visibility: hidden; }
-body [data-step-process] [data-slot='tool.call.toolview'] [aria-expanded='true'] > :is([class^="_leading_"], [class*=" _leading_"], [class$="_leading"], [class*="_leading "]) > svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-step-process] [data-slot='tool.call.toolview'] [aria-expanded='true'] > :is([class^="_leading_"], [class*=" _leading_"], [class$="_leading"], [class*="_leading "]) > svg > * { visibility: hidden; }
-body [data-slot='sidebar'] :is([class^="_newSession_"], [class*=" _newSession_"], [class$="_newSession"], [class*="_newSession "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M14.452%201.548a1.865%201.865%200%200%200-2.644%200L6.979%206.377a2.2%202.2%200%200%200-.578%201.021l-.374%201.498a.89.89%200%200%200%201.079%201.079l1.498-.374a2.2%202.2%200%200%200%201.021-.578l4.829-4.829c.73-.73.73-1.914%200-2.645zm-.707%201.937L8.916%208.314a1.2%201.2%200%200%201-.556.315l-1.32.333l.331-1.322c.053-.21.161-.403.315-.556l4.83-4.829a.866.866%200%200%201%201.23%200a.87.87%200%200%201%200%201.231zM13%207.768l1-1V11.5c0%201.378-1.121%202.5-2.5%202.5h-7A2.503%202.503%200%200%201%202%2011.5v-7C2%203.122%203.121%202%204.5%202h4.736l-1%201H4.5C3.673%203%203%203.673%203%204.5v7c0%20.827.673%201.5%201.5%201.5h7c.827%200%201.5-.673%201.5-1.5z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-slot='sidebar'] :is([class^="_newSession_"], [class*=" _newSession_"], [class$="_newSession"], [class*="_newSession "]) svg > * { visibility: hidden; }
-body [data-slot='sidebar'] :is([class^="_panelIcon_"], [class*=" _panelIcon_"], [class$="_panelIcon"], [class*="_panelIcon "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M12.5%201A2.5%202.5%200%200%201%2015%203.5v9a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2012.5v-9A2.5%202.5%200%200%201%203.5%201zm0%2013a1.5%201.5%200%200%200%201.5-1.5v-9A1.5%201.5%200%200%200%2012.5%202H7v12z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-slot='sidebar'] :is([class^="_panelIcon_"], [class*=" _panelIcon_"], [class$="_panelIcon"], [class*="_panelIcon "]) > * { visibility: hidden; }
+body [data-step-process] [data-slot='tool.call.toolview'] [aria-expanded='true'] > :is([class*="_leading_"], [class$="_leading"], [class*="_leading "]) > svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-step-process] [data-slot='tool.call.toolview'] [aria-expanded='true'] > :is([class*="_leading_"], [class$="_leading"], [class*="_leading "]) > svg > * { visibility: hidden; }
+body [data-slot='sidebar'] :is([class*="_newSession_"], [class$="_newSession"], [class*="_newSession "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M14.452%201.548a1.865%201.865%200%200%200-2.644%200L6.979%206.377a2.2%202.2%200%200%200-.578%201.021l-.374%201.498a.89.89%200%200%200%201.079%201.079l1.498-.374a2.2%202.2%200%200%200%201.021-.578l4.829-4.829c.73-.73.73-1.914%200-2.645zm-.707%201.937L8.916%208.314a1.2%201.2%200%200%201-.556.315l-1.32.333l.331-1.322c.053-.21.161-.403.315-.556l4.83-4.829a.866.866%200%200%201%201.23%200a.87.87%200%200%201%200%201.231zM13%207.768l1-1V11.5c0%201.378-1.121%202.5-2.5%202.5h-7A2.503%202.503%200%200%201%202%2011.5v-7C2%203.122%203.121%202%204.5%202h4.736l-1%201H4.5C3.673%203%203%203.673%203%204.5v7c0%20.827.673%201.5%201.5%201.5h7c.827%200%201.5-.673%201.5-1.5z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-slot='sidebar'] :is([class*="_newSession_"], [class$="_newSession"], [class*="_newSession "]) svg > * { visibility: hidden; }
+body [data-slot='sidebar'] :is([class*="_panelIcon_"], [class$="_panelIcon"], [class*="_panelIcon "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M12.5%201A2.5%202.5%200%200%201%2015%203.5v9a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2012.5v-9A2.5%202.5%200%200%201%203.5%201zm0%2013a1.5%201.5%200%200%200%201.5-1.5v-9A1.5%201.5%200%200%200%2012.5%202H7v12z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-slot='sidebar'] :is([class*="_panelIcon_"], [class$="_panelIcon"], [class*="_panelIcon "]) > * { visibility: hidden; }
 body [data-slot='sidebar'] [data-slot='settings.trigger'] svg {  width: 24px; height: 24px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M12%209a3%203%200%201%200%200%206a3%203%200%201%200%200-6m0%204.5a1.5%201.5%200%201%201%20.001-3.001A1.5%201.5%200%200%201%2012%2013.5m9.848%201.072l-1.93-1.63a1.232%201.232%200%200%201%200-1.884l1.93-1.63a.62.62%200%200%200%20.189-.662a10.5%2010.5%200%200%200-2.209-3.804a.62.62%200%200%200-.668-.168l-2.381.848a1.3%201.3%200%200%201-.419.073a1.24%201.24%200%200%201-1.219-1.014l-.454-2.478a.62.62%200%200%200-.482-.493a10.7%2010.7%200%200%200-4.408%200a.62.62%200%200%200-.482.493l-.453%202.478a1.24%201.24%200%200%201-1.638.942l-2.38-.848a.62.62%200%200%200-.669.168a10.5%2010.5%200%200%200-2.21%203.805a.615.615%200%200%200%20.189.661l1.929%201.63q.077.066.143.143c.444.52.379%201.299-.143%201.742l-1.929%201.63a.62.62%200%200%200-.189.662a10.5%2010.5%200%200%200%202.21%203.803a.62.62%200%200%200%20.669.168l2.38-.847a1.3%201.3%200%200%201%20.419-.072c.588%200%201.11.417%201.219%201.014l.453%202.478a.62.62%200%200%200%20.482.493a10.7%2010.7%200%200%200%204.408%200a.62.62%200%200%200%20.482-.493l.454-2.478q.018-.099.053-.194a1.24%201.24%200%200%201%201.585-.748l2.379.848q.105.036.208.036a.62.62%200%200%200%20.461-.204a10.5%2010.5%200%200%200%202.208-3.804a.615.615%200%200%200-.189-.662zm-2.756%203.017l-1.81-.645a2.747%202.747%200%200%200-3.615%202.085l-.345%201.877a9.2%209.2%200%200%201-2.642-.002l-.344-1.876a2.737%202.737%200%200%200-3.616-2.085l-1.81.644a8.9%208.9%200%200%201-1.319-2.266l1.461-1.235c.56-.472.9-1.135.96-1.864a2.7%202.7%200%200%200-.645-1.995a3%203%200%200%200-.315-.315L3.591%208.677A8.9%208.9%200%200%201%204.91%206.412l1.81.645q.447.158.921.159a2.75%202.75%200%200%200%202.695-2.244l.344-1.876a9.3%209.3%200%200%201%202.642-.002l.343%201.877a2.737%202.737%200%200%200%203.617%202.085l1.81-.645c.552.69.993%201.449%201.319%202.266l-1.46%201.235a2.7%202.7%200%200%200-.96%201.864a2.71%202.71%200%200%200%20.962%202.31l1.46%201.234a8.9%208.9%200%200%201-1.318%202.267z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-slot='sidebar'] [data-slot='settings.trigger'] svg > * { visibility: hidden; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_searchButton_"], [class*=" _searchButton_"], [class$="_searchButton"], [class*="_searchButton "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M10.02%2010.727a5.5%205.5%200%201%201%20.707-.707l3.127%203.126a.5.5%200%200%201-.708.708zM11%206.5a4.5%204.5%200%201%200-9%200a4.5%204.5%200%200%200%209%200%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_searchButton_"], [class*=" _searchButton_"], [class$="_searchButton"], [class*="_searchButton "]) svg > * { visibility: hidden; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_clearButton_"], [class*=" _clearButton_"], [class$="_clearButton"], [class*="_clearButton "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.85%2013.15c.2.2.2.51%200%20.71a.485.485%200%200%201-.7%200L8%208.71l-5.15%205.15a.485.485%200%200%201-.7%200c-.2-.2-.2-.51%200-.71L7.3%208L2.15%202.85c-.2-.2-.2-.51%200-.71s.51-.2.71%200l5.15%205.15l5.15-5.15c.2-.2.51-.2.71%200s.2.51%200%20.71L8.72%208l5.15%205.15z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_clearButton_"], [class*=" _clearButton_"], [class$="_clearButton"], [class*="_clearButton "]) svg > * { visibility: hidden; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_headerActions_"], [class*=" _headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > span :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M6%209.5A2%202%200%200%201%207.937%2011H13.5a.5.5%200%200%201%20.09.992L13.5%2012l-5.563.001a2%202%200%200%201-3.874%200L2.5%2012a.5.5%200%200%201-.09-.992L2.5%2011h1.563A2%202%200%200%201%206%209.5m0%201a1%201%200%201%200%200%202a1%201%200%200%200%200-2m4-8A2%202%200%200%201%2011.937%204H13.5a.5.5%200%200%201%20.09.992L13.5%205l-1.563.001a2%202%200%200%201-3.874%200L2.5%205a.5.5%200%200%201-.09-.992L2.5%204h5.563A2%202%200%200%201%2010%202.5m0%201a1%201%200%201%200%200%202a1%201%200%200%200%200-2%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_headerActions_"], [class*=" _headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > span :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) svg > * { visibility: hidden; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_headerActions_"], [class*=" _headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):last-child svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v.757a5.5%205.5%200%200%200-1-.657v-.1A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207H2v4.5A1.5%201.5%200%200%200%203.5%2013h2.707q.149.524.393%201H3.5A2.5%202.5%200%200%201%201%2011.5zm15%207a4.5%204.5%200%201%201-9%200a4.5%204.5%200%200%201%209%200M12%209a.5.5%200%200%200-1%200v2H9a.5.5%200%200%200%200%201h2v2a.5.5%200%200%200%201%200v-2h2a.5.5%200%200%200%200-1h-2z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_headerActions_"], [class*=" _headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):last-child svg > * { visibility: hidden; }
-body [data-composer-card] :is([class^="_add_"], [class*=" _add_"], [class$="_add"], [class*="_add "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M8%201.5a.5.5%200%200%200-1%200V7H1.5a.5.5%200%200%200%200%201H7v5.5a.5.5%200%200%200%201%200V8h5.5a.5.5%200%200%200%200-1H8z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-composer-card] :is([class^="_add_"], [class*=" _add_"], [class$="_add"], [class*="_add "]) svg > * { visibility: hidden; }
-body [data-composer-card] :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-composer-card] :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) > * { visibility: hidden; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_searchButton_"], [class$="_searchButton"], [class*="_searchButton "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M10.02%2010.727a5.5%205.5%200%201%201%20.707-.707l3.127%203.126a.5.5%200%200%201-.708.708zM11%206.5a4.5%204.5%200%201%200-9%200a4.5%204.5%200%200%200%209%200%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_searchButton_"], [class$="_searchButton"], [class*="_searchButton "]) svg > * { visibility: hidden; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_clearButton_"], [class$="_clearButton"], [class*="_clearButton "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.85%2013.15c.2.2.2.51%200%20.71a.485.485%200%200%201-.7%200L8%208.71l-5.15%205.15a.485.485%200%200%201-.7%200c-.2-.2-.2-.51%200-.71L7.3%208L2.15%202.85c-.2-.2-.2-.51%200-.71s.51-.2.71%200l5.15%205.15l5.15-5.15c.2-.2.51-.2.71%200s.2.51%200%20.71L8.72%208l5.15%205.15z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_clearButton_"], [class$="_clearButton"], [class*="_clearButton "]) svg > * { visibility: hidden; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > span :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M6%209.5A2%202%200%200%201%207.937%2011H13.5a.5.5%200%200%201%20.09.992L13.5%2012l-5.563.001a2%202%200%200%201-3.874%200L2.5%2012a.5.5%200%200%201-.09-.992L2.5%2011h1.563A2%202%200%200%201%206%209.5m0%201a1%201%200%201%200%200%202a1%201%200%200%200%200-2m4-8A2%202%200%200%201%2011.937%204H13.5a.5.5%200%200%201%20.09.992L13.5%205l-1.563.001a2%202%200%200%201-3.874%200L2.5%205a.5.5%200%200%201-.09-.992L2.5%204h5.563A2%202%200%200%201%2010%202.5m0%201a1%201%200%201%200%200%202a1%201%200%200%200%200-2%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > span :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) svg > * { visibility: hidden; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):last-child svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v.757a5.5%205.5%200%200%200-1-.657v-.1A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207H2v4.5A1.5%201.5%200%200%200%203.5%2013h2.707q.149.524.393%201H3.5A2.5%202.5%200%200%201%201%2011.5zm15%207a4.5%204.5%200%201%201-9%200a4.5%204.5%200%200%201%209%200M12%209a.5.5%200%200%200-1%200v2H9a.5.5%200%200%200%200%201h2v2a.5.5%200%200%200%201%200v-2h2a.5.5%200%200%200%200-1h-2z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) > :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):last-child svg > * { visibility: hidden; }
+body [data-composer-card] :is([class*="_add_"], [class$="_add"], [class*="_add "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M8%201.5a.5.5%200%200%200-1%200V7H1.5a.5.5%200%200%200%200%201H7v5.5a.5.5%200%200%200%201%200V8h5.5a.5.5%200%200%200%200-1H8z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-composer-card] :is([class*="_add_"], [class$="_add"], [class*="_add "]) svg > * { visibility: hidden; }
+body [data-composer-card] :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-composer-card] :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) > * { visibility: hidden; }
 body [data-phase='hero'] [data-slot='conversation.session.header.corner'] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M12.5%201A2.5%202.5%200%200%201%2015%203.5v9a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2012.5v-9A2.5%202.5%200%200%201%203.5%201zM9%2014V2H3.5A1.5%201.5%200%200%200%202%203.5v9A1.5%201.5%200%200%200%203.5%2014z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-phase='hero'] [data-slot='conversation.session.header.corner'] svg > * { visibility: hidden; }
-body [data-shortcut-modal='settings'] :is([class^="_close_"], [class*=" _close_"], [class$="_close"], [class*="_close "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.85%2013.15c.2.2.2.51%200%20.71a.485.485%200%200%201-.7%200L8%208.71l-5.15%205.15a.485.485%200%200%201-.7%200c-.2-.2-.2-.51%200-.71L7.3%208L2.15%202.85c-.2-.2-.2-.51%200-.71s.51-.2.71%200l5.15%205.15l5.15-5.15c.2-.2.51-.2.71%200s.2.51%200%20.71L8.72%208l5.15%205.15z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-shortcut-modal='settings'] :is([class^="_close_"], [class*=" _close_"], [class$="_close"], [class*="_close "]) svg > * { visibility: hidden; }
+body [data-shortcut-modal='settings'] :is([class*="_close_"], [class$="_close"], [class*="_close "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.85%2013.15c.2.2.2.51%200%20.71a.485.485%200%200%201-.7%200L8%208.71l-5.15%205.15a.485.485%200%200%201-.7%200c-.2-.2-.2-.51%200-.71L7.3%208L2.15%202.85c-.2-.2-.2-.51%200-.71s.51-.2.71%200l5.15%205.15l5.15-5.15c.2-.2.51-.2.71%200s.2.51%200%20.71L8.72%208l5.15%205.15z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-shortcut-modal='settings'] :is([class*="_close_"], [class$="_close"], [class*="_close "]) svg > * { visibility: hidden; }
 body [data-dockkit-tab-close] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.85%2013.15c.2.2.2.51%200%20.71a.485.485%200%200%201-.7%200L8%208.71l-5.15%205.15a.485.485%200%200%201-.7%200c-.2-.2-.2-.51%200-.71L7.3%208L2.15%202.85c-.2-.2-.2-.51%200-.71s.51-.2.71%200l5.15%205.15l5.15-5.15c.2-.2.51-.2.71%200s.2.51%200%20.71L8.72%208l5.15%205.15z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-dockkit-tab-close] svg > * { visibility: hidden; }
 body [data-dockkit-add-tab] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M8%201.5a.5.5%200%200%200-1%200V7H1.5a.5.5%200%200%200%200%201H7v5.5a.5.5%200%200%200%201%200V8h5.5a.5.5%200%200%200%200-1H8z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
@@ -1796,39 +1796,39 @@ body [data-dockkit-strip-chrome] [data-sidebar-right-mode='push'] svg {  width: 
 body [data-dockkit-strip-chrome] [data-sidebar-right-mode='push'] svg > * { visibility: hidden; }
 body [data-dockkit-strip-chrome] [data-sidebar-right-toggle] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M12.5%201A2.5%202.5%200%200%201%2015%203.5v9a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2012.5v-9A2.5%202.5%200%200%201%203.5%201zM9%2014V2H3.5A1.5%201.5%200%200%200%202%203.5v9A1.5%201.5%200%200%200%203.5%2014z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-dockkit-strip-chrome] [data-sidebar-right-toggle] svg > * { visibility: hidden; }
-body [data-dockkit-tab-title] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2011.5zM2%207v4.5A1.5%201.5%200%200%200%203.5%2013h9a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-dockkit-tab-title] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) > * { visibility: hidden; }
-body [data-phase='hero'] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2011.5zM2%207v4.5A1.5%201.5%200%200%200%203.5%2013h9a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-phase='hero'] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) > * { visibility: hidden; }
-body [data-phase='hero'] :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-phase='hero'] :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) > * { visibility: hidden; }
-body :is([class^="_toBottom_"], [class*=" _toBottom_"], [class$="_toBottom"], [class*="_toBottom "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.854%208.146a.5.5%200%200%200-.707%200l-4.146%204.146V2.5a.5.5%200%200%200-1%200v9.793L3.855%208.147a.5.5%200%200%200-.707.707l5%205a.5.5%200%200%200%20.708%200l5-5a.5.5%200%200%200%200-.707z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body :is([class^="_toBottom_"], [class*=" _toBottom_"], [class$="_toBottom"], [class*="_toBottom "]) svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key^='workspace:'] :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M6.146%203.146a.5.5%200%200%200%200%20.707l4.146%204.146l-4.146%204.146a.5.5%200%200%200%20.707.707l4.5-4.5a.5.5%200%200%200%200-.707l-4.5-4.5a.5.5%200%200%200-.707%200%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] [data-row-key^='workspace:'] :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='true'] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5v4.6l.924-1.6A3%203%200%200%201%205.522%206h6.393A1.5%201.5%200%200%200%2010.5%205H7a.5.5%200%200%201-.354-.146L4.94%203.146A.5.5%200%200%200%204.586%203H3.5A1.5%201.5%200%200%200%202%204.5m5.069%209.495L7%2014H3.5A2.5%202.5%200%200%201%201%2011.5v-7A2.5%202.5%200%200%201%203.5%202h1.086a1.5%201.5%200%200%201%201.06.44L7.207%204H10.5a2.5%202.5%200%200%201%202.458%202.041c1.647.3%202.586%202.18%201.704%203.709l-1.585%202.745a3%203%200%200%201-2.598%201.5zM5.522%207A2%202%200%200%200%203.79%208l-1.585%202.745a1.5%201.5%200%200%200%201.299%202.25h6.975a2%202%200%200%200%201.732-1l1.585-2.745a1.5%201.5%200%200%200-1.3-2.25z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='true'] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='false'] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2011.5zM2%207v4.5A1.5%201.5%200%200%200%203.5%2013h9a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='false'] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key='workspace:'][aria-expanded] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20fill%3D%22currentColor%22%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-2.387l-.017-.058a1%201%200%200%200-.028-.09L9.715%2013H12.5a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207L6.646%206.561A1.5%201.5%200%200%201%205.585%207H.999V4.5a2.5%202.5%200%200%201%202.5-2.5h2.086a1.5%201.5%200%200%201%201.061.439zM5.585%206a.5.5%200%200%200%20.354-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.585%203H3.499a1.5%201.5%200%200%200-1.5%201.5V6z%22%2F%3E%3Cpath%20d%3D%22M6.766%209.271c.245.101.441.294.545.538l1.833%204.425a1%201%200%200%201%20.08.383a1%201%200%200%201-.616.924l-.925.383a1.01%201.01%200%200%201-.94-.092a1%201%200%200%201-.37-.449L5%2012.07V15a1%201%200%200%201-1%201H3a1%201%200%200%201-.5-.135A1%201%200%200%201%202%2016H1a1%201%200%200%201-1-1V9a1.003%201.003%200%200%201%201-1h1c.176%200%20.348.046.5.135A1%201%200%200%201%203%208h1a1.003%201.003%200%200%201%201%201v.688l.078-.038L6%209.268c.246-.099.521-.098.766.003M1%2015h1V9H1zm2%200h1V9H3zm2.463-4.426L7.3%2015l.92-.383l-1.835-4.425z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] [data-row-key='workspace:'][aria-expanded] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) svg > * { visibility: hidden; }
-body [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > span > button svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M5%208a1%201%200%201%201-2%200a1%201%200%200%201%202%200m4%200a1%201%200%201%201-2%200a1%201%200%200%201%202%200m3%201a1%201%200%201%200%200-2a1%201%200%200%200%200%202%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > span > button svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key^='workspace:'] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > button svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M14.452%201.548a1.865%201.865%200%200%200-2.644%200L6.979%206.377a2.2%202.2%200%200%200-.578%201.021l-.374%201.498a.89.89%200%200%200%201.079%201.079l1.498-.374a2.2%202.2%200%200%200%201.021-.578l4.829-4.829c.73-.73.73-1.914%200-2.645zm-.707%201.937L8.916%208.314a1.2%201.2%200%200%201-.556.315l-1.32.333l.331-1.322c.053-.21.161-.403.315-.556l4.83-4.829a.866.866%200%200%201%201.23%200a.87.87%200%200%201%200%201.231zM13%207.768l1-1V11.5c0%201.378-1.121%202.5-2.5%202.5h-7A2.503%202.503%200%200%201%202%2011.5v-7C2%203.122%203.121%202%204.5%202h4.736l-1%201H4.5C3.673%203%203%203.673%203%204.5v7c0%20.827.673%201.5%201.5%201.5h7c.827%200%201.5-.673%201.5-1.5z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] [data-row-key^='workspace:'] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > button svg > * { visibility: hidden; }
+body [data-dockkit-tab-title] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2011.5zM2%207v4.5A1.5%201.5%200%200%200%203.5%2013h9a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-dockkit-tab-title] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) > * { visibility: hidden; }
+body [data-phase='hero'] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2011.5zM2%207v4.5A1.5%201.5%200%200%200%203.5%2013h9a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-phase='hero'] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) > * { visibility: hidden; }
+body [data-phase='hero'] :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-phase='hero'] :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) > * { visibility: hidden; }
+body :is([class*="_toBottom_"], [class$="_toBottom"], [class*="_toBottom "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.854%208.146a.5.5%200%200%200-.707%200l-4.146%204.146V2.5a.5.5%200%200%200-1%200v9.793L3.855%208.147a.5.5%200%200%200-.707.707l5%205a.5.5%200%200%200%20.708%200l5-5a.5.5%200%200%200%200-.707z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body :is([class*="_toBottom_"], [class$="_toBottom"], [class*="_toBottom "]) svg > * { visibility: hidden; }
+body [data-vsc-tree] [data-row-key^='workspace:'] :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M6.146%203.146a.5.5%200%200%200%200%20.707l4.146%204.146l-4.146%204.146a.5.5%200%200%200%20.707.707l4.5-4.5a.5.5%200%200%200%200-.707l-4.5-4.5a.5.5%200%200%200-.707%200%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key^='workspace:'] :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) svg > * { visibility: hidden; }
+body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='true'] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5v4.6l.924-1.6A3%203%200%200%201%205.522%206h6.393A1.5%201.5%200%200%200%2010.5%205H7a.5.5%200%200%201-.354-.146L4.94%203.146A.5.5%200%200%200%204.586%203H3.5A1.5%201.5%200%200%200%202%204.5m5.069%209.495L7%2014H3.5A2.5%202.5%200%200%201%201%2011.5v-7A2.5%202.5%200%200%201%203.5%202h1.086a1.5%201.5%200%200%201%201.06.44L7.207%204H10.5a2.5%202.5%200%200%201%202.458%202.041c1.647.3%202.586%202.18%201.704%203.709l-1.585%202.745a3%203%200%200%201-2.598%201.5zM5.522%207A2%202%200%200%200%203.79%208l-1.585%202.745a1.5%201.5%200%200%200%201.299%202.25h6.975a2%202%200%200%200%201.732-1l1.585-2.745a1.5%201.5%200%200%200-1.3-2.25z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='true'] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) svg > * { visibility: hidden; }
+body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='false'] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2%204.5V6h3.586a.5.5%200%200%200%20.353-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.586%203H3.5A1.5%201.5%200%200%200%202%204.5m-1%200A2.5%202.5%200%200%201%203.5%202h2.086a1.5%201.5%200%200%201%201.06.44L8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2011.5zM2%207v4.5A1.5%201.5%200%200%200%203.5%2013h9a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207l-1.56%201.56A1.5%201.5%200%200%201%205.585%207z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key^='workspace:'][aria-expanded='false'] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) svg > * { visibility: hidden; }
+body [data-vsc-tree] [data-row-key='workspace:'][aria-expanded] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20fill%3D%22currentColor%22%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M8.207%204H12.5A2.5%202.5%200%200%201%2015%206.5v5a2.5%202.5%200%200%201-2.5%202.5h-2.387l-.017-.058a1%201%200%200%200-.028-.09L9.715%2013H12.5a1.5%201.5%200%200%200%201.5-1.5v-5A1.5%201.5%200%200%200%2012.5%205H8.207L6.646%206.561A1.5%201.5%200%200%201%205.585%207H.999V4.5a2.5%202.5%200%200%201%202.5-2.5h2.086a1.5%201.5%200%200%201%201.061.439zM5.585%206a.5.5%200%200%200%20.354-.146L7.293%204.5L5.939%203.146A.5.5%200%200%200%205.585%203H3.499a1.5%201.5%200%200%200-1.5%201.5V6z%22%2F%3E%3Cpath%20d%3D%22M6.766%209.271c.245.101.441.294.545.538l1.833%204.425a1%201%200%200%201%20.08.383a1%201%200%200%201-.616.924l-.925.383a1.01%201.01%200%200%201-.94-.092a1%201%200%200%201-.37-.449L5%2012.07V15a1%201%200%200%201-1%201H3a1%201%200%200%201-.5-.135A1%201%200%200%201%202%2016H1a1%201%200%200%201-1-1V9a1.003%201.003%200%200%201%201-1h1c.176%200%20.348.046.5.135A1%201%200%200%201%203%208h1a1.003%201.003%200%200%201%201%201v.688l.078-.038L6%209.268c.246-.099.521-.098.766.003M1%2015h1V9H1zm2%200h1V9H3zm2.463-4.426L7.3%2015l.92-.383l-1.835-4.425z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key='workspace:'][aria-expanded] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) svg > * { visibility: hidden; }
+body [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > span > button svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M5%208a1%201%200%201%201-2%200a1%201%200%200%201%202%200m4%200a1%201%200%201%201-2%200a1%201%200%200%201%202%200m3%201a1%201%200%201%200%200-2a1%201%200%200%200%200%202%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > span > button svg > * { visibility: hidden; }
+body [data-vsc-tree] [data-row-key^='workspace:'] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > button svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M14.452%201.548a1.865%201.865%200%200%200-2.644%200L6.979%206.377a2.2%202.2%200%200%200-.578%201.021l-.374%201.498a.89.89%200%200%200%201.079%201.079l1.498-.374a2.2%202.2%200%200%200%201.021-.578l4.829-4.829c.73-.73.73-1.914%200-2.645zm-.707%201.937L8.916%208.314a1.2%201.2%200%200%201-.556.315l-1.32.333l.331-1.322c.053-.21.161-.403.315-.556l4.83-4.829a.866.866%200%200%201%201.23%200a.87.87%200%200%201%200%201.231zM13%207.768l1-1V11.5c0%201.378-1.121%202.5-2.5%202.5h-7A2.503%202.503%200%200%201%202%2011.5v-7C2%203.122%203.121%202%204.5%202h4.736l-1%201H4.5C3.673%203%203%203.673%203%204.5v7c0%20.827.673%201.5%201.5%201.5h7c.827%200%201.5-.673%201.5-1.5z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key^='workspace:'] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) > button svg > * { visibility: hidden; }
 body [data-vsc-tree] [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(1) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M6.5%208a.5.5%200%200%200%200%201h3a.5.5%200%200%200%200-1zM1%203.5A1.5%201.5%200%200%201%202.5%202h11A1.5%201.5%200%200%201%2015%203.5v1a1.5%201.5%200%200%201-1%201.415V11.5a2.5%202.5%200%200%201-2.5%202.5h-7A2.5%202.5%200%200%201%202%2011.5V5.915A1.5%201.5%200%200%201%201%204.5zM2.5%203a.5.5%200%200%200-.5.5v1a.5.5%200%200%200%20.5.5h11a.5.5%200%200%200%20.5-.5v-1a.5.5%200%200%200-.5-.5zM3%206v5.5A1.5%201.5%200%200%200%204.5%2013h7a1.5%201.5%200%200%200%201.5-1.5V6z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-vsc-tree] [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(1) svg > * { visibility: hidden; }
-body [data-vsc-tree] :is([class^="_archived_"], [class*=" _archived_"], [class$="_archived"], [class*="_archived "]) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(1) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M4.5%2013c-.827%200-1.5-.673-1.5-1.5V6h10v.213q.524.149%201%20.394V6l-.004-.085A1.5%201.5%200%200%200%2015%204.5v-1c0-.827-.673-1.5-1.5-1.5h-11C1.673%202%201%202.673%201%203.5v1c0%20.653.42%201.21%201.004%201.415L2%206v5.5C2%2012.878%203.122%2014%204.5%2014h2.107a5.4%205.4%200%200%201-.394-1zm-2-8a.5.5%200%200%201-.5-.5v-1a.5.5%200%200%201%20.5-.5h11a.5.5%200%200%201%20.5.5v1a.5.5%200%200%201-.5.5zm9%202a4.5%204.5%200%201%200%200%209a4.5%204.5%200%200%200%200-9m2.336%205.871l-1.982%201.982a.5.5%200%200%201-.708%200a.5.5%200%200%201%200-.707l1.982-1.982a1.27%201.27%200%200%200-1.793-1.793l-.629.629h.793a.5.5%200%200%201%200%201h-2a.5.5%200%200%201-.5-.5v-2a.5.5%200%200%201%201%200v.793l.629-.629a2.27%202.27%200%200%201%203.872%201.604c0%20.606-.236%201.174-.664%201.603%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] :is([class^="_archived_"], [class*=" _archived_"], [class$="_archived"], [class*="_archived "]) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(1) svg > * { visibility: hidden; }
+body [data-vsc-tree] :is([class*="_archived_"], [class$="_archived"], [class*="_archived "]) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(1) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M4.5%2013c-.827%200-1.5-.673-1.5-1.5V6h10v.213q.524.149%201%20.394V6l-.004-.085A1.5%201.5%200%200%200%2015%204.5v-1c0-.827-.673-1.5-1.5-1.5h-11C1.673%202%201%202.673%201%203.5v1c0%20.653.42%201.21%201.004%201.415L2%206v5.5C2%2012.878%203.122%2014%204.5%2014h2.107a5.4%205.4%200%200%201-.394-1zm-2-8a.5.5%200%200%201-.5-.5v-1a.5.5%200%200%201%20.5-.5h11a.5.5%200%200%201%20.5.5v1a.5.5%200%200%201-.5.5zm9%202a4.5%204.5%200%201%200%200%209a4.5%204.5%200%200%200%200-9m2.336%205.871l-1.982%201.982a.5.5%200%200%201-.708%200a.5.5%200%200%201%200-.707l1.982-1.982a1.27%201.27%200%200%200-1.793-1.793l-.629.629h.793a.5.5%200%200%201%200%201h-2a.5.5%200%200%201-.5-.5v-2a.5.5%200%200%201%201%200v.793l.629-.629a2.27%202.27%200%200%201%203.872%201.604c0%20.606-.236%201.174-.664%201.603%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] :is([class*="_archived_"], [class$="_archived"], [class*="_archived "]) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(1) svg > * { visibility: hidden; }
 body [data-vsc-tree] [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(2) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M13.5%203q-.297%200-.577.114L8.481%204.967l-2.822-.941a.5.5%200%200%200-.658.474V7H1.257L.5%207.5l.757.5H5v2.5a.5.5%200%200%200%20.658.474l2.822-.941l4.445%201.854q.277.113.574.113c.827%200%201.5-.673%201.5-1.5v-6c0-.827-.673-1.5-1.5-1.5zm.5%207.5c0%20.343-.385.59-.692.462L8.693%209.038a.5.5%200%200%200-.35-.013l-2.342.781V5.193l2.342.781a.5.5%200%200%200%20.351-.013l4.612-1.923a.51.51%200%200%201%20.695.461z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-vsc-tree] [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(2) svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key]:has(:is([class^="_pinIndicator_"], [class*=" _pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "])) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(2) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M10.059%202.445a1.5%201.5%200%200%200-2.386.353l-2.02%203.79l-2.811.938a.5.5%200%200%200-.196.828L4.793%2010.5l-2.647%202.646L2%2014l.854-.146L5.5%2011.207l2.146%202.147a.5.5%200%200%200%20.828-.196l.937-2.811l3.779-2.023a1.5%201.5%200%200%200%20.354-2.38zm-1.504.824a.5.5%200%200%201%20.796-.118l3.485%203.498a.5.5%200%200%201-.118.794L8.764%209.559a.5.5%200%200%200-.238.283l-.744%202.232L3.926%208.22l2.232-.745a.5.5%200%200%200%20.283-.239z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] [data-row-key]:has(:is([class^="_pinIndicator_"], [class*=" _pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "])) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(2) svg > * { visibility: hidden; }
-body [data-vsc-tree] :is([class^="_pinIndicator_"], [class*=" _pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M10.059%202.445a1.5%201.5%200%200%200-2.386.353l-2.02%203.79l-2.811.938a.5.5%200%200%200-.196.828L4.793%2010.5l-2.647%202.646L2%2014l.854-.146L5.5%2011.207l2.146%202.147a.5.5%200%200%200%20.828-.196l.937-2.811l3.779-2.023a1.5%201.5%200%200%200%20.354-2.38zm-1.504.824a.5.5%200%200%201%20.796-.118l3.485%203.498a.5.5%200%200%201-.118.794L8.764%209.559a.5.5%200%200%200-.238.283l-.744%202.232L3.926%208.22l2.232-.745a.5.5%200%200%200%20.283-.239z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
-body [data-vsc-tree] :is([class^="_pinIndicator_"], [class*=" _pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "]) svg > * { visibility: hidden; }
-body [data-vsc-tree] [data-row-key^='session:'] > :is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "]):empty::after { content: ''; display: block; width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M1%204.5A2.5%202.5%200%200%201%203.5%202h9A2.5%202.5%200%200%201%2015%204.5v5a2.5%202.5%200%200%201-2.5%202.5H8.688l-3.063%202.68A.98.98%200%200%201%204%2013.942V12h-.5A2.5%202.5%200%200%201%201%209.5zM3.5%203A1.5%201.5%200%200%200%202%204.5v5A1.5%201.5%200%200%200%203.5%2011H5v2.898L8.312%2011H12.5A1.5%201.5%200%200%200%2014%209.5v-5A1.5%201.5%200%200%200%2012.5%203z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key]:has(:is([class*="_pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "])) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(2) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M10.059%202.445a1.5%201.5%200%200%200-2.386.353l-2.02%203.79l-2.811.938a.5.5%200%200%200-.196.828L4.793%2010.5l-2.647%202.646L2%2014l.854-.146L5.5%2011.207l2.146%202.147a.5.5%200%200%200%20.828-.196l.937-2.811l3.779-2.023a1.5%201.5%200%200%200%20.354-2.38zm-1.504.824a.5.5%200%200%201%20.796-.118l3.485%203.498a.5.5%200%200%201-.118.794L8.764%209.559a.5.5%200%200%200-.238.283l-.744%202.232L3.926%208.22l2.232-.745a.5.5%200%200%200%20.283-.239z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key]:has(:is([class*="_pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "])) [data-slot='sidebar.workspaces.session.row.action'] > button:nth-of-type(2) svg > * { visibility: hidden; }
+body [data-vsc-tree] :is([class*="_pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "]) svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M10.059%202.445a1.5%201.5%200%200%200-2.386.353l-2.02%203.79l-2.811.938a.5.5%200%200%200-.196.828L4.793%2010.5l-2.647%202.646L2%2014l.854-.146L5.5%2011.207l2.146%202.147a.5.5%200%200%200%20.828-.196l.937-2.811l3.779-2.023a1.5%201.5%200%200%200%20.354-2.38zm-1.504.824a.5.5%200%200%201%20.796-.118l3.485%203.498a.5.5%200%200%201-.118.794L8.764%209.559a.5.5%200%200%200-.238.283l-.744%202.232L3.926%208.22l2.232-.745a.5.5%200%200%200%20.283-.239z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] :is([class*="_pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "]) svg > * { visibility: hidden; }
+body [data-vsc-tree] [data-row-key^='session:'] > :is([class*="_slot_"], [class$="_slot"], [class*="_slot "]):empty::after { content: ''; display: block; width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M1%204.5A2.5%202.5%200%200%201%203.5%202h9A2.5%202.5%200%200%201%2015%204.5v5a2.5%202.5%200%200%201-2.5%202.5H8.688l-3.063%202.68A.98.98%200%200%201%204%2013.942V12h-.5A2.5%202.5%200%200%201%201%209.5zM3.5%203A1.5%201.5%200%200%200%202%204.5v5A1.5%201.5%200%200%200%203.5%2011H5v2.898L8.312%2011H12.5A1.5%201.5%200%200%200%2014%209.5v-5A1.5%201.5%200%200%200%2012.5%203z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 
-body [data-vsc-tree] [data-row-key^='session:'] > :is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "]):has(> [data-slot]:empty)::after { content: ''; display: block; width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M1%204.5A2.5%202.5%200%200%201%203.5%202h9A2.5%202.5%200%200%201%2015%204.5v5a2.5%202.5%200%200%201-2.5%202.5H8.688l-3.063%202.68A.98.98%200%200%201%204%2013.942V12h-.5A2.5%202.5%200%200%201%201%209.5zM3.5%203A1.5%201.5%200%200%200%202%204.5v5A1.5%201.5%200%200%200%203.5%2011H5v2.898L8.312%2011H12.5A1.5%201.5%200%200%200%2014%209.5v-5A1.5%201.5%200%200%200%2012.5%203z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+body [data-vsc-tree] [data-row-key^='session:'] > :is([class*="_slot_"], [class$="_slot"], [class*="_slot "]):has(> [data-slot]:empty)::after { content: ''; display: block; width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M1%204.5A2.5%202.5%200%200%201%203.5%202h9A2.5%202.5%200%200%201%2015%204.5v5a2.5%202.5%200%200%201-2.5%202.5H8.688l-3.063%202.68A.98.98%200%200%201%204%2013.942V12h-.5A2.5%202.5%200%200%201%201%209.5zM3.5%203A1.5%201.5%200%200%200%202%204.5v5A1.5%201.5%200%200%200%203.5%2011H5v2.898L8.312%2011H12.5A1.5%201.5%200%200%200%2014%209.5v-5A1.5%201.5%200%200%200%2012.5%203z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 `;
 
 // src/tree.css
@@ -1839,37 +1839,37 @@ var tree_default = `/*
  * Adaptation: Native DSH hierarchy and two-line search results with Classic row geometry, persistent focus, and independent selection states.
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
  */
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])):has(> :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "])) {
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])):has(> :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "])) {
   --dsh-session-list-edge-inset: 0px;
   padding-right: 0;
 }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) {
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) {
   height: 22px; margin: 0; padding: 0 8px 0 12px; gap: 2px;
   border-radius: 0; border: 0; box-shadow: 0 -1px var(--dsw-alias-border-l3);
 }
-body [data-slot='sidebar'] :is([class^="_sectionLabel_"], [class*=" _sectionLabel_"], [class$="_sectionLabel"], [class*="_sectionLabel "]) {
+body [data-slot='sidebar'] :is([class*="_sectionLabel_"], [class$="_sectionLabel"], [class*="_sectionLabel "]) {
   font-size: 11px; line-height: 22px; font-weight: 700; text-transform: uppercase;
   color: var(--dsw-alias-label-primary); max-width: 60%;
 }
-body [data-slot='sidebar'] :is([class^="_sectionLabelHidden_"], [class*=" _sectionLabelHidden_"], [class$="_sectionLabelHidden"], [class*="_sectionLabelHidden "]) { max-width: 0; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_headerActions_"], [class*=" _headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) { gap: 4px; }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is(:is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]), :is([class^="_searchButton_"], [class*=" _searchButton_"], [class$="_searchButton"], [class*="_searchButton "]), :is([class^="_clearButton_"], [class*=" _clearButton_"], [class$="_clearButton"], [class*="_clearButton "])) {
+body [data-slot='sidebar'] :is([class*="_sectionLabelHidden_"], [class$="_sectionLabelHidden"], [class*="_sectionLabelHidden "]) { max-width: 0; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_headerActions_"], [class$="_headerActions"], [class*="_headerActions "]) { gap: 4px; }
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is(:is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]), :is([class*="_searchButton_"], [class$="_searchButton"], [class*="_searchButton "]), :is([class*="_clearButton_"], [class$="_clearButton"], [class*="_clearButton "])) {
   box-sizing: border-box; width: 20px; height: 20px; padding: 2px; border: 0; border-radius: 6px;
 }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_search_"], [class*=" _search_"], [class$="_search"], [class*="_search "]) { height: 22px; border-radius: 4px; }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_searchExpanded_"], [class*=" _searchExpanded_"], [class$="_searchExpanded"], [class*="_searchExpanded "]) {
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_search_"], [class$="_search"], [class*="_search "]) { height: 22px; border-radius: 4px; }
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_searchExpanded_"], [class$="_searchExpanded"], [class*="_searchExpanded "]) {
   width: 100%; margin-inline: 0; border-width: 1px;
 }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_searchExpanded_"], [class*=" _searchExpanded_"], [class$="_searchExpanded"], [class*="_searchExpanded "]) :is(:is([class^="_searchButton_"], [class*=" _searchButton_"], [class$="_searchButton"], [class*="_searchButton "]), :is([class^="_clearButton_"], [class*=" _clearButton_"], [class$="_clearButton"], [class*="_clearButton "])) {
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_searchExpanded_"], [class$="_searchExpanded"], [class*="_searchExpanded "]) :is(:is([class*="_searchButton_"], [class$="_searchButton"], [class*="_searchButton "]), :is([class*="_clearButton_"], [class$="_clearButton"], [class*="_clearButton "])) {
   height: 20px;
 }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_searchSlot_"], [class*=" _searchSlot_"], [class$="_searchSlot"], [class*="_searchSlot "]) { max-width: 22px; }
-body [data-slot='sidebar'] :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]):not(:is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "])) > :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class^="_searchSlotExpanded_"], [class*=" _searchSlotExpanded_"], [class$="_searchSlotExpanded"], [class*="_searchSlotExpanded "]) { max-width: 100%; }
-body [data-slot='sidebar'] :is([class^="_listArea_"], [class*=" _listArea_"], [class$="_listArea"], [class*="_listArea "]) { margin: 0; padding: 0; }
-body [data-slot='sidebar'] :is([class^="_treeBody_"], [class*=" _treeBody_"], [class$="_treeBody"], [class*="_treeBody "]) > [role='tree'] {
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_searchSlot_"], [class$="_searchSlot"], [class*="_searchSlot "]) { max-width: 22px; }
+body [data-slot='sidebar'] :is([class*="_root_"], [class$="_root"], [class*="_root "]):not(:is([class*="_rail_"], [class$="_rail"], [class*="_rail "])) > :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) :is([class*="_searchSlotExpanded_"], [class$="_searchSlotExpanded"], [class*="_searchSlotExpanded "]) { max-width: 100%; }
+body [data-slot='sidebar'] :is([class*="_listArea_"], [class$="_listArea"], [class*="_listArea "]) { margin: 0; padding: 0; }
+body [data-slot='sidebar'] :is([class*="_treeBody_"], [class$="_treeBody"], [class*="_treeBody "]) > [role='tree'] {
   margin: 0; padding: 0 0 8px; scrollbar-gutter: auto;
 }
-body [data-slot='sidebar'] :is([class^="_treeBody_"], [class*=" _treeBody_"], [class$="_treeBody"], [class*="_treeBody "]) > :is([class^="_fade_"], [class*=" _fade_"], [class$="_fade"], [class*="_fade "]) { display: none; }
+body [data-slot='sidebar'] :is([class*="_treeBody_"], [class$="_treeBody"], [class*="_treeBody "]) > :is([class*="_fade_"], [class$="_fade"], [class*="_fade "]) { display: none; }
 
 /* Persistent disclosure and icon lanes. The native 12px depth step projects to 8px.
    Neutralize native .selected fills here: that class identifies the open session,
@@ -1882,30 +1882,30 @@ body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem'] {
 body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] {
   gap: 0; padding-left: calc(8px + var(--dsh-workspace-indent, 0px) / 1.5);
 }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class^="_chevron_"], [class*=" _chevron_"], [class$="_chevron"], [class*="_chevron "]) {
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class*="_chevron_"], [class$="_chevron"], [class*="_chevron "]) {
   display: inline-flex; box-sizing: content-box; order: 0; width: 16px; height: 22px; padding-right: 6px;
   color: var(--dsw-alias-label-primary); transform: translateX(3px);
 }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) {
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) {
   display: inline-flex; order: 1; width: 16px; height: 22px; margin-right: 6px;
   color: inherit;
 }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class^="_projectText_"], [class*=" _projectText_"], [class$="_projectText"], [class*="_projectText "]) { order: 2; }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) { order: 3; }
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class*="_projectText_"], [class$="_projectText"], [class*="_projectText "]) { order: 2; }
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='workspace:'] > :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) { order: 3; }
 body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='session:'] {
   padding-left: calc(8px + var(--dsh-workspace-indent, 0px) / 1.5);
 }
 body [data-slot='sidebar'] [data-vsc-tree-group] [data-row-key^='session:'] {
   padding-left: calc(16px + var(--dsh-workspace-indent, 0px) / 1.5);
 }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='session:'] > :is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "]) {
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='session:'] > :is([class*="_slot_"], [class$="_slot"], [class*="_slot "]) {
   width: 16px; height: 22px; margin-left: 22px; margin-right: 6px;
 }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :is([class^="_title_"], [class*=" _title_"], [class$="_title"], [class*="_title "]) {
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :is([class*="_title_"], [class$="_title"], [class*="_title "]) {
   margin: 0; font-size: 13px; line-height: 22px; font-weight: 400; color: inherit;
   overflow: clip; text-overflow: ellipsis; mask-image: none;
 }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :is([class^="_time_"], [class*=" _time_"], [class$="_time"], [class*="_time "]) {
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :is([class*="_time_"], [class$="_time"], [class*="_time "]) {
   font-size: .9em; padding-left: 6px; opacity: .7; color: inherit; font-variant-numeric: tabular-nums;
 }
 body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='overflow:'] {
@@ -1914,33 +1914,33 @@ body [data-slot='sidebar'] [data-vsc-tree] [data-row-key^='overflow:'] {
 }
 body [data-slot='sidebar'] [data-vsc-tree-group],
 body [data-slot='sidebar'] [data-vsc-tree-group] > * + * { margin-top: 0; }
-body [data-slot='sidebar'] [data-vsc-tree]:is([class^="_flatList_"], [class*=" _flatList_"], [class$="_flatList"], [class*="_flatList "]) > * + * { margin-top: 0; }
+body [data-slot='sidebar'] [data-vsc-tree]:is([class*="_flatList_"], [class$="_flatList"], [class*="_flatList "]) > * + * { margin-top: 0; }
 /* Search retains its workspace/snippet line; each line uses the tree's 22px rhythm. */
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_searchResultRow_"], [class*=" _searchResultRow_"], [class$="_searchResultRow"], [class*="_searchResultRow "]) {
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_searchResultRow_"], [class$="_searchResultRow"], [class*="_searchResultRow "]) {
   height: 44px; padding: 0 12px 0 8px;
 }
-body [data-slot='sidebar'] [data-vsc-tree]:is([class^="_searchTree_"], [class*=" _searchTree_"], [class$="_searchTree"], [class*="_searchTree "]) > [role='treeitem'] + [role='treeitem'] { margin-top: 0; }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_searchResultHeading_"], [class*=" _searchResultHeading_"], [class$="_searchResultHeading"], [class*="_searchResultHeading "]) { height: 22px; }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_searchResultTitle_"], [class*=" _searchResultTitle_"], [class$="_searchResultTitle"], [class*="_searchResultTitle "]) { font-size: 13px; line-height: 22px; margin-left: 6px; }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_searchResultMeta_"], [class*=" _searchResultMeta_"], [class$="_searchResultMeta"], [class*="_searchResultMeta "]) { margin-left: 22px; height: 22px; }
-body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class^="_searchResultWorkspace_"], [class*=" _searchResultWorkspace_"], [class$="_searchResultWorkspace"], [class*="_searchResultWorkspace "]), :is([class^="_searchResultSnippet_"], [class*=" _searchResultSnippet_"], [class$="_searchResultSnippet"], [class*="_searchResultSnippet "])) {
+body [data-slot='sidebar'] [data-vsc-tree]:is([class*="_searchTree_"], [class$="_searchTree"], [class*="_searchTree "]) > [role='treeitem'] + [role='treeitem'] { margin-top: 0; }
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_searchResultHeading_"], [class$="_searchResultHeading"], [class*="_searchResultHeading "]) { height: 22px; }
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_searchResultTitle_"], [class$="_searchResultTitle"], [class*="_searchResultTitle "]) { font-size: 13px; line-height: 22px; margin-left: 6px; }
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_searchResultMeta_"], [class$="_searchResultMeta"], [class*="_searchResultMeta "]) { margin-left: 22px; height: 22px; }
+body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class*="_searchResultWorkspace_"], [class$="_searchResultWorkspace"], [class*="_searchResultWorkspace "]), :is([class*="_searchResultSnippet_"], [class$="_searchResultSnippet"], [class*="_searchResultSnippet "])) {
   font-size: .9em; line-height: 22px; color: inherit; opacity: .7;
 }
 
 /* One continuous guide belongs to each parent, including every visible descendant. */
-body [data-slot='sidebar'] [data-vsc-tree-group]:not(:is([class^="_workspaceDropBefore_"], [class*=" _workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before {
+body [data-slot='sidebar'] [data-vsc-tree-group]:not(:is([class*="_workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before {
   content: ''; position: absolute; z-index: 1; pointer-events: none;
   left: calc(16px + var(--dsh-workspace-indent, 0px) / 1.5); top: 22px; bottom: 0;
   width: 1px; background: var(--vsc-tree-inactive-guide); opacity: 1;
 }
-body [data-slot='sidebar'] [data-vsc-tree-group='active']:not(:is([class^="_workspaceDropBefore_"], [class*=" _workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before { background: var(--vsc-tree-guide); opacity: 1; }
+body [data-slot='sidebar'] [data-vsc-tree-group='active']:not(:is([class*="_workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before { background: var(--vsc-tree-guide); opacity: 1; }
 
 /* A remembered focus row is distinct from selection and from DOM focus.
    Row actions/rename fields deliberately leave the list's active state. */
 body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:hover:not([aria-selected='true']):not([data-vsc-tree-focused='true']) {
   background: var(--vscode-list-hoverBackground); color: var(--vscode-list-hoverForeground);
 }
-body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is([class^="_menuOpen_"], [class*=" _menuOpen_"], [class$="_menuOpen"], [class*="_menuOpen "]):not([aria-selected='true']):not([data-vsc-tree-focused='true']) {
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is([class*="_menuOpen_"], [class$="_menuOpen"], [class*="_menuOpen "]):not([aria-selected='true']):not([data-vsc-tree-focused='true']) {
   background: var(--vscode-list-hoverBackground); color: var(--vscode-list-hoverForeground);
 }
 body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem'][aria-selected='true'] {
@@ -1960,31 +1960,31 @@ body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [role='t
 body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [data-vsc-tree-focused='true'][aria-selected='true'] {
   outline-color: var(--vscode-list-focusAndSelectionOutline, var(--vscode-contrastActiveBorder, var(--vscode-list-focusOutline)));
 }
-body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is([aria-selected='true'], [data-vsc-tree-focused='true']) :is(:is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "]), :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "])) { color: inherit; }
-body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [aria-selected='true'] :is(:is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "]), :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "])) {
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is([aria-selected='true'], [data-vsc-tree-focused='true']) :is(:is([class*="_slot_"], [class$="_slot"], [class*="_slot "]), :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "])) { color: inherit; }
+body [data-slot='sidebar'] [data-vsc-tree][data-vsc-tree-active='true'] [aria-selected='true'] :is(:is([class*="_slot_"], [class$="_slot"], [class*="_slot "]), :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "])) {
   color: var(--vscode-list-activeSelectionIconForeground, inherit);
 }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) { display: none; gap: 0; height: 22px; margin-left: 4px; }
-body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :is([class^="_menuOpen_"], [class*=" _menuOpen_"], [class$="_menuOpen"], [class*="_menuOpen "])) :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) { display: inline-flex; }
-body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :is([class^="_menuOpen_"], [class*=" _menuOpen_"], [class$="_menuOpen"], [class*="_menuOpen "])) > :is(:is([class^="_time_"], [class*=" _time_"], [class$="_time"], [class*="_time "]), :is([class^="_pinIndicator_"], [class*=" _pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "])) { display: none; }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) {
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) { display: none; gap: 0; height: 22px; margin-left: 4px; }
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :is([class*="_menuOpen_"], [class$="_menuOpen"], [class*="_menuOpen "])) :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) { display: inline-flex; }
+body [data-slot='sidebar'] [data-vsc-tree] [role='treeitem']:is(:hover, :focus-within, [data-vsc-tree-focused='true'], [aria-selected='true'], :is([class*="_menuOpen_"], [class$="_menuOpen"], [class*="_menuOpen "])) > :is(:is([class*="_time_"], [class$="_time"], [class*="_time "]), :is([class*="_pinIndicator_"], [class$="_pinIndicator"], [class*="_pinIndicator "]), :is([class*="_rowResting_"], [class$="_rowResting"], [class*="_rowResting "])) { display: none; }
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) {
   box-sizing: border-box; width: 20px; height: 20px; padding: 2px;
   border-radius: var(--vscode-cornerRadius-medium, 6px);
 }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) svg { width: 16px; height: 16px; }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):hover { background: var(--vscode-toolbar-hoverBackground); }
-body [data-slot='sidebar'] [data-vsc-tree] :is([class^="_rowActions_"], [class*=" _rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class^="_iconButton_"], [class*=" _iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):focus-visible {
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]) svg { width: 16px; height: 16px; }
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):hover { background: var(--vscode-toolbar-hoverBackground); }
+body [data-slot='sidebar'] [data-vsc-tree] :is([class*="_rowActions_"], [class$="_rowActions"], [class*="_rowActions "]) :is([class*="_iconButton_"], [class$="_iconButton"], [class*="_iconButton "]):focus-visible {
   outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px;
 }
 
 /* Keep native insertion markers separate from the ancestor's guide. */
-body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class^="_dropBefore_"], [class*=" _dropBefore_"], [class$="_dropBefore"], [class*="_dropBefore "]), :is([class^="_workspaceDropBefore_"], [class*=" _workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before,
-body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class^="_dropAfter_"], [class*=" _dropAfter_"], [class$="_dropAfter"], [class*="_dropAfter "]), :is([class^="_workspaceDropAfter_"], [class*=" _workspaceDropAfter_"], [class$="_workspaceDropAfter"], [class*="_workspaceDropAfter "]))::after {
+body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class*="_dropBefore_"], [class$="_dropBefore"], [class*="_dropBefore "]), :is([class*="_workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before,
+body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class*="_dropAfter_"], [class$="_dropAfter"], [class*="_dropAfter "]), :is([class*="_workspaceDropAfter_"], [class$="_workspaceDropAfter"], [class*="_workspaceDropAfter "]))::after {
   height: 1px; width: auto; left: 0; right: 0; opacity: 1;
   background: var(--dsw-focus-ring-color);
 }
-body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class^="_dropBefore_"], [class*=" _dropBefore_"], [class$="_dropBefore"], [class*="_dropBefore "]), :is([class^="_workspaceDropBefore_"], [class*=" _workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before { top: 0; bottom: auto; }
-body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class^="_dropAfter_"], [class*=" _dropAfter_"], [class$="_dropAfter"], [class*="_dropAfter "]), :is([class^="_workspaceDropAfter_"], [class*=" _workspaceDropAfter_"], [class$="_workspaceDropAfter"], [class*="_workspaceDropAfter "]))::after { bottom: 0; top: auto; }
+body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class*="_dropBefore_"], [class$="_dropBefore"], [class*="_dropBefore "]), :is([class*="_workspaceDropBefore_"], [class$="_workspaceDropBefore"], [class*="_workspaceDropBefore "]))::before { top: 0; bottom: auto; }
+body [data-slot='sidebar'] [data-vsc-tree] :is(:is([class*="_dropAfter_"], [class$="_dropAfter"], [class*="_dropAfter "]), :is([class*="_workspaceDropAfter_"], [class$="_workspaceDropAfter"], [class*="_workspaceDropAfter "]))::after { bottom: 0; top: auto; }
 `;
 
 // src/activity.css
@@ -2041,23 +2041,23 @@ body .vsc-action:active { background: var(--vscode-toolbar-activeBackground); }
 body .vsc-action:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
 /* Existing settings/footer controls retain their dialogs, events and focus return. */
 body .vsc-global-actions [data-slot='settings.trigger'] > button,
-body .vsc-global-actions :is([class^="_triggerRow_"], [class*=" _triggerRow_"], [class$="_triggerRow"], [class*="_triggerRow "]),
-body .vsc-global-actions :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *) {
+body .vsc-global-actions :is([class*="_triggerRow_"], [class$="_triggerRow"], [class*="_triggerRow "]),
+body .vsc-global-actions :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *) {
   box-sizing: border-box; width: 48px; height: 48px; margin: 0; padding: 0;
   display: flex; align-items: center; justify-content: center; border-radius: 0;
 }
 body .vsc-global-actions [data-slot='settings.trigger'] svg { width: 24px; height: 24px; }
-body .vsc-global-actions [data-slot='settings.trigger'] :is([class^="_label_"], [class*=" _label_"], [class$="_label"], [class*="_label "]) { display: none; }
-body .vsc-global-actions :is([class^="_rail_"], [class*=" _rail_"], [class$="_rail"], [class*="_rail "]) { margin-left: 0; transform: none; }
-body .vsc-global-actions :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *) { position: relative; background: transparent; color: var(--vscode-activityBar-inactiveForeground); }
-body .vsc-global-actions :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *):is(:hover, :focus-visible, [aria-expanded='true']) { background: transparent; color: var(--vscode-activityBar-foreground); }
-body .vsc-global-actions :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *):focus-visible { outline: none; }
-body .vsc-global-actions :is([class^="_trigger_"], [class*=" _trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *):focus-visible::before { content: ''; position: absolute; inset: 0 auto 0 0; border-left: 2px solid var(--vscode-contrastActiveBorder, var(--vscode-focusBorder)); }
+body .vsc-global-actions [data-slot='settings.trigger'] :is([class*="_label_"], [class$="_label"], [class*="_label "]) { display: none; }
+body .vsc-global-actions :is([class*="_rail_"], [class$="_rail"], [class*="_rail "]) { margin-left: 0; transform: none; }
+body .vsc-global-actions :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *) { position: relative; background: transparent; color: var(--vscode-activityBar-inactiveForeground); }
+body .vsc-global-actions :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *):is(:hover, :focus-visible, [aria-expanded='true']) { background: transparent; color: var(--vscode-activityBar-foreground); }
+body .vsc-global-actions :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *):focus-visible { outline: none; }
+body .vsc-global-actions :is([class*="_trigger_"], [class$="_trigger"], [class*="_trigger "]):not([data-shortcut-modal] *):focus-visible::before { content: ''; position: absolute; inset: 0 auto 0 0; border-left: 2px solid var(--vscode-contrastActiveBorder, var(--vscode-focusBorder)); }
 .vsc-leading { display: flex; height: 35px; align-items: center; gap: 4px; }
-body [data-slot='sidebar'] :is([class^="_sectionHeader_"], [class*=" _sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) { background: var(--vscode-sideBarSectionHeader-background); }
-body [data-slot='sidebar'] :is([class^="_sectionLabel_"], [class*=" _sectionLabel_"], [class$="_sectionLabel"], [class*="_sectionLabel "]) { padding-left: 8px; }
+body [data-slot='sidebar'] :is([class*="_sectionHeader_"], [class$="_sectionHeader"], [class*="_sectionHeader "]) { background: var(--vscode-sideBarSectionHeader-background); }
+body [data-slot='sidebar'] :is([class*="_sectionLabel_"], [class$="_sectionLabel"], [class*="_sectionLabel "]) { padding-left: 8px; }
 body [data-slot='sidebar'] [data-vsc-tree] { scrollbar-width: thin; scrollbar-color: var(--vscode-scrollbarSlider-background) transparent; }
-body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :is([class^="_title_"], [class*=" _title_"], [class$="_title"], [class*="_title "]) { white-space: nowrap; text-overflow: ellipsis; }
+body [data-slot='sidebar'] [data-vsc-tree] [data-row-key] :is([class*="_title_"], [class$="_title"], [class*="_title "]) { white-space: nowrap; text-overflow: ellipsis; }
 /* Desktop titlebar traffic lights keep their native drag clearance. */
 html[data-platform='darwin'] .vsc-sidebar { padding-top: 36px; }
 @media (prefers-reduced-motion: reduce) { .vsc-sidebar * { scroll-behavior: auto; } }
@@ -2071,21 +2071,21 @@ html[data-platform='darwin'] .vsc-sidebar { padding-top: 36px; }
 .vsc-side-panel > [data-slot='main'] { height: 100%; min-height: 0; min-width: 0; }
 .vsc-side-panel { --dsh-frame-top-clearance: 0px; }
 body .vsc-side-panel [data-plugin-panel] { padding: 0 8px 12px; gap: 12px; background: var(--vscode-sideBar-background); }
-body .vsc-side-panel :is(:is([class^="_pageHead_"], [class*=" _pageHead_"], [class$="_pageHead"], [class*="_pageHead "]), :is([class^="_pageHeading_"], [class*=" _pageHeading_"], [class$="_pageHeading"], [class*="_pageHeading "])) { flex-direction: column; align-items: stretch; gap: 8px; margin: 0 0 12px; padding: 0; }
-body .vsc-side-panel :is(:is([class^="_pageTitle_"], [class*=" _pageTitle_"], [class$="_pageTitle"], [class*="_pageTitle "]), :is([class^="_pageHeading_"], [class*=" _pageHeading_"], [class$="_pageHeading"], [class*="_pageHeading "]) h1) { display: none; }
-body .vsc-side-panel :is([class^="_pageIntro_"], [class*=" _pageIntro_"], [class$="_pageIntro"], [class*="_pageIntro "]) { font-size: 12px; }
-body .vsc-side-panel :is([class^="_toolbar_"], [class*=" _toolbar_"], [class$="_toolbar"], [class*="_toolbar "]) { justify-content: flex-start; gap: 8px; }
-body .vsc-side-panel :is([class^="_cardHead_"], [class*=" _cardHead_"], [class$="_cardHead"], [class*="_cardHead "]) { flex-wrap: wrap; gap: 8px; padding: 8px 0; }
-body .vsc-side-panel :is([class^="_cardIcon_"], [class*=" _cardIcon_"], [class$="_cardIcon"], [class*="_cardIcon "]) { width: 32px; height: 32px; }
-body .vsc-side-panel :is(:is([class^="_cardDescription_"], [class*=" _cardDescription_"], [class$="_cardDescription"], [class*="_cardDescription "]), :is([class^="_cardMeta_"], [class*=" _cardMeta_"], [class$="_cardMeta"], [class*="_cardMeta "]), :is([class^="_cardPackage_"], [class*=" _cardPackage_"], [class$="_cardPackage"], [class*="_cardPackage "])) { overflow-wrap: anywhere; }
-body .vsc-side-panel :is([class^="_pageContent_"], [class*=" _pageContent_"], [class$="_pageContent"], [class*="_pageContent "]) { padding: 0 8px 12px; }
-body .vsc-side-panel :is([class^="_page_"], [class*=" _page_"], [class$="_page"], [class*="_page "]) { font-size: 13px; background: var(--vscode-sideBar-background); }
-body .vsc-side-panel :is([class^="_creationActions_"], [class*=" _creationActions_"], [class$="_creationActions"], [class*="_creationActions "]) { gap: 8px; }
-body .vsc-side-panel :is([class^="_filterTabs_"], [class*=" _filterTabs_"], [class$="_filterTabs"], [class*="_filterTabs "]) { gap: 2px; }
-body .vsc-side-panel :is([class^="_filterTab_"], [class*=" _filterTab_"], [class$="_filterTab"], [class*="_filterTab "]) { height: 22px; padding: 0 6px; border-radius: 0; font-size: 12px; }
-body .vsc-side-panel :is([class^="_searchField_"], [class*=" _searchField_"], [class$="_searchField"], [class*="_searchField "]) { height: 26px; margin-bottom: 8px; padding: 0 6px; border-radius: 4px; }
-body .vsc-side-panel :is([class^="_newButton_"], [class*=" _newButton_"], [class$="_newButton"], [class*="_newButton "]) { height: 26px; border-radius: 4px; font-size: 12px; }
-body .vsc-side-panel :is([class^="_detailPane_"], [class*=" _detailPane_"], [class$="_detailPane"], [class*="_detailPane "]) { max-width: 100%; min-width: 0; }
+body .vsc-side-panel :is(:is([class*="_pageHead_"], [class$="_pageHead"], [class*="_pageHead "]), :is([class*="_pageHeading_"], [class$="_pageHeading"], [class*="_pageHeading "])) { flex-direction: column; align-items: stretch; gap: 8px; margin: 0 0 12px; padding: 0; }
+body .vsc-side-panel :is(:is([class*="_pageTitle_"], [class$="_pageTitle"], [class*="_pageTitle "]), :is([class*="_pageHeading_"], [class$="_pageHeading"], [class*="_pageHeading "]) h1) { display: none; }
+body .vsc-side-panel :is([class*="_pageIntro_"], [class$="_pageIntro"], [class*="_pageIntro "]) { font-size: 12px; }
+body .vsc-side-panel :is([class*="_toolbar_"], [class$="_toolbar"], [class*="_toolbar "]) { justify-content: flex-start; gap: 8px; }
+body .vsc-side-panel :is([class*="_cardHead_"], [class$="_cardHead"], [class*="_cardHead "]) { flex-wrap: wrap; gap: 8px; padding: 8px 0; }
+body .vsc-side-panel :is([class*="_cardIcon_"], [class$="_cardIcon"], [class*="_cardIcon "]) { width: 32px; height: 32px; }
+body .vsc-side-panel :is(:is([class*="_cardDescription_"], [class$="_cardDescription"], [class*="_cardDescription "]), :is([class*="_cardMeta_"], [class$="_cardMeta"], [class*="_cardMeta "]), :is([class*="_cardPackage_"], [class$="_cardPackage"], [class*="_cardPackage "])) { overflow-wrap: anywhere; }
+body .vsc-side-panel :is([class*="_pageContent_"], [class$="_pageContent"], [class*="_pageContent "]) { padding: 0 8px 12px; }
+body .vsc-side-panel :is([class*="_page_"], [class$="_page"], [class*="_page "]) { font-size: 13px; background: var(--vscode-sideBar-background); }
+body .vsc-side-panel :is([class*="_creationActions_"], [class$="_creationActions"], [class*="_creationActions "]) { gap: 8px; }
+body .vsc-side-panel :is([class*="_filterTabs_"], [class$="_filterTabs"], [class*="_filterTabs "]) { gap: 2px; }
+body .vsc-side-panel :is([class*="_filterTab_"], [class$="_filterTab"], [class*="_filterTab "]) { height: 22px; padding: 0 6px; border-radius: 0; font-size: 12px; }
+body .vsc-side-panel :is([class*="_searchField_"], [class$="_searchField"], [class*="_searchField "]) { height: 26px; margin-bottom: 8px; padding: 0 6px; border-radius: 4px; }
+body .vsc-side-panel :is([class*="_newButton_"], [class$="_newButton"], [class*="_newButton "]) { height: 26px; border-radius: 4px; font-size: 12px; }
+body .vsc-side-panel :is([class*="_detailPane_"], [class$="_detailPane"], [class*="_detailPane "]) { max-width: 100%; min-width: 0; }
 `;
 
 // src/assistant.css
@@ -2097,7 +2097,7 @@ var assistant_default = `/*
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
  */
 /* Reply prose keeps DSH's reading sizes; inline code remains part of the line. */
-body [data-chat-flow-kind='assistant-step'] :is([class^="_markdown_"], [class*=" _markdown_"], [class$="_markdown"], [class*="_markdown "]) :not(pre) > code {
+body [data-chat-flow-kind='assistant-step'] :is([class*="_markdown_"], [class$="_markdown"], [class*="_markdown "]) :not(pre) > code {
   display: inline;
   border: 0;
   border-radius: 0;
@@ -2106,7 +2106,7 @@ body [data-chat-flow-kind='assistant-step'] :is([class^="_markdown_"], [class*="
   overflow-wrap: anywhere;
 }
 
-body [data-chat-flow-kind='assistant-step'] :is([class^="_markdown_"], [class*=" _markdown_"], [class$="_markdown"], [class*="_markdown "]) :is(a, :is([class^="_fileMention_"], [class*=" _fileMention_"], [class$="_fileMention"], [class*="_fileMention "])):focus-visible {
+body [data-chat-flow-kind='assistant-step'] :is([class*="_markdown_"], [class$="_markdown"], [class*="_markdown "]) :is(a, :is([class*="_fileMention_"], [class$="_fileMention"], [class*="_fileMention "])):focus-visible {
   outline: 1px solid var(--dsw-focus-ring-color);
   outline-offset: 2px;
   box-shadow: none;
@@ -2141,7 +2141,7 @@ body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] {
   font: 11px/18px var(--dsw-font-family);
 }
 
-body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] :is([class^="_actions_"], [class*=" _actions_"], [class$="_actions"], [class*="_actions "]) {
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] :is([class*="_actions_"], [class$="_actions"], [class*="_actions "]) {
   gap: 4px;
 }
 
@@ -2160,7 +2160,7 @@ body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] butt
   font: 11px/16px var(--dsw-font-family);
 }
 
-body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button:is([class^="_action_"], [class*=" _action_"], [class$="_action"], [class*="_action "]) {
+body :is(.md-code-block, [data-read], [data-diff]) [data-code-block-banner] button:is([class*="_action_"], [class$="_action"], [class*="_action "]) {
   width: 22px;
 }
 
@@ -2226,7 +2226,7 @@ body [data-turn-tail] [data-clock='end'] {
   margin-left: -3px;
 }
 
-body [data-turn-tail] [data-clock='end'] button:is([class^="_action_"], [class*=" _action_"], [class$="_action"], [class*="_action "]) {
+body [data-turn-tail] [data-clock='end'] button:is([class*="_action_"], [class$="_action"], [class*="_action "]) {
   box-sizing: border-box;
   width: 22px;
   height: 22px;
@@ -2235,7 +2235,7 @@ body [data-turn-tail] [data-clock='end'] button:is([class^="_action_"], [class*=
   color: var(--vscode-icon-foreground);
 }
 
-body [data-turn-tail] [data-clock='end'] button:is([class^="_action_"], [class*=" _action_"], [class$="_action"], [class*="_action "]) svg {
+body [data-turn-tail] [data-clock='end'] button:is([class*="_action_"], [class$="_action"], [class*="_action "]) svg {
   width: 16px;
   height: 16px;
 }
@@ -2245,21 +2245,21 @@ body [data-turn-tail] [data-clock='end'] button:focus-visible {
   outline-offset: -1px;
 }
 
-body [data-turn-tail] [data-clock='end'] button:is([class^="_action_"], [class*=" _action_"], [class$="_action"], [class*="_action "]):hover:not([data-unavailable]) {
+body [data-turn-tail] [data-clock='end'] button:is([class*="_action_"], [class$="_action"], [class*="_action "]):hover:not([data-unavailable]) {
   background: var(--vscode-toolbar-hoverBackground);
 }
 
-body [data-turn-tail] [data-clock='end'] button:is([class^="_action_"], [class*=" _action_"], [class$="_action"], [class*="_action "]):active:not([data-unavailable]) {
+body [data-turn-tail] [data-clock='end'] button:is([class*="_action_"], [class$="_action"], [class*="_action "]):active:not([data-unavailable]) {
   background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
 }
 
-body [data-turn-tail] :is([class^="_endInfo_"], [class*=" _endInfo_"], [class$="_endInfo"], [class*="_endInfo "]) {
+body [data-turn-tail] :is([class*="_endInfo_"], [class$="_endInfo"], [class*="_endInfo "]) {
   gap: 4px;
   margin-left: 8px;
   color: var(--dsw-alias-label-caption);
 }
 
-body [data-turn-tail] :is([class^="_timeEnd_"], [class*=" _timeEnd_"], [class$="_timeEnd"], [class*="_timeEnd "]) {
+body [data-turn-tail] :is([class*="_timeEnd_"], [class$="_timeEnd"], [class*="_timeEnd "]) {
   font: 11px/22px var(--dsw-font-family);
   font-variant-numeric: tabular-nums;
 }
@@ -2287,8 +2287,8 @@ body [data-step-process-body]:has(:is([data-terminal], [data-slot="tool.call.too
   mask-image: none;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([data-terminal], [data-read], [data-diff], [data-search], [data-web], :is([class^="_ioCard_"], [class*=" _ioCard_"], [class$="_ioCard"], [class*="_ioCard "])),
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_detailsBodyWrap_"], [class*=" _detailsBodyWrap_"], [class$="_detailsBodyWrap"], [class*="_detailsBodyWrap "]) > :is([class^="_root_"], [class*=" _root_"], [class$="_root"], [class*="_root "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([data-terminal], [data-read], [data-diff], [data-search], [data-web], :is([class*="_ioCard_"], [class$="_ioCard"], [class*="_ioCard "])),
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_detailsBodyWrap_"], [class$="_detailsBodyWrap"], [class*="_detailsBodyWrap "]) > :is([class*="_root_"], [class$="_root"], [class*="_root "]) {
   --dsl-search-radius: 0px;
   --dsl-web-radius: 0px;
   box-sizing: border-box;
@@ -2301,49 +2301,49 @@ body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_detailsBod
 
 /* Every expanded tool body starts under its title; terminal and IO cards
    should not be the only variants with this inset. */
-body :is([data-tool], [data-slot='tool.call.toolview']) :is(:is([class^="_codeBody_"], [class*=" _codeBody_"], [class$="_codeBody"], [class*="_codeBody "]), :is([class^="_imageBody_"], [class*=" _imageBody_"], [class$="_imageBody"], [class*="_imageBody "]), :is([class^="_searchRecovery_"], [class*=" _searchRecovery_"], [class$="_searchRecovery"], [class*="_searchRecovery "])) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is(:is([class*="_codeBody_"], [class$="_codeBody"], [class*="_codeBody "]), :is([class*="_imageBody_"], [class$="_imageBody"], [class*="_imageBody "]), :is([class*="_searchRecovery_"], [class$="_searchRecovery"], [class*="_searchRecovery "])) {
   margin-left: 22px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-read] > :is([class^="_body_"], [class*=" _body_"], [class$="_body"], [class*="_body "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-read] > :is([class*="_body_"], [class$="_body"], [class*="_body "]) {
   padding: 10px 12px 12px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] > :is([class^="_body_"], [class*=" _body_"], [class$="_body"], [class*="_body "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] > :is([class*="_body_"], [class$="_body"], [class*="_body "]) {
   padding-block: 10px 12px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] :is(:is([class^="_line_"], [class*=" _line_"], [class$="_line"], [class*="_line "]), :is([class^="_expand_"], [class*=" _expand_"], [class$="_expand"], [class*="_expand "])) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-diff] :is(:is([class*="_line_"], [class$="_line"], [class*="_line "]), :is([class*="_expand_"], [class$="_expand"], [class*="_expand "])) {
   padding-inline: 12px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_ioCard_"], [class*=" _ioCard_"], [class$="_ioCard"], [class*="_ioCard "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_ioCard_"], [class$="_ioCard"], [class*="_ioCard "]) {
   background: var(--dsw-alias-bg-base);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_ioSection_"], [class*=" _ioSection_"], [class$="_ioSection"], [class*="_ioSection "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_ioSection_"], [class$="_ioSection"], [class*="_ioSection "]) {
   padding: 8px 12px;
   column-gap: 12px;
 }
 
 /* Detail cards already own the frame; nested code should not add another. */
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_detailsBodyWrap_"], [class*=" _detailsBodyWrap_"], [class$="_detailsBodyWrap"], [class*="_detailsBodyWrap "]) .md-code-block {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_detailsBodyWrap_"], [class$="_detailsBodyWrap"], [class*="_detailsBodyWrap "]) .md-code-block {
   border: 0;
   box-shadow: none;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-search] > :is([class^="_header_"], [class*=" _header_"], [class$="_header"], [class*="_header "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-search] > :is([class*="_header_"], [class$="_header"], [class*="_header "]) {
   min-height: 28px;
   padding: 3px 12px;
   border-bottom: 1px solid var(--dsw-alias-border-l3);
   border-radius: 0;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_ioDivider_"], [class*=" _ioDivider_"], [class$="_ioDivider"], [class*="_ioDivider "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_ioDivider_"], [class$="_ioDivider"], [class*="_ioDivider "]) {
   height: 1px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_inspectButton_"], [class*=" _inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) {
   box-sizing: border-box;
   height: 22px;
   margin-left: 22px;
@@ -2354,27 +2354,27 @@ body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_inspectBut
 }
 
 /* Detail cards place Inspect at the top-right, outside the disclosure target. */
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_detailsBodyWrap_"], [class*=" _detailsBodyWrap_"], [class$="_detailsBodyWrap"], [class*="_detailsBodyWrap "]) > :is([class^="_inspectButton_"], [class*=" _inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_detailsBodyWrap_"], [class$="_detailsBodyWrap"], [class*="_detailsBodyWrap "]) > :is([class*="_inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) {
   top: 6px;
   right: 6px;
   margin: 0;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_inspectButton_"], [class*=" _inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) svg {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) svg {
   width: 16px;
   height: 16px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_inspectButton_"], [class*=" _inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]):hover {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]):hover {
   background: var(--vscode-toolbar-hoverBackground);
   color: var(--vscode-foreground);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) :is([class^="_inspectButton_"], [class*=" _inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]):active {
+body :is([data-tool], [data-slot='tool.call.toolview']) :is([class*="_inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]):active {
   background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']):focus-within :is([class^="_inspectButton_"], [class*=" _inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']):focus-within :is([class*="_inspectButton_"], [class$="_inspectButton"], [class*="_inspectButton "]) {
   opacity: 1;
 }
 
@@ -2388,7 +2388,7 @@ body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] {
   letter-spacing: 0;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] > :is([class^="_header_"], [class*=" _header_"], [class$="_header"], [class*="_header "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] > :is([class*="_header_"], [class$="_header"], [class*="_header "]) {
   padding-block: 6px;
   padding-right: 8px;
   gap: 8px;
@@ -2396,18 +2396,18 @@ body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] > :is([c
   background: var(--dsw-specific-sidebar-fill);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal][data-body] > :is([class^="_header_"], [class*=" _header_"], [class$="_header"], [class*="_header "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal][data-body] > :is([class*="_header_"], [class$="_header"], [class*="_header "]) {
   border-bottom: 1px solid var(--dsw-alias-border-l3);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_command_"], [class*=" _command_"], [class$="_command"], [class*="_command "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_command_"], [class$="_command"], [class*="_command "]) {
   flex: 1;
   overflow-x: hidden;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_cwd_"], [class*=" _cwd_"], [class$="_cwd"], [class*="_cwd "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_cwd_"], [class$="_cwd"], [class*="_cwd "]) {
   max-width: 30%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2415,36 +2415,36 @@ body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([cla
   color: var(--dsw-alias-label-caption);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_runState_"], [class*=" _runState_"], [class$="_runState"], [class*="_runState "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_runState_"], [class$="_runState"], [class*="_runState "]) {
   top: calc(var(--dsl-terminal-line-height) / 2);
   left: calc(-1 * var(--dsl-terminal-gutter) + 2px);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_copyButton_"], [class*=" _copyButton_"], [class$="_copyButton"], [class*="_copyButton "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_copyButton_"], [class$="_copyButton"], [class*="_copyButton "]) {
   padding-inline: 4px;
   border-radius: var(--vscode-cornerRadius-medium, 6px);
   background: var(--dsw-specific-sidebar-fill);
   font: 11px/var(--dsl-terminal-line-height) var(--dsw-font-family);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_copyButton_"], [class*=" _copyButton_"], [class$="_copyButton"], [class*="_copyButton "]):hover {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_copyButton_"], [class$="_copyButton"], [class*="_copyButton "]):hover {
   background: var(--vscode-toolbar-hoverBackground);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_copyButton_"], [class*=" _copyButton_"], [class$="_copyButton"], [class*="_copyButton "]):active {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_copyButton_"], [class$="_copyButton"], [class*="_copyButton "]):active {
   background: var(--vscode-toolbar-activeBackground, var(--vscode-toolbar-hoverBackground));
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_status_"], [class*=" _status_"], [class$="_status"], [class*="_status "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_status_"], [class$="_status"], [class*="_status "]) {
   border-radius: 2px;
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_output_"], [class*=" _output_"], [class$="_output"], [class*="_output "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_output_"], [class$="_output"], [class*="_output "]) {
   box-sizing: border-box;
   line-height: var(--dsl-terminal-line-height);
 }
 
-body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class^="_line_"], [class*=" _line_"], [class$="_line"], [class*="_line "]) {
+body :is([data-tool], [data-slot='tool.call.toolview']) [data-terminal] :is([class*="_line_"], [class$="_line"], [class*="_line "]) {
   white-space: pre;
   overflow-wrap: normal;
 }
@@ -2532,10 +2532,10 @@ body [data-dockkit-tab-close]:hover { background: var(--vscode-toolbar-hoverBack
 body [data-dockkit-tab-close] svg { width: 16px; height: 16px; }
 
 /* The existing insertion marker keeps its location without creating tab gaps. */
-body [data-dockkit-strip-tabs] > :is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "]) {
+body [data-dockkit-strip-tabs] > :is([class*="_slot_"], [class$="_slot"], [class*="_slot "]) {
   position: relative; width: 0; height: 35px;
 }
-body [data-dockkit-strip-tabs] > :is([class^="_slot_"], [class*=" _slot_"], [class$="_slot"], [class*="_slot "])::before { display: none; }
+body [data-dockkit-strip-tabs] > :is([class*="_slot_"], [class$="_slot"], [class*="_slot "])::before { display: none; }
 body [data-dockkit-strip-tabs] > [data-dockkit-caret]::before {
   display: block; position: absolute; left: -1px; width: 2px; height: 20px;
 }
@@ -2564,7 +2564,7 @@ body [data-dockkit-strip] button:focus-visible {
 body [data-dockkit-host='dock'] { border-radius: 0; box-shadow: none; }
 
 body [data-dockkit-strip-chrome] [data-sidebar-right-toggle] svg { transform: none; }
-body [data-dockkit-tab-title] :is([class^="_folder_"], [class*=" _folder_"], [class$="_folder"], [class*="_folder "]) { color: inherit; }
+body [data-dockkit-tab-title] :is([class*="_folder_"], [class$="_folder"], [class*="_folder "]) { color: inherit; }
 
 /* Session views and inspector detail pages use PanelTitle's compact text
    tabs. Stable item attributes keep this separate from segmented choices. */
@@ -2598,72 +2598,74 @@ body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-d
 /* The 8px strip inset + 10px item inset aligns with the session heading. */
 body [data-conversation-tabs] { margin: 0 -28px 0 -20px; }
 body [role='tablist']:has(> [id^='trajectory-detail-']) { border-bottom: 1px solid var(--vscode-panel-border); }
-body :is([class^="_detailTabsBar_"], [class*=" _detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) {
+body :is([class*="_detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) {
   box-sizing: border-box; height: 35px; min-height: 35px; padding: 0 8px; gap: 8px;
   border-bottom: 1px solid var(--vscode-panel-border);
 }
 body [role='tablist']:has(> [data-detail-tab]) { align-self: stretch; padding: 0; }
-body :is([class^="_detailTabsBar_"], [class*=" _detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) :is([class^="_detailActions_"], [class*=" _detailActions_"], [class$="_detailActions"], [class*="_detailActions "]) { margin-right: 0; }
-body :is([class^="_detailTabsBar_"], [class*=" _detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) :is([class^="_detailIconButton_"], [class*=" _detailIconButton_"], [class$="_detailIconButton"], [class*="_detailIconButton "]) {
+body :is([class*="_detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) :is([class*="_detailActions_"], [class$="_detailActions"], [class*="_detailActions "]) { margin-right: 0; }
+body :is([class*="_detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) :is([class*="_detailIconButton_"], [class$="_detailIconButton"], [class*="_detailIconButton "]) {
   box-sizing: border-box; width: 22px; height: 22px; padding: 3px; border-radius: 6px;
 }
-body :is([class^="_detailTabsBar_"], [class*=" _detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) :is([class^="_detailIconButton_"], [class*=" _detailIconButton_"], [class$="_detailIconButton"], [class*="_detailIconButton "]) svg { width: 16px; height: 16px; }
+body :is([class*="_detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) :is([class*="_detailIconButton_"], [class$="_detailIconButton"], [class*="_detailIconButton "]) svg { width: 16px; height: 16px; }
 
 /* Plugin settings changes configuration scope, using SettingsEditor's
    sentence-case 13px tabs with the bottom rule across the whole label box. */
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) {
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) {
   display: flex; align-items: stretch; min-width: 0; height: 35px;
   gap: 0; margin-top: 0; padding: 0; border-bottom: 1px solid var(--vscode-settings-headerBorder);
 }
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab'] {
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab'] {
   box-sizing: border-box; position: relative; height: 35px; padding: 7px 8px 6px;
   border: 0; border-radius: 0; font: 13px/20px var(--dsw-font-family); text-transform: none;
   color: var(--vscode-foreground); background: transparent; opacity: .9; box-shadow: none;
 }
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']::after {
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0;
   height: 1px; border-radius: 0; background: transparent;
 }
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:is(:hover, [aria-selected='true']) {
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:is(:hover, [aria-selected='true']) {
   opacity: 1; color: var(--vscode-settings-headerForeground, var(--vscode-foreground));
 }
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab'][aria-selected='true']::after {
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab'][aria-selected='true']::after {
   background: var(--vscode-settings-headerForeground, var(--vscode-foreground));
 }
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:focus-visible { outline: none; opacity: 1; }
-body [data-shortcut-modal='settings'] :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:focus-visible::after { background: var(--vscode-focusBorder); }
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:focus-visible { outline: none; opacity: 1; }
+body [data-shortcut-modal='settings'] :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "])[role='tablist']:has(> [role='tab'][data-active]) > [role='tab']:focus-visible::after { background: var(--vscode-focusBorder); }
 
 /* Both native segmented primitives retain their equal-width layout and
    keyboard selection. Paint the active segment in place so an old sliding
    indicator cannot retain the host's 4px inset or elevated pill geometry. */
-body :is(:is([class^="_control_"], [class*=" _control_"], [class$="_control"], [class*="_control "]), :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] {
+body :is(:is([class*="_control_"], [class$="_control"], [class*="_control "]), :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] {
   box-sizing: border-box; align-items: center; gap: 2px; padding: 2px;
   border: 1px solid var(--vscode-contrastBorder, var(--vscode-radio-inactiveBorder, transparent));
   border-radius: 6px; background: transparent;
 }
-body :is(:is([class^="_control_"], [class*=" _control_"], [class$="_control"], [class*="_control "]), :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "]) { display: none; }
-body :is(:is([class^="_control_"], [class*=" _control_"], [class$="_control"], [class*="_control "]), :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab'] {
+body :is(:is([class*="_control_"], [class$="_control"], [class*="_control "]), :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "]) { display: none; }
+body :is(:is([class*="_control_"], [class$="_control"], [class*="_control "]), :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab'] {
   box-sizing: border-box; display: inline-flex; justify-content: center; align-items: center;
   min-width: 0; height: 24px; padding: 0 6px; margin: 0;
   border: 1px solid transparent; border-radius: 4px;
   font: 11px/16px var(--dsw-font-family); color: var(--vscode-foreground);
   background: transparent; box-shadow: none; text-decoration: none; transition: none;
 }
-body :is(:is([class^="_control_"], [class*=" _control_"], [class$="_control"], [class*="_control "]), :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab']:not([aria-selected='true']):hover:not(:disabled) { background: var(--vscode-toolbar-hoverBackground); }
-body :is(:is([class^="_control_"], [class*=" _control_"], [class$="_control"], [class*="_control "]), :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab'][aria-selected='true'] {
+body :is(:is([class*="_control_"], [class$="_control"], [class*="_control "]), :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab']:not([aria-selected='true']):hover:not(:disabled) { background: var(--vscode-toolbar-hoverBackground); }
+body :is(:is([class*="_control_"], [class$="_control"], [class*="_control "]), :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab'][aria-selected='true'] {
   background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
   color: var(--vscode-foreground); border-color: var(--vscode-contrastActiveBorder, transparent); font-weight: 600;
 }
-body :is(:is([class^="_control_"], [class*=" _control_"], [class$="_control"], [class*="_control "]), :is([class^="_tabs_"], [class*=" _tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class^="_indicator_"], [class*=" _indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab']:focus-visible {
+body :is(:is([class*="_control_"], [class$="_control"], [class*="_control "]), :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> :is([class*="_indicator_"], [class$="_indicator"], [class*="_indicator "])))[role='tablist'] > [role='tab']:focus-visible {
   outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; text-decoration: none;
 }
 `;
 
+// src/selectors.js
+var nativeClass = (name) => `:is([class*="_${name}_"], [class$="_${name}"], [class*="_${name} "])`;
+
 // src/tree.js
 var rowSelector = '[role="treeitem"], [data-row-key^="overflow:"]';
 var groupSelector = '[style*="--dsh-workspace-indent"]';
-var titleSelector = '[class$="_title"], [class*="_title "], [class^="_title_"], [class*=" _title_"], [class*="searchResultTitle"]';
-var nativeClass = (name) => `:is([class$="_${name}"], [class*="_${name} "], [class^="_${name}_"], [class*=" _${name}_"])`;
+var titleSelector = `${nativeClass("title")}, ${nativeClass("searchResultTitle")}`;
 var menuTriggerSelector = `button[aria-haspopup="menu"], button[aria-haspopup="true"], ${nativeClass("rowActions")} > ${nativeClass("root")} > button`;
 function enhanceSidebarTree(document2) {
   const view = document2.defaultView;
@@ -2816,7 +2818,7 @@ function enhanceSidebarTree(document2) {
       next.set(tree, state);
       remembered.set(tree, state);
     }
-    for (const button of document2.querySelectorAll('[data-slot="sidebar"] button[class$="_newSession"], [data-slot="sidebar"] button[class*="_newSession "]')) {
+    for (const button of document2.querySelectorAll(`[data-slot="sidebar"] button${nativeClass("newSession")}`)) {
       alive.add(button);
       if (button.hasAttribute("aria-label")) attr(button, "title", button.getAttribute("aria-label"));
     }
