@@ -2569,7 +2569,7 @@ body [data-dockkit-tab-title] :is([class*="_folder_"], [class$="_folder"], [clas
 /* Session views and inspector detail pages use PanelTitle's compact text
    tabs. Stable item attributes keep this separate from segmented choices. */
 body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) {
-  display: flex; align-items: stretch; box-sizing: border-box; height: 35px;
+  display: flex; flex-wrap: nowrap; align-items: stretch; box-sizing: border-box; height: 35px;
   min-width: 0; gap: 0; margin: 0; padding: 0 8px; border: 0;
   overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
   background: transparent;
@@ -2577,7 +2577,7 @@ body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-d
 body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab])))::-webkit-scrollbar { display: none; }
 body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab'] {
   position: relative; box-sizing: border-box; flex: 0 0 auto; min-width: 0; height: 35px;
-  padding: 0 10px; border: 0; border-radius: 0;
+  margin: 0; padding: 0 10px; border: 0; border-radius: 0;
   font: 11px/27px var(--dsw-font-family); text-transform: uppercase;
   white-space: nowrap; color: var(--vscode-panelTitle-inactiveForeground);
   background: transparent; box-shadow: none;
@@ -2595,8 +2595,19 @@ body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-d
 body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab']:focus-visible { outline: none; }
 body :is([data-conversation-tabs], [role='tablist']:has(> :is([id^='trajectory-detail-'], [data-detail-tab]))) [role='tab']:focus-visible::after { height: 2px; background: var(--vscode-focusBorder); }
 
-/* The 8px strip inset + 10px item inset aligns with the session heading. */
-body [data-conversation-tabs] { margin: 0 -28px 0 -20px; }
+/* Own the whole row, including the host's More launcher. The host enlarges
+   tab hit areas with negative margins; Classic already includes those in
+   each 35px tab, so neither the tabs nor their parent need that spacing. */
+body :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> [data-conversation-tabs]) {
+  box-sizing: border-box; height: 35px; min-height: 35px;
+  flex-wrap: nowrap; align-items: center; gap: 4px;
+  margin: 0; padding: 0;
+}
+body :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]) > [data-conversation-tabs] { flex: 0 1 auto; padding: 0; }
+body :is([class*="_tabs_"], [class$="_tabs"], [class*="_tabs "]):has(> [data-conversation-tabs]) :is([class*="_viewsMore_"], [class$="_viewsMore"], [class*="_viewsMore "]) {
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; margin: 0; padding: 3px;
+}
 body [role='tablist']:has(> [id^='trajectory-detail-']) { border-bottom: 1px solid var(--vscode-panel-border); }
 body :is([class*="_detailTabsBar_"], [class$="_detailTabsBar"], [class*="_detailTabsBar "]):has(> [role='tablist'] > [data-detail-tab]) {
   box-sizing: border-box; height: 35px; min-height: 35px; padding: 0 8px; gap: 8px;

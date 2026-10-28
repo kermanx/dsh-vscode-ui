@@ -1,6 +1,6 @@
 {
   "name": "dsh-vscode-ui",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "description": "VS Code Classic workbench for DSH, with an activity bar and session explorer",
   "license": "MIT",
