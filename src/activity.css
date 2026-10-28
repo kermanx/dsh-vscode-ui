@@ -22,6 +22,7 @@ body .vsc-sidebar {
 body .vsc-activities { display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; flex: 1; min-height: 48px; }
 .vsc-activities::-webkit-scrollbar { display: none; }
 .vsc-global-actions { flex: none; display: flex; flex-direction: column; }
+.vsc-more-anchor { display: block; flex: none; }
 body .vsc-activity {
   position: relative; box-sizing: border-box; display: flex; flex: none;
   align-items: center; justify-content: center; width: 48px; height: 48px;

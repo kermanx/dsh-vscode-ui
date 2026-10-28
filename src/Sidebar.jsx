@@ -3,19 +3,24 @@
  * Reference revision: 4378eb0b965339a354d357fcb5ae33d2e10bf20e
  * Reference components: ActivityBar, CompositeBar, SidebarTitle, WorkbenchLayout, ActionBar
  * Adaptation: React activity navigation and title toolbar around DSH's persistent session and panel slots, with view focus handoff.
- * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+ * DSH sidebar contract: 353c550cac64c9bcb01a0f1c6f54bf4ea3cdfa94 (menu actions, pins and access).
+ * Copyright (c) Microsoft Corporation. Copyright (c) 2026 DeepSeek. MIT License.
  */
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
-import { Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
+import { Menu, Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
 
 export function Icon({ name, size = 16 }) {
   return <span aria-hidden="true" className="vsc-icon" data-icon={name} style={{ width: size, height: size }} />
 }
 const panelIcons = { plugins: 'extensions', schedules: 'calendar', review: 'git-pull-request', tasks: 'checklist' }
 
-export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar, selectPanel, startSession, renderSlot, t }) {
+export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, useEntryPins, useEntryActions, useRemoteAccess, setPinned, toggleSidebar, selectPanel, startSession, renderSlot, t }) {
   const panels = usePanels(value => value)
   const panel = usePanelInfo(value => value.activePanelId)
+  const unpinned = useEntryPins(value => value)
+  const hasEntryActions = useEntryActions(value => value)
+  const canStartSession = useRemoteAccess('session/create')
+  const [moreOpen, setMoreOpen] = useState(false)
   const root = useRef(null)
   const activityButtons = useRef(new Map())
   const pendingViewFocus = useRef(null)
@@ -23,7 +28,8 @@ export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggle
   const [titleFocus, setTitleFocus] = useState('newSession')
   const entries = [
     { id: 'explorer', label: t('explorer'), icon: 'files' },
-    ...panels.map(p => ({ ...p, icon: panelIcons[p.id] })),
+    ...panels.filter(p => !unpinned.includes(p.id) || p.id === panel).map(p => ({ ...p, icon: panelIcons[p.id] })),
+    ...(hasEntryActions ? [{ id: 'more', label: t('more'), icon: 'ellipsis' }] : []),
   ]
   const active = panel ?? 'explorer'
   const activeLabel = entries.find(entry => entry.id === active)?.label ?? t('explorer')
@@ -50,20 +56,28 @@ export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggle
     focusActivity(active)
     toggleSidebar()
   }
+  const openPanel = (id) => {
+    setMoreOpen(false)
+    pendingViewFocus.current = id
+    selectPanel(id)
+  }
   const activate = (id) => {
     focusActivity(id)
+    if (id === 'more') { setMoreOpen(value => !value); return }
+    setMoreOpen(false)
     if (id === active && !collapsed) { toggleSidebar(); return }
     pendingViewFocus.current = id
     if (id === 'explorer') {
       selectPanel(null)
       if (collapsed) toggleSidebar()
     } else {
-      selectPanel(id)
+      openPanel(id)
     }
   }
   useEffect(() => {
     if (!entries.some(entry => entry.id === focused)) setFocused('explorer')
-  }, [panels, focused])
+  }, [panels, unpinned, panel, hasEntryActions, focused])
+  useEffect(() => { if (!hasEntryActions) setMoreOpen(false) }, [hasEntryActions])
   const keyboard = (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
     const current = entries.findIndex(e => e.id === focused)
@@ -96,16 +110,29 @@ export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggle
   return <div ref={root} className="vsc-sidebar" data-collapsed={collapsed || undefined}>
     <div className="vsc-activitybar">
       <nav className="vsc-activities" aria-label={t('activityBar')} onKeyDown={keyboard}>
-        {entries.map(entry => <Tooltip key={entry.id} label={entry.label} side="right" delayMs={500}>
-          <button type="button" className="vsc-activity" data-activity-id={entry.id}
-            ref={element => { if (element) activityButtons.current.set(entry.id, element); else activityButtons.current.delete(entry.id) }}
-            aria-label={entry.label} aria-current={active === entry.id && !collapsed ? 'page' : undefined}
-            tabIndex={focused === entry.id ? 0 : -1} onFocus={() => setFocused(entry.id)}
-            onClick={() => activate(entry.id)}>
-            {entry.icon ? <Icon name={entry.icon} size={24} /> : renderSlot('sidebar.panellist', { size: 24, active: active === entry.id && !collapsed }, { only: entry.id })}
-            {entry.id === 'explorer' && renderSlot('sidebar.toggle.badge', {})}
-          </button>
-        </Tooltip>)}
+        {entries.map(entry => {
+          const button = <Tooltip label={entry.label} side="right" delayMs={500}>
+            <button type="button" className="vsc-activity" data-activity-id={entry.id}
+              ref={element => { if (element) activityButtons.current.set(entry.id, element); else activityButtons.current.delete(entry.id) }}
+              aria-label={entry.label} aria-current={active === entry.id && !collapsed ? 'page' : undefined}
+              aria-haspopup={entry.id === 'more' ? 'menu' : undefined}
+              aria-expanded={entry.id === 'more' ? moreOpen : undefined}
+              tabIndex={focused === entry.id ? 0 : -1} onFocus={() => setFocused(entry.id)}
+              onClick={() => activate(entry.id)}>
+              {entry.icon ? <Icon name={entry.icon} size={24} /> : renderSlot('sidebar.panellist', { size: 24, active: active === entry.id && !collapsed }, { only: entry.id })}
+              {entry.id === 'explorer' && renderSlot('sidebar.toggle.badge', {})}
+            </button>
+          </Tooltip>
+          return entry.id === 'more' ? <Menu key={entry.id} open={moreOpen} onClose={() => setMoreOpen(false)}
+            portal autoFocus side="right" className="vsc-more-anchor" anchor={button}>
+            {moreOpen && renderSlot('sidebar.panellist.actions', {
+              entries: panels.filter(p => p.id !== 'plugins').map(p => ({ ...p, pinned: !unpinned.includes(p.id), active: p.id === panel })),
+              onOpen: openPanel,
+              onPinnedChange: setPinned,
+              onDismiss: () => setMoreOpen(false),
+            })}
+          </Menu> : <React.Fragment key={entry.id}>{button}</React.Fragment>
+        })}
       </nav>
       <div className="vsc-global-actions">
         {renderSlot('sidebar.footer.action', { wide: false })}
@@ -116,12 +143,12 @@ export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggle
       <header className="vsc-sidebar-title">
         <h2 title={activeLabel}>{activeLabel}</h2>
         <div className="vsc-title-actions" role="toolbar" aria-label={activeLabel} onKeyDown={titleKeyboard}>
-          {panel === null && <Tooltip label={t('newSession')} delayMs={500}>
+          {panel === null && canStartSession && <Tooltip label={t('newSession')} delayMs={500}>
             <button type="button" className="vsc-action" aria-label={t('newSession')} tabIndex={titleFocus === 'newSession' ? 0 : -1}
               onFocus={() => setTitleFocus('newSession')} onClick={() => startSession()}><Icon name="new-file"/></button>
           </Tooltip>}
           <Tooltip label={t('collapse')} delayMs={500}>
-            <button type="button" className="vsc-action" aria-label={t('collapse')} tabIndex={panel !== null || titleFocus === 'collapse' ? 0 : -1}
+            <button type="button" className="vsc-action" aria-label={t('collapse')} tabIndex={panel !== null || !canStartSession || titleFocus === 'collapse' ? 0 : -1}
               onFocus={() => setTitleFocus('collapse')} onClick={collapseExplorer}><Icon name="layout-sidebar-left"/></button>
           </Tooltip>
         </div>
@@ -135,9 +162,10 @@ export function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggle
 }
 
 /** Keep the host's caption controls available through its leading slot. */
-export function LeadingControls({ toggleSidebar, startSession, t }) {
+export function LeadingControls({ toggleSidebar, startSession, useRemoteAccess, t }) {
+  const canStartSession = useRemoteAccess('session/create')
   return <div className="vsc-leading">
     <button type="button" className="vsc-action" aria-label={t('explorer')} onClick={toggleSidebar}><Icon name="layout-sidebar-left"/></button>
-    <button type="button" className="vsc-action" aria-label={t('newSession')} onClick={() => startSession()}><Icon name="new-file"/></button>
+    {canStartSession && <button type="button" className="vsc-action" aria-label={t('newSession')} onClick={() => startSession()}><Icon name="new-file"/></button>}
   </div>
 }

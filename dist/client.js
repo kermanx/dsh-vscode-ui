@@ -1755,6 +1755,7 @@ var icons_default = `.vsc-icon[data-icon="files"] { mask: url("data:image/svg+xm
 .vsc-icon[data-icon="checklist"] { mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M4.854%202.146a.5.5%200%200%201%200%20.707l-2%202a.5.5%200%200%201-.707%200l-1-1a.5.5%200%200%201%20.707-.707l.646.646l1.646-1.646a.5.5%200%200%201%20.708%200M14.5%204h-8a.5.5%200%200%201%200-1h8a.5.5%200%200%201%200%201m-9.646%207.146a.5.5%200%200%201%200%20.707l-2%202a.5.5%200%200%201-.707%200l-1-1a.5.5%200%200%201%20.707-.707l.646.646l1.646-1.646a.5.5%200%200%201%20.708%200M14.5%2013h-8a.5.5%200%200%201%200-1h8a.5.5%200%200%201%200%201M4.854%206.646a.5.5%200%200%201%200%20.707l-2%202a.5.5%200%200%201-.707%200l-1-1a.5.5%200%200%201%20.707-.707l.646.646l1.646-1.646a.5.5%200%200%201%20.708%200M14.5%208.5h-8a.5.5%200%200%201%200-1h8a.5.5%200%200%201%200%201%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 .vsc-icon[data-icon="new-file"] { mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M5%2014a1%201%200%200%201-1-1V3a1%201%200%200%201%201-1h3v2.5A1.5%201.5%200%200%200%209.5%206H12v.025q.516.048%201%20.188v-.799c0-.398-.158-.779-.439-1.061L9.647%201.439A1.5%201.5%200%200%200%208.586%201H5a2%202%200%200%200-2%202v10a2%202%200%200%200%202%202h2.261a5.6%205.6%200%200%201-.654-1zM9%202.207L11.793%205H9.5a.5.5%200%200%201-.5-.5zM11.5%207a4.5%204.5%200%201%200%200%209a4.5%204.5%200%200%200%200-9m2.5%205h-2v2a.5.5%200%200%201-1%200v-2H9a.5.5%200%200%201%200-1h2V9a.5.5%200%200%201%201%200v2h2a.5.5%200%200%201%200%201%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 .vsc-icon[data-icon="layout-sidebar-left"] { mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M12.5%201A2.5%202.5%200%200%201%2015%203.5v9a2.5%202.5%200%200%201-2.5%202.5h-9A2.5%202.5%200%200%201%201%2012.5v-9A2.5%202.5%200%200%201%203.5%201zm0%2013a1.5%201.5%200%200%200%201.5-1.5v-9A1.5%201.5%200%200%200%2012.5%202H7v12z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
+.vsc-icon[data-icon="ellipsis"] { mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M5%208a1%201%200%201%201-2%200a1%201%200%200%201%202%200m4%200a1%201%200%201%201-2%200a1%201%200%200%201%202%200m3%201a1%201%200%201%200%200-2a1%201%200%200%200%200%202%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-step-process] [data-process-activity][aria-expanded='false'] [data-step-process-chevron] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M6.146%203.146a.5.5%200%200%200%200%20.707l4.146%204.146l-4.146%204.146a.5.5%200%200%200%20.707.707l4.5-4.5a.5.5%200%200%200%200-.707l-4.5-4.5a.5.5%200%200%200-.707%200%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
 body [data-step-process] [data-process-activity][aria-expanded='false'] [data-step-process-chevron] svg > * { visibility: hidden; }
 body [data-step-process] [data-process-activity][aria-expanded='true'] [data-step-process-chevron] svg {  width: 16px; height: 16px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22m3.146%205.854l4.5%204.5a.5.5%200%200%200%20.707%200l4.5-4.5a.5.5%200%200%200-.707-.707L8%209.293L3.854%205.147a.5.5%200%200%200-.708.707%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; }
@@ -2011,6 +2012,7 @@ body .vsc-sidebar {
 body .vsc-activities { display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; flex: 1; min-height: 48px; }
 .vsc-activities::-webkit-scrollbar { display: none; }
 .vsc-global-actions { flex: none; display: flex; flex-direction: column; }
+.vsc-more-anchor { display: block; flex: none; }
 body .vsc-activity {
   position: relative; box-sizing: border-box; display: flex; flex: none;
   align-items: center; justify-content: center; width: 48px; height: 48px;
@@ -3158,9 +3160,13 @@ function Icon({ name, size = 16 }) {
   return /* @__PURE__ */ import_react3.default.createElement("span", { "aria-hidden": "true", className: "vsc-icon", "data-icon": name, style: { width: size, height: size } });
 }
 var panelIcons = { plugins: "extensions", schedules: "calendar", review: "git-pull-request", tasks: "checklist" };
-function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar, selectPanel, startSession, renderSlot, t }) {
+function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, useEntryPins, useEntryActions, useRemoteAccess, setPinned, toggleSidebar, selectPanel, startSession, renderSlot, t }) {
   const panels = usePanels((value) => value);
   const panel = usePanelInfo((value) => value.activePanelId);
+  const unpinned = useEntryPins((value) => value);
+  const hasEntryActions = useEntryActions((value) => value);
+  const canStartSession = useRemoteAccess("session/create");
+  const [moreOpen, setMoreOpen] = (0, import_react3.useState)(false);
   const root = (0, import_react3.useRef)(null);
   const activityButtons = (0, import_react3.useRef)(/* @__PURE__ */ new Map());
   const pendingViewFocus = (0, import_react3.useRef)(null);
@@ -3168,7 +3174,8 @@ function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar
   const [titleFocus, setTitleFocus] = (0, import_react3.useState)("newSession");
   const entries = [
     { id: "explorer", label: t("explorer"), icon: "files" },
-    ...panels.map((p) => ({ ...p, icon: panelIcons[p.id] }))
+    ...panels.filter((p) => !unpinned.includes(p.id) || p.id === panel).map((p) => ({ ...p, icon: panelIcons[p.id] })),
+    ...hasEntryActions ? [{ id: "more", label: t("more"), icon: "ellipsis" }] : []
   ];
   const active = panel ?? "explorer";
   const activeLabel = entries.find((entry) => entry.id === active)?.label ?? t("explorer");
@@ -3192,8 +3199,18 @@ function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar
     focusActivity(active);
     toggleSidebar();
   };
+  const openPanel = (id) => {
+    setMoreOpen(false);
+    pendingViewFocus.current = id;
+    selectPanel(id);
+  };
   const activate = (id) => {
     focusActivity(id);
+    if (id === "more") {
+      setMoreOpen((value) => !value);
+      return;
+    }
+    setMoreOpen(false);
     if (id === active && !collapsed) {
       toggleSidebar();
       return;
@@ -3203,12 +3220,15 @@ function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar
       selectPanel(null);
       if (collapsed) toggleSidebar();
     } else {
-      selectPanel(id);
+      openPanel(id);
     }
   };
   (0, import_react3.useEffect)(() => {
     if (!entries.some((entry) => entry.id === focused)) setFocused("explorer");
-  }, [panels, focused]);
+  }, [panels, unpinned, panel, hasEntryActions, focused]);
+  (0, import_react3.useEffect)(() => {
+    if (!hasEntryActions) setMoreOpen(false);
+  }, [hasEntryActions]);
   const keyboard = (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
     const current = entries.findIndex((e) => e.id === focused);
@@ -3238,25 +3258,48 @@ function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar
     event.stopPropagation();
     buttons[index].focus();
   };
-  return /* @__PURE__ */ import_react3.default.createElement("div", { ref: root, className: "vsc-sidebar", "data-collapsed": collapsed || void 0 }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-activitybar" }, /* @__PURE__ */ import_react3.default.createElement("nav", { className: "vsc-activities", "aria-label": t("activityBar"), onKeyDown: keyboard }, entries.map((entry) => /* @__PURE__ */ import_react3.default.createElement(import_dsh_client_ui_primitives.Tooltip, { key: entry.id, label: entry.label, side: "right", delayMs: 500 }, /* @__PURE__ */ import_react3.default.createElement(
-    "button",
-    {
-      type: "button",
-      className: "vsc-activity",
-      "data-activity-id": entry.id,
-      ref: (element) => {
-        if (element) activityButtons.current.set(entry.id, element);
-        else activityButtons.current.delete(entry.id);
+  return /* @__PURE__ */ import_react3.default.createElement("div", { ref: root, className: "vsc-sidebar", "data-collapsed": collapsed || void 0 }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-activitybar" }, /* @__PURE__ */ import_react3.default.createElement("nav", { className: "vsc-activities", "aria-label": t("activityBar"), onKeyDown: keyboard }, entries.map((entry) => {
+    const button = /* @__PURE__ */ import_react3.default.createElement(import_dsh_client_ui_primitives.Tooltip, { label: entry.label, side: "right", delayMs: 500 }, /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        type: "button",
+        className: "vsc-activity",
+        "data-activity-id": entry.id,
+        ref: (element) => {
+          if (element) activityButtons.current.set(entry.id, element);
+          else activityButtons.current.delete(entry.id);
+        },
+        "aria-label": entry.label,
+        "aria-current": active === entry.id && !collapsed ? "page" : void 0,
+        "aria-haspopup": entry.id === "more" ? "menu" : void 0,
+        "aria-expanded": entry.id === "more" ? moreOpen : void 0,
+        tabIndex: focused === entry.id ? 0 : -1,
+        onFocus: () => setFocused(entry.id),
+        onClick: () => activate(entry.id)
       },
-      "aria-label": entry.label,
-      "aria-current": active === entry.id && !collapsed ? "page" : void 0,
-      tabIndex: focused === entry.id ? 0 : -1,
-      onFocus: () => setFocused(entry.id),
-      onClick: () => activate(entry.id)
-    },
-    entry.icon ? /* @__PURE__ */ import_react3.default.createElement(Icon, { name: entry.icon, size: 24 }) : renderSlot("sidebar.panellist", { size: 24, active: active === entry.id && !collapsed }, { only: entry.id }),
-    entry.id === "explorer" && renderSlot("sidebar.toggle.badge", {})
-  )))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-global-actions" }, renderSlot("sidebar.footer.action", { wide: false }), renderSlot("sidebar.settings", { wide: false }))), /* @__PURE__ */ import_react3.default.createElement("section", { className: "vsc-explorer", "aria-label": activeLabel, hidden: collapsed }, /* @__PURE__ */ import_react3.default.createElement("header", { className: "vsc-sidebar-title" }, /* @__PURE__ */ import_react3.default.createElement("h2", { title: activeLabel }, activeLabel), /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-title-actions", role: "toolbar", "aria-label": activeLabel, onKeyDown: titleKeyboard }, panel === null && /* @__PURE__ */ import_react3.default.createElement(import_dsh_client_ui_primitives.Tooltip, { label: t("newSession"), delayMs: 500 }, /* @__PURE__ */ import_react3.default.createElement(
+      entry.icon ? /* @__PURE__ */ import_react3.default.createElement(Icon, { name: entry.icon, size: 24 }) : renderSlot("sidebar.panellist", { size: 24, active: active === entry.id && !collapsed }, { only: entry.id }),
+      entry.id === "explorer" && renderSlot("sidebar.toggle.badge", {})
+    ));
+    return entry.id === "more" ? /* @__PURE__ */ import_react3.default.createElement(
+      import_dsh_client_ui_primitives.Menu,
+      {
+        key: entry.id,
+        open: moreOpen,
+        onClose: () => setMoreOpen(false),
+        portal: true,
+        autoFocus: true,
+        side: "right",
+        className: "vsc-more-anchor",
+        anchor: button
+      },
+      moreOpen && renderSlot("sidebar.panellist.actions", {
+        entries: panels.filter((p) => p.id !== "plugins").map((p) => ({ ...p, pinned: !unpinned.includes(p.id), active: p.id === panel })),
+        onOpen: openPanel,
+        onPinnedChange: setPinned,
+        onDismiss: () => setMoreOpen(false)
+      })
+    ) : /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, { key: entry.id }, button);
+  })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-global-actions" }, renderSlot("sidebar.footer.action", { wide: false }), renderSlot("sidebar.settings", { wide: false }))), /* @__PURE__ */ import_react3.default.createElement("section", { className: "vsc-explorer", "aria-label": activeLabel, hidden: collapsed }, /* @__PURE__ */ import_react3.default.createElement("header", { className: "vsc-sidebar-title" }, /* @__PURE__ */ import_react3.default.createElement("h2", { title: activeLabel }, activeLabel), /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-title-actions", role: "toolbar", "aria-label": activeLabel, onKeyDown: titleKeyboard }, panel === null && canStartSession && /* @__PURE__ */ import_react3.default.createElement(import_dsh_client_ui_primitives.Tooltip, { label: t("newSession"), delayMs: 500 }, /* @__PURE__ */ import_react3.default.createElement(
     "button",
     {
       type: "button",
@@ -3273,7 +3316,7 @@ function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar
       type: "button",
       className: "vsc-action",
       "aria-label": t("collapse"),
-      tabIndex: panel !== null || titleFocus === "collapse" ? 0 : -1,
+      tabIndex: panel !== null || !canStartSession || titleFocus === "collapse" ? 0 : -1,
       onFocus: () => setTitleFocus("collapse"),
       onClick: collapseExplorer
     },
@@ -3282,15 +3325,30 @@ function Sidebar({ collapsed, sidePanels, usePanels, usePanelInfo, toggleSidebar
     if (collapsed) toggleSidebar();
   } })), sidePanels));
 }
-function LeadingControls({ toggleSidebar, startSession, t }) {
-  return /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-leading" }, /* @__PURE__ */ import_react3.default.createElement("button", { type: "button", className: "vsc-action", "aria-label": t("explorer"), onClick: toggleSidebar }, /* @__PURE__ */ import_react3.default.createElement(Icon, { name: "layout-sidebar-left" })), /* @__PURE__ */ import_react3.default.createElement("button", { type: "button", className: "vsc-action", "aria-label": t("newSession"), onClick: () => startSession() }, /* @__PURE__ */ import_react3.default.createElement(Icon, { name: "new-file" })));
+function LeadingControls({ toggleSidebar, startSession, useRemoteAccess, t }) {
+  const canStartSession = useRemoteAccess("session/create");
+  return /* @__PURE__ */ import_react3.default.createElement("div", { className: "vsc-leading" }, /* @__PURE__ */ import_react3.default.createElement("button", { type: "button", className: "vsc-action", "aria-label": t("explorer"), onClick: toggleSidebar }, /* @__PURE__ */ import_react3.default.createElement(Icon, { name: "layout-sidebar-left" })), canStartSession && /* @__PURE__ */ import_react3.default.createElement("button", { type: "button", className: "vsc-action", "aria-label": t("newSession"), onClick: () => startSession() }, /* @__PURE__ */ import_react3.default.createElement(Icon, { name: "new-file" })));
+}
+
+// src/panel-pins.js
+var import_dsh_client_store2 = require("@deepseek-ai/dsh-client-store");
+function createPanelPins() {
+  const unpinned = (0, import_dsh_client_store2.createSnapshotStore)([]);
+  return {
+    unpinned,
+    setPinned(id, pinned) {
+      const current = unpinned.getSnapshot();
+      if (id === "plugins" || pinned !== current.includes(id)) return;
+      unpinned.set(pinned ? current.filter((entry) => entry !== id) : [...current, id]);
+    }
+  };
 }
 
 // src/client.js
 var inject = ["theme", "slots", "locale", "shortcuts"];
 var messages = {
-  en: { explorer: "Sessions", search: "Search Sessions", activityBar: "Activity Bar", newSession: "New Session", collapse: "Hide Side Bar" },
-  zh: { explorer: "\u4F1A\u8BDD", search: "\u641C\u7D22\u4F1A\u8BDD", activityBar: "\u6D3B\u52A8\u680F", newSession: "\u65B0\u5EFA\u4F1A\u8BDD", collapse: "\u9690\u85CF\u4FA7\u680F" }
+  en: { explorer: "Sessions", search: "Search Sessions", activityBar: "Activity Bar", newSession: "New Session", collapse: "Hide Side Bar", more: "More" },
+  zh: { explorer: "\u4F1A\u8BDD", search: "\u641C\u7D22\u4F1A\u8BDD", activityBar: "\u6D3B\u52A8\u680F", newSession: "\u65B0\u5EFA\u4F1A\u8BDD", collapse: "\u9690\u85CF\u4FA7\u680F", more: "\u66F4\u591A" }
 };
 function panelStore(ctx) {
   let snapshot = [];
@@ -3321,11 +3379,17 @@ function apply2(ctx) {
   apply(ctx);
   ctx.inject(["layout", "uiWorkspace"], (ctx2) => {
     const panels = panelStore(ctx2);
+    const pins = createPanelPins();
+    const entryActions = {
+      getSnapshot: () => ctx2.slots.entriesOfSlot("sidebar.panellist.actions").length > 0,
+      subscribe: (listener) => ctx2.slots.subscribe("sidebar.panellist.actions", listener)
+    };
     const injectProps = () => ({
       startSession: (workspaceId) => ctx2.get("uiWorkspace").startSession(workspaceId),
       toggleSidebar: () => ctx2.layout.toggleSidebar(),
       selectPanel: (id) => ctx2.layout.selectPanel(id),
-      hooks: { panels }
+      setPinned: pins.setPinned,
+      hooks: { panels, entryPins: pins.unpinned, entryActions }
     });
     ctx2.slots.inject("sidebar", () => ctx2.slots.register({
       name: "sidebar",
@@ -3334,6 +3398,7 @@ function apply2(ctx) {
       children: {
         "sidebar.toggle.badge": { kind: "single", scope: "root" },
         "sidebar.panellist": { kind: "list", scope: "root" },
+        "sidebar.panellist.actions": { kind: "list", scope: "root" },
         "sidebar.workspaces": { kind: "single", scope: "root" },
         "sidebar.settings": { kind: "single", scope: "root" },
         "sidebar.footer.action": { kind: "list", scope: "root" }

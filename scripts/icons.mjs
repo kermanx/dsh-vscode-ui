@@ -43,7 +43,7 @@ export async function iconStyles() {
     ["[data-vsc-tree] [data-row-key^='session:'] > :--class(slot):empty::after", 'comment'],
     ["[data-vsc-tree] [data-row-key^='session:'] > :--class(slot):has(> [data-slot]:empty)::after", 'comment'],
   ]
-  const own = ['files', 'search', 'extensions', 'calendar', 'git-pull-request', 'checklist', 'new-file', 'layout-sidebar-left']
+  const own = ['files', 'search', 'extensions', 'calendar', 'git-pull-request', 'checklist', 'new-file', 'layout-sidebar-left', 'ellipsis']
     .map(name => {
       const item = icons[name];
       if (!item) throw new Error(`Missing Codicon: ${name}`);

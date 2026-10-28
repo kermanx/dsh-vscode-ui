@@ -12,6 +12,12 @@ const compiled = await build({ entryPoints: ['src/Sidebar.jsx'], bundle: true, w
 const output = { exports: {} }
 runInNewContext(compiled.outputFiles[0].text, { module: output, exports: output.exports, require: id => id === '@deepseek-ai/dsh-client-ui-primitives' ? { Tooltip: ({ children }) => children } : require(id) })
 const { Sidebar } = output.exports
+const hostHooks = {
+  useEntryPins: selector => selector([]),
+  useEntryActions: selector => selector(false),
+  useRemoteAccess: () => true,
+  setPinned() {},
+}
 
 test('activity actions switch the sidebar, toggle current views, and support roving keyboard focus', async () => {
   const dom = new JSDOM('<!doctype html><body><div id="mount"></div></body>', { pretendToBeVisual: true })
@@ -22,7 +28,7 @@ test('activity actions switch the sidebar, toggle current views, and support rov
   const selections = []
   let toggles = 0
   const render = () => root.render(React.createElement(Sidebar, {
-    collapsed, width: 312, usePanels: selector => selector([{ id: 'plugins', label: 'Plugins' }, { id: 'schedules', label: 'Schedules' }]),
+    ...hostHooks, collapsed, width: 312, usePanels: selector => selector([{ id: 'plugins', label: 'Plugins' }, { id: 'schedules', label: 'Schedules' }]),
     usePanelInfo: selector => selector({ activePanelId: panel }), t: key => key,
     selectPanel: id => { selections.push(id); panel = id; if (id !== null) collapsed = false; render() },
     toggleSidebar: () => { collapsed = !collapsed; toggles++; render() }, startSession: () => {},
@@ -78,7 +84,7 @@ test('view opening focuses content and hiding a focused view returns focus to it
   let collapsed = false
   const customIconStates = []
   const render = () => root.render(React.createElement(Sidebar, {
-    collapsed, width: 312, usePanels: selector => selector([{ id: 'custom', label: 'Custom' }]),
+    ...hostHooks, collapsed, width: 312, usePanels: selector => selector([{ id: 'custom', label: 'Custom' }]),
     usePanelInfo: selector => selector({ activePanelId: panel }), t: key => key,
     selectPanel: id => { panel = id; if (id !== null) collapsed = false; render() },
     toggleSidebar: () => { collapsed = !collapsed; render() }, startSession: () => {},
@@ -107,6 +113,39 @@ test('view opening focuses content and hiding a focused view returns focus to it
     await act(() => activity('explorer').click())
     assert.equal(document.activeElement, search)
     assert.equal(document.getElementById('session-search'), search, 'session content stays mounted across view switches')
+  } finally {
+    await act(() => root.unmount()); dom.window.close()
+    delete globalThis.window; delete globalThis.document; delete globalThis.IS_REACT_ACT_ENVIRONMENT
+  }
+})
+
+test('session creation controls follow access changes and keep the title toolbar reachable', async () => {
+  const dom = new JSDOM('<!doctype html><body><div id="mount"></div></body>', { pretendToBeVisual: true })
+  Object.assign(globalThis, { window: dom.window, document: dom.window.document, IS_REACT_ACT_ENVIRONMENT: true })
+  const root = createRoot(document.getElementById('mount'))
+  let allowed = false
+  let started = 0
+  const props = {
+    ...hostHooks, useRemoteAccess: action => { assert.equal(action, 'session/create'); return allowed },
+    collapsed: false, sidePanels: null, usePanels: selector => selector([]),
+    usePanelInfo: selector => selector({ activePanelId: null }), renderSlot: () => null,
+    toggleSidebar() {}, selectPanel() {}, startSession: () => { started++ }, t: key => key,
+  }
+  const render = () => root.render(React.createElement(React.Fragment, null,
+    React.createElement(Sidebar, props), React.createElement(output.exports.LeadingControls, props)))
+  try {
+    await act(render)
+    assert.equal(document.querySelectorAll('[aria-label="newSession"]').length, 0)
+    assert.equal(document.querySelector('[aria-label="collapse"]').tabIndex, 0)
+    allowed = true
+    await act(render)
+    const buttons = document.querySelectorAll('[aria-label="newSession"]')
+    assert.equal(buttons.length, 2)
+    await act(() => { buttons[0].click(); buttons[1].click() })
+    assert.equal(started, 2)
+    allowed = false
+    await act(render)
+    assert.equal(document.querySelectorAll('[aria-label="newSession"]').length, 0)
   } finally {
     await act(() => root.unmount()); dom.window.close()
     delete globalThis.window; delete globalThis.document; delete globalThis.IS_REACT_ACT_ENVIRONMENT

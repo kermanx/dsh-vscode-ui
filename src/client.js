@@ -18,11 +18,12 @@ import dockStyles from './dock.css'
 import { enhanceSidebarTree } from './tree.js'
 import { enhanceViewTabs } from './tabs.js'
 import { Sidebar, LeadingControls } from './Sidebar.jsx'
+import { createPanelPins } from './panel-pins.js'
 
 export const inject = ['theme', 'slots', 'locale', 'shortcuts']
 const messages = {
-  en: { explorer: 'Sessions', search: 'Search Sessions', activityBar: 'Activity Bar', newSession: 'New Session', collapse: 'Hide Side Bar' },
-  zh: { explorer: '会话', search: '搜索会话', activityBar: '活动栏', newSession: '新建会话', collapse: '隐藏侧栏' },
+  en: { explorer: 'Sessions', search: 'Search Sessions', activityBar: 'Activity Bar', newSession: 'New Session', collapse: 'Hide Side Bar', more: 'More' },
+  zh: { explorer: '会话', search: '搜索会话', activityBar: '活动栏', newSession: '新建会话', collapse: '隐藏侧栏', more: '更多' },
 }
 function panelStore(ctx) {
   let snapshot = []
@@ -47,28 +48,35 @@ export function apply(ctx) {
   ctx.effect(() => ctx.locale.register('vscode-ui', messages))
   applyLayout(ctx)
   ctx.inject(['layout', 'uiWorkspace'], ctx => {
-  const panels = panelStore(ctx)
-  const injectProps = () => ({
-    startSession: workspaceId => ctx.get('uiWorkspace').startSession(workspaceId),
-    toggleSidebar: () => ctx.layout.toggleSidebar(),
-    selectPanel: id => ctx.layout.selectPanel(id),
-    hooks: { panels },
-  })
-  ctx.slots.inject('sidebar', () => ctx.slots.register({
-    name: 'sidebar', locale: 'vscode-ui', inject: injectProps,
-    children: {
-      'sidebar.toggle.badge': { kind: 'single', scope: 'root' },
-      'sidebar.panellist': { kind: 'list', scope: 'root' },
-      'sidebar.workspaces': { kind: 'single', scope: 'root' },
-      'sidebar.settings': { kind: 'single', scope: 'root' },
-      'sidebar.footer.action': { kind: 'list', scope: 'root' },
-    },
-  }, Sidebar))
-  ctx.slots.inject('shell.leading', () => ctx.slots.register({ name: 'shell.leading', locale: 'vscode-ui', inject: injectProps }, LeadingControls))
-  ctx.effect(() => ctx.slots.subscribe('sidebar.panellist', panels.sync))
-  ctx.effect(() => ctx.locale.subscribe(panels.sync))
-  panels.sync()
-  ctx.effect(() => enhanceSidebarTree(document))
-  ctx.effect(() => enhanceViewTabs(document))
+    const panels = panelStore(ctx)
+    const pins = createPanelPins()
+    const entryActions = {
+      getSnapshot: () => ctx.slots.entriesOfSlot('sidebar.panellist.actions').length > 0,
+      subscribe: listener => ctx.slots.subscribe('sidebar.panellist.actions', listener),
+    }
+    const injectProps = () => ({
+      startSession: workspaceId => ctx.get('uiWorkspace').startSession(workspaceId),
+      toggleSidebar: () => ctx.layout.toggleSidebar(),
+      selectPanel: id => ctx.layout.selectPanel(id),
+      setPinned: pins.setPinned,
+      hooks: { panels, entryPins: pins.unpinned, entryActions },
+    })
+    ctx.slots.inject('sidebar', () => ctx.slots.register({
+      name: 'sidebar', locale: 'vscode-ui', inject: injectProps,
+      children: {
+        'sidebar.toggle.badge': { kind: 'single', scope: 'root' },
+        'sidebar.panellist': { kind: 'list', scope: 'root' },
+        'sidebar.panellist.actions': { kind: 'list', scope: 'root' },
+        'sidebar.workspaces': { kind: 'single', scope: 'root' },
+        'sidebar.settings': { kind: 'single', scope: 'root' },
+        'sidebar.footer.action': { kind: 'list', scope: 'root' },
+      },
+    }, Sidebar))
+    ctx.slots.inject('shell.leading', () => ctx.slots.register({ name: 'shell.leading', locale: 'vscode-ui', inject: injectProps }, LeadingControls))
+    ctx.effect(() => ctx.slots.subscribe('sidebar.panellist', panels.sync))
+    ctx.effect(() => ctx.locale.subscribe(panels.sync))
+    panels.sync()
+    ctx.effect(() => enhanceSidebarTree(document))
+    ctx.effect(() => enhanceViewTabs(document))
   })
 }
